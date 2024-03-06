@@ -7,7 +7,7 @@
 
   .bg-image {
     position: relative;
-    background-image: url('/images/wooden.jpg'); /* Altere o caminho da sua imagem */
+    background-image: url('images/wooden.jpg'); /* Altere o caminho da sua imagem */
     background-size: cover;
     background-position: center;
     height: 57vh; /* Altura personalizada da imagem de fundo */
@@ -26,7 +26,7 @@
     left: 50%;
     transform: translateX(-50%);
     aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
-    background-image: url('/images/carta atras.png'); /* Altere o caminho da sua imagem */
+    background-image: url('images/carta atras.png'); /* Altere o caminho da sua imagem */
     background-size: cover;
     transition: transform 0.2s; /* Adicionando uma transição suave */
   }
@@ -64,7 +64,7 @@
     left: 50%;
     transform: translateX(-50%);
     aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
-    background-image: url('/images/carta atras.png'); /* Altere o caminho da sua imagem */
+    background-image: url('images/carta atras.png'); /* Altere o caminho da sua imagem */
     background-size: cover;
     cursor: default; /* Definindo o cursor como default para desabilitar interações com o jogador */
     z-index: 2;
