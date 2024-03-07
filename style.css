@@ -12,6 +12,18 @@
     z-index: 10; /* Garante que o botão fique acima do fundo preto */
 }
 
+.money-label {
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário para a distância do topo */
+  left: 50%; /* Isso centraliza horizontalmente */
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 2;
+}
+
 
   .bg-image {
     position: relative;

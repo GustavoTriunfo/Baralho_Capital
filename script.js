@@ -47,3 +47,14 @@ function option3() {
     // Ação para a opção 3
     alert("Opção 3 selecionada");
 }
+
+// Função para atualizar o valor do dinheiro na label
+function atualizarDinheiro(valor) {
+  var dinheiroLabel = document.getElementById('moneyLabel');
+  // Formatando o valor para o padrão brasileiro
+  var valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  dinheiroLabel.textContent = 'Dinheiro: ' + valorFormatado;
+}
+
+var dinheiroRecebido = 10000; // Este é apenas um exemplo, você deve substituir pelo valor real recebido
+atualizarDinheiro(dinheiroRecebido);
