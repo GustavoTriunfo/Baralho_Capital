@@ -9,6 +9,10 @@
 </head>
 <body>
 
+  <button class="btn btn-dark btn-hamburger" type="button" onclick="toggleMenu()">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
     <div class="black-bg">
         <!-- Fundo preto sólido -->
         <div class="opponent-cards">
@@ -40,6 +44,16 @@
           </div>
         </div>
       </div>
+
+      
+      <!-- Caixa de opções -->
+      <div id="menuOverlay" class="menu-overlay">
+        <div class="menu-options">
+            <button onclick="option1()">Opção 1</button>
+            <button onclick="option2()">Opção 2</button>
+            <button onclick="option3()">Opção 3</button>
+        </div>
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
