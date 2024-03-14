@@ -1,3 +1,8 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
 .black-bg {
     position: relative;
     background-color: black;
@@ -122,9 +127,62 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
 }
 
 .menu-options button {
     display: block;
     margin-bottom: 10px;
+  border-radius: 10px solid;
+}
+.button-options {
+  border-radius: 20px; /* Raio de borda de 20px para arredondar os botões */
+  padding: 10px 20px; /* Ajuste o preenchimento conforme necessário */
+  margin: 5px; /* Adicione margem entre os botões conforme desejado */
+}
+
+/*Para botão esquerdo e direito*/
+.expanded-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.expanded-card .card-inner {
+  width: 200px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.expanded-card .buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.return-button,
+.play-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return-button {
+  background-color: red;
+  color: white;
+}
+
+.play-button {
+  background-color: green;
+  color: white;
+}
+.expanded-card .card-back {
+  background-image: url('./images/OdsAmbiente.png'); /* Caminho para o conteúdo que deseja mostrar */
+  background-size: cover;
 }
