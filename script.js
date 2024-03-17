@@ -1,12 +1,3 @@
-/*$(document).ready(function() {
-    $(".card").mouseenter(function() {
-      $(this).css("z-index", "1000"); // Definindo a carta com mouse em cima na frente das outras
-    });
-  
-    $(".card").mouseleave(function() {
-      $(this).css("z-index", "1"); // Devolvendo a carta para a posição original
-    });
-  });*/
 
   $(document).ready(function() {
     $(".card").click(function() {
