@@ -10,7 +10,13 @@
 <body>
 
   <div id="moneyLabel" class="money-label">Dinheiro: $0</div>
-  
+  <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
+    <!-- Conteúdo da pré-visualização -->
+    <!-- Botões para ação com a pré-visualização -->
+    <button id="buttonOption1" class="btn btn-custom-primary">Devolver</button>
+    <button id="buttonOption2" class="btn btn-custom-secondary">Jogar</button>
+  </div>
+
   <button class="btn btn-dark btn-hamburger" type="button" onclick="toggleMenu()">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -57,10 +63,12 @@
         </div>
     </div>
 
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="script.js"></script>
+
 
 </body>
 </html>

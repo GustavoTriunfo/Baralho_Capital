@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
   $(document).ready(function() {
     $(".card").click(function() {
@@ -10,7 +11,47 @@
         $(this).addClass("active").css("z-index", "1000"); // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
       }
     });
+=======
+$(document).ready(function() {
+  $(".card").click(function(event) {
+    event.stopPropagation(); // Impede a propagação do evento de clique para o documento
+    
+    // Verificar se a carta clicada já está ativa
+    if ($(this).hasClass("active")) {
+      // Se a carta clicada já estiver ativa, remover a pré-visualização e a classe 'active'
+      $("#cardPreviewOverlay").removeClass("d-block");
+      $(this).removeClass("active").css("z-index", "1");
+    } else {
+      // Tornar visível a div de pré-visualização
+      $("#cardPreviewOverlay").addClass("d-block");
+      
+      // Obter o caminho da imagem de fundo da carta clicada
+      var cardImage = $(this).css('background-image');
+      
+      // Atualizar a pré-visualização com a imagem da carta clicada
+      $("#cardPreviewOverlay").css('background-image', cardImage);
+      
+      // Remover classe 'active' e redefinir o z-index de todas as cartas
+      $(".card").removeClass("active").css("z-index", "1");
+      
+      // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
+      $(this).addClass("active").css("z-index", "1000");
+    }
+>>>>>>> develop
   });
+
+  // Evento de clique no documento inteiro para remover a pré-visualização
+  $(document).click(function(event) {
+    if (!$(event.target).closest('.card').length && !$(event.target).closest('#cardPreviewOverlay').length) {
+      // Se o clique não for em uma carta e nem na pré-visualização, remove a pré-visualização
+      $("#cardPreviewOverlay").removeClass("d-block");
+      $(".card").removeClass("active").css("z-index", "1");
+    }
+  });
+});
+
+
+  
 
   function toggleMenu() {
     console.log("Toggle menu clicked");
