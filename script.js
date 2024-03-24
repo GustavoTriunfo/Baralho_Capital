@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   $(".card").click(function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique para o documento
@@ -64,6 +63,11 @@ function option2() {
 function option3() {
     // Ação para a opção 3
     alert("Opção 3 selecionada");
+}
+
+function option4() {
+  // Ação para a opção 3
+  alert("Opção 4 selecionada");
 }
 
 // Função para atualizar o valor do dinheiro na label

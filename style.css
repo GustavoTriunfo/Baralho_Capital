@@ -10,6 +10,10 @@
   top: 10px; /* Ajuste conforme necessário */
   left: 10px; /* Ajuste conforme necessário */
   z-index: 10; /* Garante que o botão fique acima do fundo preto */
+  background-size: cover;
+  background-image: url('images/menu_icon.png');
+  border: none; /* Remova a borda do botão */
+  cursor: pointer; /* Defina o cursor para mostrar que o botão é clicável */
 }
 
 .money-label {
@@ -129,8 +133,28 @@ z-index: 2;
 }
 
 .menu-options button {
-  display: block;
-  margin-bottom: 10px;
+/* background: none;  Remove o fundo do botão */
+border: none; /* Remove a borda do botão */
+padding: 0; /* Remove o preenchimento interno do botão */
+width: 200px;
+height: 120px;
+position: relative; /* Permite posicionar o texto sobre a imagem */
+}
+
+.menu-options button img {
+width: 100%; /* Defina a largura da imagem para ocupar todo o espaço do botão */
+height: 100%; /* Ajuste a altura automaticamente para manter a proporção da imagem */
+object-fit: cover;
+}
+
+.menu-options button span {
+position: absolute; /* Permite posicionar o texto sobre a imagem */
+top: 10%; /* Alinha o texto ao centro verticalmente */
+left: 25%; /* Alinha o texto ao centro horizontalmente */
+transform: translate(-50%, -50%); /* Centraliza o texto */
+color: rgb(0, 0, 0); /* Define a cor do texto */
+font-size: 16px; /* Define o tamanho da fonte do texto */
+font-weight: bold; /* Define a fonte em negrito */
 }
 
 .card-preview-overlay {
