@@ -1,17 +1,4 @@
-<<<<<<< HEAD
 
-  $(document).ready(function() {
-    $(".card").click(function() {
-      // Verificar se a carta já está ativa
-      if ($(this).hasClass("active")) {
-        $(this).removeClass("active"); // Remover classe 'active'
-        $(this).css("z-index", "1"); // Definir o z-index de volta ao padrão
-      } else {
-        $(".card").removeClass("active").css("z-index", "1"); // Remover classe 'active' e redefinir o z-index de todas as cartas
-        $(this).addClass("active").css("z-index", "1000"); // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
-      }
-    });
-=======
 $(document).ready(function() {
   $(".card").click(function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique para o documento
@@ -37,7 +24,6 @@ $(document).ready(function() {
       // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
       $(this).addClass("active").css("z-index", "1000");
     }
->>>>>>> develop
   });
 
   // Evento de clique no documento inteiro para remover a pré-visualização
