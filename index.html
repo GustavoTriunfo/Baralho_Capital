@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/Favicon/favicon-32x32.png">
   <title>Baralho Capital</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
@@ -11,66 +10,65 @@
 <body>
 
   <div id="moneyLabel" class="money-label">Dinheiro: $0</div>
-  
+  <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
+    <!-- Conteúdo da pré-visualização -->
+    <!-- Botões para ação com a pré-visualização -->
+    <button id="buttonOption1" class="btn btn-custom-primary">Devolver</button>
+    <button id="buttonOption2" class="btn btn-custom-secondary">Jogar</button>
+  </div>
+
   <button class="btn btn-dark btn-hamburger" type="button" onclick="toggleMenu()">
     <span class="navbar-toggler-icon"></span>
-  </button>
+</button>
 
-  <div class="black-bg">
-    <!-- Fundo preto sólido -->
-    <div class="opponent-cards">
-        <div class="opponent-card"></div>
-        <div class="opponent-card"></div>
-        <div class="opponent-card"></div>
-        <div class="opponent-card"></div>
-    </div>
-  </div>
-
-  <div class="bg-image">
-    <!-- Cartas na mão do jogador -->
-    <div class="card-holder">
-      <div class="card card1"></div>
-      <div class="card card2"></div>
-      <div class="card card3"></div>
-      <div class="card card4"></div>
-    </div>
-  
-    <!-- Conteúdo dentro da imagem de fundo -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 text-center text-white">
-          <h1></h1>
-          <p></p>
+    <div class="black-bg">
+        <!-- Fundo preto sólido -->
+        <div class="opponent-cards">
+            <div class="opponent-card"></div>
+            <div class="opponent-card"></div>
+            <div class="opponent-card"></div>
+            <div class="opponent-card"></div>
+          </div>
+      </div>
+      
+     
+      
+      <div class="bg-image">
+        <!-- Cartas na mão do jogador -->
+        <div class="card-holder">
+          <div class="card card1"></div>
+          <div class="card card2"></div>
+          <div class="card card3"></div>
+          <div class="card card4"></div>
+        </div>
+      
+        <!-- Conteúdo dentro da imagem de fundo -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 offset-md-3 text-center text-white">
+              <h1></h1>
+              <p></p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-   <!-- Caixa de opções -->
-   <div id="menuOverlay" class="menu-overlay">
-    <div class="menu-options">
-        <button class="button-options" onclick="option1()">Opção 1</button>
-        <button class="button-options" onclick="option2()">Opção 2</button>
-        <button class="button-options" onclick="option3()">Opção 3</button>
+      
+      <!-- Caixa de opções -->
+      <div id="menuOverlay" class="menu-overlay">
+        <div class="menu-options">
+            <button onclick="option1()">Opção 1</button>
+            <button onclick="option2()">Opção 2</button>
+            <button onclick="option3()">Opção 3</button>
+        </div>
     </div>
-</div>
 
-  <!-- Div para carta expandida -->
-  <div id="expanded-card" class="expanded-card">
-    <div class="card-inner">
-        <div class="card-front"></div>
-        <div class="card-back"></div>
-    </div>
-    <div class="buttons">
-        <button id="returnButton" class="return-button">Devolver</button>
-        <button id="playButton" class="play-button">Jogar</button>
-    </div>
-  </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="script.js"></script>
+
 
 </body>
 </html>

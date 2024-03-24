@@ -1,188 +1,163 @@
-*{
-  font-family: Arial, Helvetica, sans-serif;
+.black-bg {
+  position: relative;
+  background-color: black;
+  height: 300px; /* Altura personalizada da área preta */
+  z-index: 1;
 }
 
-
-.black-bg {
-    position: relative;
-    background-color: black;
-    height: 300px; /* Altura personalizada da área preta */
-    z-index: 1;
-  }
-
-  .btn-hamburger {
-    position: absolute;
-    top: 10px; /* Ajuste conforme necessário */
-    left: 10px; /* Ajuste conforme necessário */
-    z-index: 10; /* Garante que o botão fique acima do fundo preto */
+.btn-hamburger {
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário */
+  left: 10px; /* Ajuste conforme necessário */
+  z-index: 10; /* Garante que o botão fique acima do fundo preto */
 }
 
 .money-label {
+position: absolute;
+top: 10px; /* Ajuste conforme necessário para a distância do topo */
+left: 50%; /* Isso centraliza horizontalmente */
+transform: translateX(-50%);
+background-color: green;
+color: white;
+padding: 5px 10px;
+border-radius: 5px;
+z-index: 2;
+}
+
+
+.bg-image {
+  position: relative;
+  background-image: url('images/wooden.jpg'); /* Altere o caminho da sua imagem */
+  background-size: cover;
+  background-position: center;
+  height: 57vh; /* Altura personalizada da imagem de fundo */
+  z-index: 3;
+}
+
+.card {
+  width: 25%; /* Tamanho relativo */
+  height: auto; /* Altura automática para manter a proporção */
+  max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 8px;
   position: absolute;
-  top: 10px; /* Ajuste conforme necessário para a distância do topo */
-  left: 50%; /* Isso centraliza horizontalmente */
+  bottom: 20px; /* Distância do fundo da página */
+  left: 50%;
   transform: translateX(-50%);
-  background-color: green;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
+   /* Altere o caminho da sua imagem */
+  background-size: cover;
+  transition: transform 0.2s; /* Adicionando uma transição suave */
+}
+
+
+.card.active {
+  transform: translate(-50%, -50%) scale(1.1); /* Aumentando o tamanho da carta em 10% */
+}
+
+.card1 {
+  transform: translateX(-150%) rotate(-10deg);
+  background-image: url('images/carta3.png');
+}
+
+.card2 {
+  transform: translateX(-75%) rotate(-5deg);
+  background-image: url('images/CartaFundo.png');
+}
+
+.card3 {
+  transform: translateX(0) rotate(0deg);
+  background-image: url('images/carta1.jpg');
+}
+
+.card4 {
+  transform: translateX(75%) rotate(5deg);
+  background-image: url('images/carta2.jpg');
+}
+
+.opponent-card {
+  width: 15%; /* Tamanho relativo */
+  height: auto; /* Altura automática para manter a proporção */
+  max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 8px;
+  position: absolute;
+  bottom: -20px; /* Ajuste conforme necessário */
+  left: 50%;
+  transform: translateX(-50%);
+  aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
+  background-image: url('images/CartaFundo.png'); /* Altere o caminho da sua imagem */
+  background-size: cover;
+  cursor: default; /* Definindo o cursor como default para desabilitar interações com o jogador */
   z-index: 2;
 }
 
+.opponent-card:nth-child(1) {
+  transform: translateX(-120%) rotate(-10deg);
+}
 
-  .bg-image {
-    position: relative;
-    background-image: url('images/wooden.jpg'); /* Altere o caminho da sua imagem */
-    background-size: cover;
-    background-position: center;
-    height: 57vh; /* Altura personalizada da imagem de fundo */
-    z-index: 3;
-  }
+.opponent-card:nth-child(2) {
+  transform: translateX(-70%) rotate(-5deg);
+}
 
-  .card {
-    width: 25%; /* Tamanho relativo */
-    height: auto; /* Altura automática para manter a proporção */
-    max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
-    background-color: #fff;
-    border: 1px solid #000;
-    border-radius: 8px;
-    position: absolute;
-    bottom: 20px; /* Distância do fundo da página */
-    left: 50%;
-    transform: translateX(-50%);
-    aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
-    background-image: url('images/CartaFundo.png'); /* Altere o caminho da sua imagem */
-    background-size: cover;
-    transition: transform 0.2s; /* Adicionando uma transição suave */
-  }
+.opponent-card:nth-child(4) {
+  transform: translateX(0) rotate(0deg);
+}
 
+.opponent-card:nth-child(3) {
+  transform: translateX(50%) rotate(5deg);
+}
 
-  .card.active {
-    transform: translate(-50%, -50%) scale(1.1); /* Aumentando o tamanho da carta em 10% */
-  }
-  
-  .card1 {
-    transform: translateX(-150%) rotate(-10deg);
-  }
-  
-  .card2 {
-    transform: translateX(-75%) rotate(-5deg);
-  }
-  
-  .card3 {
-    transform: translateX(0) rotate(0deg);
-  }
-  
-  .card4 {
-    transform: translateX(75%) rotate(5deg);
-  }
-
-  .opponent-card {
-    width: 15%; /* Tamanho relativo */
-    height: auto; /* Altura automática para manter a proporção */
-    max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
-    background-color: #fff;
-    border: 1px solid #000;
-    border-radius: 8px;
-    position: absolute;
-    bottom: -20px; /* Ajuste conforme necessário */
-    left: 50%;
-    transform: translateX(-50%);
-    aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
-    background-image: url('images/CartaFundo.png'); /* Altere o caminho da sua imagem */
-    background-size: cover;
-    cursor: default; /* Definindo o cursor como default para desabilitar interações com o jogador */
-    z-index: 2;
-  }
-  
-  .opponent-card:nth-child(1) {
-    transform: translateX(-120%) rotate(-10deg);
-  }
-  
-  .opponent-card:nth-child(2) {
-    transform: translateX(-70%) rotate(-5deg);
-  }
-  
-  .opponent-card:nth-child(4) {
-    transform: translateX(0) rotate(0deg);
-  }
-  
-  .opponent-card:nth-child(3) {
-    transform: translateX(50%) rotate(5deg);
-  }
-  
-  .menu-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo transparente */
-    z-index: 4;
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo transparente */
+  z-index: 4;
 }
 
 .menu-options {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-}
-
-.menu-options button {
-    display: block;
-    margin-bottom: 10px;
-  border-radius: 10px solid;
-}
-.button-options {
-  border-radius: 20px; /* Raio de borda de 20px para arredondar os botões */
-  padding: 10px 20px; /* Ajuste o preenchimento conforme necessário */
-  margin: 5px; /* Adicione margem entre os botões conforme desejado */
-}
-
-/*Para botão esquerdo e direito*/
-.expanded-card {
-  display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
-  padding: 20px;
-  border-radius: 10px;
 }
 
-.expanded-card .card-inner {
-  width: 200px;
-  height: 300px;
-  margin: 0 auto;
+.menu-options button {
+  display: block;
+  margin-bottom: 10px;
 }
 
-.expanded-card .buttons {
-  margin-top: 20px;
-  text-align: center;
+.card-preview-overlay {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+width: 270px;
+height: 410px;
+background-color: rgba(0, 0, 0, 0.5); /* cor de fundo semi-transparente */
+z-index: 9;
+transform: translate(-50%, -50%);
+background-size: cover;
 }
 
-.return-button,
-.play-button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.btn-custom-primary {
+position: absolute; /* Define a posição absoluta para os botões */
+background-color: rgb(235, 10, 10); /* Cor de fundo para o botão primário personalizado */
+color: white; /* Cor do texto para o botão primário personalizado */
+top: -10%; /* Distância do topo */
+left: 0%; /* Distância da esquerda */
 }
 
-.return-button {
-  background-color: red;
-  color: white;
-}
-
-.play-button {
-  background-color: green;
-  color: white;
-}
-.expanded-card .card-back {
-  background-image: url('./images/OdsAmbiente.png'); /* Caminho para o conteúdo que deseja mostrar */
-  background-size: cover;
+.btn-custom-secondary {
+position: absolute; /* Define a posição absoluta para os botões */
+background-color: rgb(37, 206, 7); /* Cor de fundo para o botão secundário personalizado */
+color: white; /* Cor do texto para o botão secundário personalizado */
+top: -10%; /* Distância do topo */
+left: 77%; /* Distância da esquerda */
 }
