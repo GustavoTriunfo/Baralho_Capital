@@ -1,0 +1,19 @@
+
+ .bg-image {
+    background-image: url('/Baralho-Capital/TelaMenu/ImagensMenu/fundo-cidade-menu.jpg'); /* Substitua 'caminho/para/sua/imagem.jpg' pelo caminho da sua imagem de fundo */
+    height: 100vh; /* Defina a altura da imagem de fundo para cobrir toda a tela */
+    background-size: cover; /* Garante que a imagem de fundo cubra toda a área designada */
+    background-position: center; /* Centraliza a imagem de fundo */
+    position: relative; /* Adiciona posição relativa para alinhar o botão */
+    text-align: center; /* Centraliza o texto */
+}
+
+.bg-image h1 {
+    color: rgb(255, 255, 255); /* Cor do texto */
+    position: absolute; /* Define a posição absoluta para o texto */
+    top: 25%; /* Ajusta a distância do topo */
+    left: 50%; /* Ajusta a distância da esquerda */
+    transform: translateX(-50%); /* Centraliza o texto horizontalmente */
+    z-index: 1; /* Garante que o texto esteja acima do botão */
+}
+  

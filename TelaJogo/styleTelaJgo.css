@@ -11,7 +11,7 @@
   left: 10px; /* Ajuste conforme necessário */
   z-index: 10; /* Garante que o botão fique acima do fundo preto */
   background-size: cover;
-  background-image: url('images/menu_icon.png');
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/menu_icon.png');
   border: none; /* Remova a borda do botão */
   cursor: pointer; /* Defina o cursor para mostrar que o botão é clicável */
 }
@@ -31,7 +31,7 @@ z-index: 2;
 
 .bg-image {
   position: relative;
-  background-image: url('images/wooden.jpg'); /* Altere o caminho da sua imagem */
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/wooden.jpg'); /* Altere o caminho da sua imagem */
   background-size: cover;
   background-position: center;
   height: 57vh; /* Altura personalizada da imagem de fundo */
@@ -62,22 +62,22 @@ z-index: 2;
 
 .card1 {
   transform: translateX(-150%) rotate(-10deg);
-  background-image: url('images/carta3.png');
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/carta3.png');
 }
 
 .card2 {
   transform: translateX(-75%) rotate(-5deg);
-  background-image: url('images/CartaFundo.png');
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/CartaFundo.png');
 }
 
 .card3 {
   transform: translateX(0) rotate(0deg);
-  background-image: url('images/carta1.jpg');
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/carta1.jpg');
 }
 
 .card4 {
   transform: translateX(75%) rotate(5deg);
-  background-image: url('images/carta2.jpg');
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/carta2.jpg');
 }
 
 .opponent-card {
@@ -92,7 +92,7 @@ z-index: 2;
   left: 50%;
   transform: translateX(-50%);
   aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
-  background-image: url('images/CartaFundo.png'); /* Altere o caminho da sua imagem */
+  background-image: url('/Baralho-Capital/TelaJogo/ImagensTelaJogo/CartaFundo.png'); /* Altere o caminho da sua imagem */
   background-size: cover;
   cursor: default; /* Definindo o cursor como default para desabilitar interações com o jogador */
   z-index: 2;

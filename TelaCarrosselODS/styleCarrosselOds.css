@@ -1,0 +1,15 @@
+ *{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  h1 {
+    text-align: center;
+    margin: 15px;
+  }
+
+  /* Legendas para os botões de navegação (opcional) */
+  .carousel-control-prev span.visually-hidden {
+    content: "Anterior"; /* Texto para o botão anterior */
+  }
+  .carousel-control-next span.visually-hidden {
+    content: "Próximo"; /* Texto para o botão seguinte */
+  }

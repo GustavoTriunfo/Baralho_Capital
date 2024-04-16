@@ -3,88 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baralho Capital</title>
-  <link rel="icon" type="image/png" href="images/CartaFundo.png">
+  <title>Baralho Capital - Tela Inicial</title>
+  <link rel="icon" type="image/png" href="/Baralho-Capital/esfera armilar.png">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/Baralho-Capital/styleTelaInicial.css">
+
 </head>
 <body>
 
-  <div id="moneyLabel" class="money-label">Dinheiro: $0</div>
-  <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
-    <!-- Conteúdo da pré-visualização -->
-    <!-- Botões para ação com a pré-visualização -->
-    <button id="buttonOption1" class="btn btn-custom-primary">Devolver</button>
-    <button id="buttonOption2" class="btn btn-custom-secondary">Jogar</button>
+<div class="bg-image">
+  <div class="title-container">
+    <h1 class="main-title">BARALHO CAPITAL</h1>
+    <p class="subtitle">O Poder da Escolha</p>
   </div>
-
-  <button class="btn btn-dark btn-hamburger" type="button" onclick="toggleMenu()">
-    <span class="navbar-toggler-icon"></span>
-</button>
-
-    <div class="black-bg">
-        <!-- Fundo preto sólido -->
-        <div class="opponent-cards">
-            <div class="opponent-card"></div>
-            <div class="opponent-card"></div>
-            <div class="opponent-card"></div>
-            <div class="opponent-card"></div>
-          </div>
-      </div>
-      
-     
-      
-      <div class="bg-image">
-        <!-- Cartas na mão do jogador -->
-        <div class="card-holder">
-          <div class="card card1"></div>
-          <div class="card card2"></div>
-          <div class="card card3"></div>
-          <div class="card card4"></div>
-        </div>
-      
-        <!-- Conteúdo dentro da imagem de fundo -->
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 offset-md-3 text-center text-white">
-              <h1></h1>
-              <p></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-     
-<!-- Caixa de opções -->
-<div id="menuOverlay" class="menu-overlay">
-  <div class="menu-options">
-    <button onclick="option1()">
-      <img src="images/pile of money.png" alt="Ícone Opção 1">
-      <span>Patrimônio</span>
-    </button>
-    <button onclick="option2()">
-      <img src="images/buy.jpg" alt="Ícone Opção 2">
-      <span>Loja</span>
-    </button>
-    <button onclick="option3()">
-      <img src="images/city_view.jpg" alt="Ícone Opção 3">
-      <span>Cidade</span>
-    </button>
-    <button onclick="option4()">
-      <img src="images/news.jpg" alt="Ícone Opção 4">
-      <span>Notícias</span>
-    </button>
+    <button class="custom-button" onclick="location.href='TelaMenu/menu.html';"><img src="imagensTelaInicial/startButton.gif" alt="Imagem do botão" width="150" height="auto"></button>
+    <button class="btn btn-warning btn-lg" onclick="window.location.href='/Baralho-Capital/TelaCarrosselODS/TelaCarrosselOds.html';" style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%);" >Saiba sobre as ODSs</button>
   </div>
-</div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="script.js"></script>
-
 
 </body>
 </html>

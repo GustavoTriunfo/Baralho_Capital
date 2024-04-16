@@ -1,0 +1,31 @@
+.bg-image {
+    background-image: url('/Baralho-Capital/TelaMenu/ImagensMenu/fundo-cidade-menu.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+}
+
+.bg-image h1 {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 25%; /* Ajusta a distância do topo */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.bg-image input[type="text"] {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    color: white;
+    margin-top: 10px; /* Reduz a distância entre o título e a caixa de texto */
+}
+
+.bg-image .btn {
+    margin-top: 10px; /* Adiciona espaço entre a caixa de texto e o botão */
+}

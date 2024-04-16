@@ -1,0 +1,42 @@
+.bg-image {
+    background-image: url('imagensTelaInicial/gifcity.gif');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+}
+
+.bg-image .title-container {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5); /* Cor de fundo com transparência */
+    z-index: 1;
+    bottom: 60%; /* Ajuste a posição vertical conforme necessário */
+    width: 100%; /* Garante que o contêiner ocupe toda a largura */
+}
+
+.bg-image .title-container h1 {
+    color: rgb(0, 0, 0); /* Cor do texto */
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block; /* Permite que o padding funcione */
+    margin-bottom: 0px;
+}
+
+.bg-image .title-container .subtitle {
+    color: rgb(255, 0, 0); /* Cor do texto */
+    font-size: 25px;
+    font-weight: bold; /* Torna o texto em negrito */
+    margin-top: -5px;
+}
+
+.custom-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 2;
+}
