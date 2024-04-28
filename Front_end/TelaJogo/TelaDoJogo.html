@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baralho Capital</title>
+  <link rel="icon" type="image/png" href="/Baralho_Capital/esfera armilar.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/Baralho_Capital/Front_end/TelaJogo/styleTelaJogo.css">
+</head>
+<body>
+
+  <div id="moneyLabel" class="money-label">Dinheiro: $0</div>
+  <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
+    <!-- Conteúdo da pré-visualização -->
+    <!-- Botões para ação com a pré-visualização -->
+    <button id="buttonOption1" class="btn btn-custom-primary">Devolver</button>
+    <button id="buttonOption2" class="btn btn-custom-secondary">Jogar</button>
+  </div>
+
+  <button class="btn btn-dark btn-hamburger" type="button" onclick="toggleMenu()">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="startOverlay">
+  <img id="startButton" src="/Baralho_Capital/imagensTelaInicial/startButton.gif" alt="Start Button" width="150" height="auto">
+</div>
+
+    <div class="black-bg">
+        <!-- Fundo preto sólido -->
+        <img id="rostoEstranho" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/strangeFace.gif" alt="Strange" width="150" height="auto">
+        <div class="opponent-cards">
+          
+          </div>
+      </div>
+      
+     
+      
+      <div class="bg-image">
+
+        <img id="imagemBaralho" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/baralho_na_mesa.png" alt="Baralho">
+        
+        <!-- Cartas na mão do jogador -->
+        <div class="card-holder">
+          
+        </div>
+      
+        <!-- Conteúdo dentro da imagem de fundo -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 offset-md-3 text-center text-white">
+              <h1></h1>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+     
+<!-- Caixa de opções -->
+<div id="menuOverlay" class="menu-overlay">
+  <div class="menu-options">
+    <button onclick="option1()">
+      <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/pile of money.png" alt="Ícone Opção 1">
+      <span>Patrimônio</span>
+    </button>
+    <button onclick="option2()">
+      <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/buy.jpg" alt="Ícone Opção 2">
+      <span>Loja</span>
+    </button>
+    <button onclick="option3()">
+      <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/city_view.jpg" alt="Ícone Opção 3">
+      <span>Cidade</span>
+    </button>
+    <button onclick="option4()">
+      <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/news.jpg" alt="Ícone Opção 4">
+      <span>Notícias</span>
+    </button>
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/Baralho_Capital/Front_end/TelaJogo/scriptTelaJogo.js"></script>
+<script src="/Baralho_Capital/Front_end/TelaJogo/app.js"></script>
+<script src="/Baralho_Capital/Front_end/TelaJogo/playerCard.js"></script>
+<script src="/Baralho_Capital/Back_end/TelaDoJogo/startJogo.js"></script>
+
+<audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Roman.mp3" preload="auto" loop></audio>
+<audio id="efeitoSonoroCartaColocadaNaMesa" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3"></audio>
+
+<script>
+  // Obtém os parâmetros de consulta da URL
+  var params = new URLSearchParams(window.location.search);
+  // Obtém o valor do parâmetro 'tipo'
+  var tipoJogo = params.get('tipo');
+  
+  // Agora você pode usar o valor de 'tipoJogo' para executar a lógica apropriada
+  if (tipoJogo === 'solo') {
+      // Executa a lógica para o jogo solo
+  } else if (tipoJogo === 'twoLocal') {
+      // Executa a lógica para o jogo local
+  } else {
+      // Trate qualquer outro valor ou falta de valor
+  }
+  </script>
+  
+</body>
+</html>

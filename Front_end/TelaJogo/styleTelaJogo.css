@@ -1,0 +1,215 @@
+.black-bg {
+  position: relative;
+  background-color: black;
+  height: 300px; /* Altura personalizada da área preta */
+  z-index: 1;
+}
+
+.btn-hamburger {
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário */
+  left: 10px; /* Ajuste conforme necessário */
+  z-index: 10; /* Garante que o botão fique acima do fundo preto */
+  background-size: cover;
+  background-image: url('/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/menu_icon.png');
+  border: none; /* Remova a borda do botão */
+  cursor: pointer; /* Defina o cursor para mostrar que o botão é clicável */
+}
+
+#startOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto com 80% de transparência */
+  z-index: 9999; /* Z-index alto para cobrir toda a tela */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#startButton {
+  cursor: pointer;
+}
+
+.money-label {
+position: absolute;
+top: 10px; /* Ajuste conforme necessário para a distância do topo */
+left: 50%; /* Isso centraliza horizontalmente */
+transform: translateX(-50%);
+background-color: green;
+color: white;
+padding: 5px 10px;
+border-radius: 5px;
+z-index: 2;
+}
+
+
+.bg-image {
+  position: relative;
+  background-image: url('/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/wooden.jpg'); /* Altere o caminho da sua imagem */
+  background-size: cover;
+  background-position: center;
+  height: 59vh; /* Altura personalizada da imagem de fundo */
+  z-index: 3;
+}
+
+#rostoEstranho {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Garante que a imagem esteja acima das cartas */
+}
+
+#imagemBaralho {
+  position: absolute; /* Define a posição absoluta para a imagem */
+  bottom: 150px; /* Ajuste conforme necessário para a distância do fundo da página */
+  left: 25%; /* Posiciona a imagem no centro horizontalmente */
+  transform: translateX(-50%); /* Centraliza a imagem horizontalmente */
+  cursor: pointer; /* Altera o cursor para indicar que a imagem é clicável */
+  z-index: 0; /* Define um índice Z alto para garantir que a imagem esteja acima das cartas */
+  width: 180px; /* Defina a largura da imagem */
+}
+
+/* Ajusta o tamanho da imagem do baralho, se necessário */
+#imagemBaralho img {
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+
+.player-card {
+  width: 25%; /* Tamanho relativo */
+  height: auto; /* Altura automática para manter a proporção */
+  max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
+  /*background-color: #fff;*/
+  border: 1px solid #000;
+  border-radius: 0px;
+  position: absolute;
+  bottom: 0px; /* Distância do fundo da página */
+  left: 50%;
+  transform: translateX(-50%);
+  aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
+   /* Altere o caminho da sua imagem */
+  background-size: contain;
+  transition: transform 0.2s; /* Adicionando uma transição suave */
+}
+
+
+.player-card.active {
+  transform: translate(-50%, -50%) scale(1.1); /* Aumentando o tamanho da carta em 10% */
+}
+
+.card-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.opponent-card {
+  width: 15%; /* Tamanho relativo */
+  height: auto; /* Altura automática para manter a proporção */
+  max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
+  /*background-color: #fff;*/
+  border: 1px solid #000;
+  border-radius: 0px;
+  position: absolute;
+  bottom: -20px; /* Ajuste conforme necessário */
+  left: 47%;
+  transform: translateX(-50%);
+  aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
+  background-image: url('/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo//CartaOficialFundo.png'); /* Altere o caminho da sua imagem */
+  background-size: contain;
+  cursor: default; /* Definindo o cursor como default para desabilitar interações com o jogador */
+  z-index: 2;
+}
+
+.opponent-card:nth-child(1) {
+  transform: translateX(-120%) rotate(-10deg);
+}
+
+.opponent-card:nth-child(2) {
+  transform: translateX(-70%) rotate(-5deg);
+}
+
+.opponent-card:nth-child(4) {
+  transform: translateX(0) rotate(0deg);
+}
+
+.opponent-card:nth-child(3) {
+  transform: translateX(50%) rotate(5deg);
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo transparente */
+  z-index: 4;
+}
+
+.menu-options {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.menu-options button {
+/* background: none;  Remove o fundo do botão */
+border: none; /* Remove a borda do botão */
+padding: 0; /* Remove o preenchimento interno do botão */
+width: 200px;
+height: 120px;
+position: relative; /* Permite posicionar o texto sobre a imagem */
+}
+
+.menu-options button img {
+width: 100%; /* Defina a largura da imagem para ocupar todo o espaço do botão */
+height: 100%; /* Ajuste a altura automaticamente para manter a proporção da imagem */
+object-fit: cover;
+}
+
+.menu-options button span {
+position: absolute; /* Permite posicionar o texto sobre a imagem */
+top: 10%; /* Alinha o texto ao centro verticalmente */
+left: 25%; /* Alinha o texto ao centro horizontalmente */
+transform: translate(-50%, -50%); /* Centraliza o texto */
+color: rgb(0, 0, 0); /* Define a cor do texto */
+font-size: 16px; /* Define o tamanho da fonte do texto */
+font-weight: bold; /* Define a fonte em negrito */
+}
+
+.card-preview-overlay {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+width: 270px;
+height: 410px;
+background-color: rgba(0, 0, 0, 0.5); /* cor de fundo semi-transparente */
+z-index: 9;
+transform: translate(-50%, -50%);
+background-size: cover;
+}
+
+.btn-custom-primary {
+position: absolute; /* Define a posição absoluta para os botões */
+background-color: rgb(235, 10, 10); /* Cor de fundo para o botão primário personalizado */
+color: white; /* Cor do texto para o botão primário personalizado */
+top: -10%; /* Distância do topo */
+left: 0%; /* Distância da esquerda */
+}
+
+.btn-custom-secondary {
+position: absolute; /* Define a posição absoluta para os botões */
+background-color: rgb(37, 206, 7); /* Cor de fundo para o botão secundário personalizado */
+color: white; /* Cor do texto para o botão secundário personalizado */
+top: -10%; /* Distância do topo */
+left: 77%; /* Distância da esquerda */
+}
