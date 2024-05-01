@@ -11,11 +11,10 @@
 <body>
 
   <div id="moneyLabel" class="money-label">Dinheiro: $0</div>
+
   <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
-    <!-- Conteúdo da pré-visualização -->
-    <!-- Botões para ação com a pré-visualização -->
-    <button id="buttonOption1" class="btn btn-custom-primary">Devolver</button>
-    <button id="buttonOption2" class="btn btn-custom-secondary">Jogar</button>
+    <button id="botaoDevolver" class="btn btn-custom-primary">Devolver</button>
+    <button id="botaoJogar" class="btn btn-custom-secondary">Jogar</button>
   </div>
 
   <button class="btn btn-dark btn-hamburger" type="button" onclick="toggleMenu()">
@@ -44,17 +43,25 @@
         <div class="card-holder">
           
         </div>
-      
-        <!-- Conteúdo dentro da imagem de fundo -->
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 offset-md-3 text-center text-white">
-              <h1></h1>
-              <p></p>
-            </div>
+        <div id="statusMenu" class="status-menu bg-light p-4 rounded" style="display: none;">
+          <!-- Botão para fechar o menu de status -->
+          <button class="close-btn btn btn-sm btn-danger" onclick="fecharMenuStatus()">Fechar</button>
+          <!-- Conteúdo do menu de status -->
+          <h2 class="text-center mb-4">Status do Jogador</h2>
+          <div class="status-info">
+            <p class="mb-2"><strong>Nome:</strong> <span id="nomeJogador" class="text-primary">Nome do Jogador</span></p>
+            <p class="mb-2"><strong>Dinheiro:</strong> <span id="dinheiroJogador" class="text-success"></span></p>
+            <p class="mb-2"><strong>INV:</strong> <span id="investimentoJogador" class="text-info"></span></p>
+            <p class="mb-2"><strong>FM:</strong> <span id="famaJogador" class="text-info"></span></p>
+            <p class="mb-2"><strong>DEF:</strong> <span id="defesaJogador" class="text-info"></span></p>
+            <p class="mb-2"><strong>R:</strong> <span id="ruindadeJogador" class="text-info"></span></p>
+            <p class="mb-2"><strong>RV:</strong> <span id="revesJogador" class="text-info"></span></p>
+            <p class="mb-2"><strong>ATK:</strong> <span id="ataqueJogador" class="text-info"></span></p>
+            <p class="mb-2"><strong>TRF:</strong> <span id="transformacaoJogador" class="text-info">false</span></p>
+            <p class="mb-2"><strong>Legenda: INV = Investimento/ FM = Fama/ DEF = Defesa/ R = Ruindade/ RV = Revés/ ATK = Ataque/ TRF = Transformação</strong> <span id="legenda" class="text-info"></span></p>
           </div>
         </div>
-      </div>
+        
 
       
      
@@ -73,9 +80,9 @@
       <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/city_view.jpg" alt="Ícone Opção 3">
       <span>Cidade</span>
     </button>
-    <button onclick="option4()">
-      <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/news.jpg" alt="Ícone Opção 4">
-      <span>Notícias</span>
+    <button onclick="mostrarMenuStatus()">
+      <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/bar graph.png" alt="Ícone Opção 4">
+      <span>Status</span>
     </button>
   </div>
 </div>
@@ -94,6 +101,7 @@
 <audio id="efeitoSonoroCartaColocadaNaMesa" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3"></audio>
 
 <script>
+  var numeroCarta = 1;
   // Obtém os parâmetros de consulta da URL
   var params = new URLSearchParams(window.location.search);
   // Obtém o valor do parâmetro 'tipo'
@@ -107,6 +115,17 @@
   } else {
       // Trate qualquer outro valor ou falta de valor
   }
+
+  function mostrarMenuStatus() {
+  var statusMenu = document.getElementById('statusMenu');
+  statusMenu.style.display = 'block'; // Altere para 'block' para exibir a div
+}
+  // Função para fechar o menu de status
+  function fecharMenuStatus() {
+    var statusMenu = document.getElementById('statusMenu');
+    statusMenu.style.display = 'none';
+  }
+
   </script>
   
 </body>

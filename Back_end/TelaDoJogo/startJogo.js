@@ -1,6 +1,69 @@
-// Função para criar cartas no início do jogo
+
+
+var jogador1 = {
+    saldo: 0,
+    salario: 0,
+    ruindade: 30,
+    historicoRuindade: [],
+    reves: 0,
+    defesa: 0,
+    ataque: 0,
+    investimento: 0,
+    fama: 0,
+    transformacao: false,
+    historicoCartasJogadas: [],
+    cartas: []
+};
+
+var jogador2 = {
+    saldo: 0,
+    salario: 0,
+    ruindade: 0,
+    historicoRuindade: [],
+    reves: 0,
+    defesa: 0,
+    ataque: 0,
+    investimento: 0,
+    fama: 0,
+    transformacao: false,
+    historicoCartasJogadas: [],
+    cartas: []
+};
+
+var jogadorAtual = jogador1; 
+
+function alternarJogador() {
+    jogadorAtual = (jogadorAtual === jogador1) ? jogador2 : jogador1;
+}
+
+function selecionarIdCarta()
+{
+    if(Math.floor(Math.random() * (90 - 1 + 1)) + 1 > 70){
+        return Math.floor(Math.random() * (111 - 100 + 1)) + 100;
+    }
+    else if(jogadorAtual.ruindade > 0 && jogadorAtual.ruindade <= 150){
+        if(jogadorAtual.ruindade >= 100 && Math.floor(Math.random() * (7 - 3 + 1)) + 3 >= 6){
+            return Math.floor(Math.random() * (7 - 3 + 1)) + 3;
+        }
+        id = Math.floor(Math.random() * (36 - 8 + 1)) + 8;
+        if(id == 36){
+            //chama método acabar
+            return id
+        } else{
+            return id
+        }
+    }else if(jogadorAtual.ruindade > 150){
+        if(jogadorAtual.historicoCartasJogadas.includes(4)){
+            return 3
+        }
+        return 4
+    } else if(jogadorAtual.investimento > 0){
+        return Math.floor(Math.random() * (80 - 51 + 1)) + 51;
+    }
+}
+
 function criarCartasNoInicio() {
-    // Contador para controlar o intervalo de tempo entre as cartas
+    
     var contador = 0;
 
     // Loop para criar cartas alternadas para jogador e oponente
@@ -29,22 +92,21 @@ function criarCartaParaJogador() {
         return; // Sai da função se o limite for atingido
     }
     // Calcula o número da nova carta
-    var novoNumero = quantidadeCartas + 1;
+    var idCorrespondente = selecionarIdCarta();
+    console.log(idCorrespondente)
     // Cria uma nova div para representar a nova carta
     var novaCarta = document.createElement('div');
     // Adiciona as classes de estilo
     novaCarta.classList.add('player-card');
     // Define o atributo de dados para representar o número da carta
-    novaCarta.dataset.cardNumber = novoNumero;
-    // Chama a função para selecionar o tipo de carta e obter o ID da imagem
-    var idImagem = selecionarTipoCarta();
-    // Define o ID da imagem como o ID da nova carta
-    novaCarta.id = idImagem;
-    // Adiciona a nova carta ao elemento card-holder
+   // novaCarta.dataset.cardNumber = idCorrespondente;
+    novaCarta.id = idCorrespondente
+    novaCarta.dataset.cardNumber = numeroCarta++;
+    selecionarImagem(idCorrespondente, novaCarta);
     document.querySelector('.card-holder').appendChild(novaCarta);
     reproduzirEfeitoSonoroCartaNaMesa();
     // Chama a função para selecionar a imagem com base no ID e definir como fundo da nova carta
-    selecionarImagem(idImagem, novaCarta);
+   
 
     // Chama a função para configurar os eventos das cartas do jogador
     rearrangeCards();
@@ -60,18 +122,15 @@ function criarCartaParaOponente() {
         return; // Sai da função se o limite for atingido
     }
     // Calcula o número da nova carta
-    var novoNumero = quantidadeCartas + 1;
+    var idCorrespondente = quantidadeCartas + 1;
     // Cria uma nova div para representar a nova carta
     var novaCarta = document.createElement('div');
     // Adiciona as classes de estilo
     novaCarta.classList.add('opponent-card');
     // Define o atributo de dados para representar o número da carta
-    novaCarta.dataset.cardNumber = novoNumero;
-    // Chama a função para selecionar o tipo de carta e obter o ID da imagem
-    var idImagem = selecionarTipoCarta();
-    // Define o ID da imagem como o ID da nova carta
-    novaCarta.id = idImagem;
-    // Adiciona a nova carta ao elemento opponent-cards
+   // novaCarta.dataset.cardNumber = novoNumero;
+    novaCarta.id = idCorrespondente
+    novaCarta.dataset.cardNumber = numeroCarta++;
     document.querySelector('.opponent-cards').appendChild(novaCarta);
     reproduzirEfeitoSonoroCartaNaMesa();
     // Chama a função para configurar os eventos das cartas do jogador
@@ -99,3 +158,5 @@ function reproduzirEfeitoSonoroCartaNaMesa() {
     var efeitoSonoro = document.getElementById("efeitoSonoroCartaColocadaNaMesa");
     efeitoSonoro.play();
 }
+
+
