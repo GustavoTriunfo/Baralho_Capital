@@ -27,6 +27,12 @@ $(document).on("click", ".player-card", function(event) {
     
         // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
         $(this).addClass("active").css("z-index", "1000");
+        var idCarta = $(".player-card.active").attr("id");
+        if (idCarta == 3 || idCarta == 4 || idCarta == 5 || idCarta == 6 || idCarta == 7 || idCarta == 36) {
+            $("#botaoDevolver, #botaoJogar").prop("disabled", true);
+        } else {
+            $("#botaoDevolver, #botaoJogar").prop("disabled", false);
+        }
     }
 });
 rearrangeCards();
@@ -37,6 +43,8 @@ $(document).click(function(event) {
         // Se o clique não for em uma carta e nem na pré-visualização, remove a pré-visualização
         $("#cardPreviewOverlay").removeClass("d-block");
         $(".player-card").removeClass("active").css("z-index", "1");
+
+        $("#botaoDevolver, #botaoJogar").prop("disabled", false);
     }
 });
 

@@ -45,7 +45,7 @@ function selecionarIdCarta()
         if(jogadorAtual.ruindade >= 100 && Math.floor(Math.random() * (7 - 3 + 1)) + 3 >= 6){
             return Math.floor(Math.random() * (7 - 3 + 1)) + 3;
         }
-        id = Math.floor(Math.random() * (36 - 8 + 1)) + 8;
+        id = Math.floor(Math.random() * (38 - 8 + 1)) + 8;
         if(id == 36){
             //chama método acabar
             return id
@@ -144,6 +144,7 @@ startButton.addEventListener('click', function() {
     startOverlay.style.display = 'none';
     iniciarMusica();
     criarCartasNoInicio();
+    configurations.style.display = 'block';
   });
 
   function iniciarMusica() {

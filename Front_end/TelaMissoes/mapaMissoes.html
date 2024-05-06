@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baralho Capital - Missões</title>
+  <link rel="icon" type="image/png" href="/Baralho_Capital/esfera armilar.png">
+  <!-- Inclua os arquivos CSS do Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Estilos personalizados -->
+  <style>
+    /* Defina o tamanho da imagem do mapa */
+    #map-container {
+      position: relative;
+      width: 100vw; /* Cobrir toda a largura da tela */
+      height: 100vh; /* Cobrir toda a altura da tela */
+      overflow: hidden; /* Oculta a parte da imagem fora da tela */
+    }
+    #map {
+      width: 200%; /* Aumenta o tamanho da imagem para cobrir toda a tela */
+      height: 200%; /* Aumenta o tamanho da imagem para cobrir toda a tela */
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #map img {
+      width: 100%;
+      height: auto;
+      cursor: grab; /* Altera o cursor para indicar que a imagem é arrastável */
+    }
+    #icon {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px; /* Tamanho do ícone */
+      height: 50px; /* Tamanho do ícone */
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="map-container" onmousedown="startDrag(event)" onmouseup="endDrag()" onmouseleave="endDrag()" onmousemove="drag(event)">
+    <!-- Div que conterá a imagem do mapa -->
+    <div id="map">
+      <img src="/Baralho_Capital/Front_end/TelaMissoes/imagensMapa/mapaCidade.png" class="img-fluid" alt="Mapa">
+    </div>
+    <!-- Ícone -->
+    <img style="width: 150px; height: auto;" id="icon" src="/Baralho_Capital/Front_end/TelaMissoes/imagensMapa/IconeDengue.png" alt="Ícone" onclick="iniciarJogo('solo')">
+  </div>
+
+  <!-- Scripts do Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Script personalizado para a navegação no mapa -->
+  <script>
+    var isDragging = false;
+    var startX, startY;
+    var startScrollLeft, startScrollTop;
+
+    function startDrag(event) {
+      isDragging = true;
+      startX = event.clientX;
+      startY = event.clientY;
+      startScrollLeft = document.getElementById('map-container').scrollLeft;
+      startScrollTop = document.getElementById('map-container').scrollTop;
+      document.getElementById('map').style.cursor = 'grabbing'; /* Altera o cursor durante o arrasto */
+    }
+
+    function endDrag() {
+      isDragging = false;
+      document.getElementById('map').style.cursor = 'grab'; /* Restaura o cursor padrão após o arrasto */
+    }
+
+    function drag(event) {
+      if (!isDragging) return;
+      var deltaX = (startX - event.clientX) * 2;
+      var deltaY = (startY - event.clientY) * 2;
+      document.getElementById('map-container').scrollLeft = startScrollLeft + deltaX;
+      document.getElementById('map-container').scrollTop = startScrollTop + deltaY;
+    }
+
+    function openPopup() {
+      // Aqui você pode adicionar código para abrir uma nova div ou fazer qualquer outra ação desejada
+      alert("Ícone clicado!");
+    }
+
+    function iniciarJogo(tipoJogo) {
+    // Constrói a URL com o parâmetro de consulta tipoJogo
+    var url = '/Baralho_Capital/Front_end/TelaJogo/TelaDoJogo.html?tipo=' + tipoJogo;
+    // Redireciona para a nova URL
+    window.location.href = url;
+}
+  </script>
+</body>
+</html>

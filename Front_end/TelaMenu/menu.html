@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baralho Capital - Tela Menu</title>
+  <title>Baralho Capital - Menu</title>
   <link rel="icon" type="image/png" href="/Baralho_Capital/esfera armilar.png">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/Baralho_Capital/Front_end/TelaMenu/styleMenu.css">
@@ -14,52 +14,15 @@
     <h1 class="text-white mb-4">BARALHO CAPITAL</h1>
     <!-- Botão para escolher o modo de jogo -->
     <div id="opcaoModoJogo">
-        <button id="umJogadorBtn" class="btn btn-primary btn-lg mb-3" onclick="showModoJogo('umJogador')">Um Jogador</button>
-        <button id="doisJogadoresBtn" class="btn btn-primary btn-lg mb-3" onclick="showModoJogo('doisJogadores')">Dois Jogadores</button>
+        <button id="umJogadorBtn" class="btn btn-primary btn-success mb-3" onclick="window.location.href='/Baralho_Capital/Front_end/TelaMissoes/mapaMissoes.html'">Sala das Missões</button>
+        <button id="doisJogadoresBtn" class="btn btn-primary btn-warning mb-3" onclick="telaConquistas()">Conquistas</button>
     </div>
     
-    <!-- Botões para escolher a sala (aparecem somente após escolher o modo de jogo) -->
-    <div id="opcaoTipoMultiplayer" style="display: none;">
-        <button id="onlineBtn" class="btn btn-success btn-lg mb-3" onclick="showSala('online')" style="display: none;">Online</button>
-        <button id="localBtn" class="btn btn-warning btn-lg" onclick="showSala('local')" style="display: none;">Local</button>
-    </div>
-    
-    <!-- Botões para criar ou entrar em uma sala (aparecem somente após escolher o modo e o tipo de sala) -->
-    <div id="SalaButtons" style="display: none;">
-        <button id="criarSalaBtn" class="btn btn-success btn-lg mb-3" onclick="window.location.href='/Baralho_Capital/Front_end/TelaCriarSala/criarSala.html';">Criar Sala</button>
-        <button id="entrarSalaBtn" class="btn btn-warning btn-lg" onclick="window.location.href='/Baralho_Capital/Front_end/TelaEntrarSala/entrarSala.html';">Entrar em Sala</button>
-    </div>
 </div>
 
 <script>
-function showModoJogo(modo) {
-    if (modo === 'umJogador') {
-      iniciarJogo('solo');
-    } else if (modo === 'doisJogadores') {
-        document.getElementById('opcaoModoJogo').style.display = 'none';
-        document.getElementById('opcaoTipoMultiplayer').style.display = 'block';
-        document.getElementById('onlineBtn').style.display = 'block';
-        document.getElementById('localBtn').style.display = 'block';
-    }
-}
 
-function showSala(sala) {
-    if (sala === 'online') {
-        document.getElementById('opcaoTipoMultiplayer').style.display = 'none';
-        document.getElementById('SalaButtons').style.display = 'block';
-        document.getElementById('criarSalaBtn').style.display = 'block';
-        document.getElementById('entrarSalaBtn').style.display = 'block';
-    } else if (sala === 'local') {
-      iniciarJogo('twoLocal');
-    }
-}
 
-function iniciarJogo(tipoJogo) {
-    // Constrói a URL com o parâmetro de consulta tipoJogo
-    var url = '/Baralho_Capital/Front_end/TelaJogo/TelaDoJogo.html?tipo=' + tipoJogo;
-    // Redireciona para a nova URL
-    window.location.href = url;
-}
 </script>
 
 </body>

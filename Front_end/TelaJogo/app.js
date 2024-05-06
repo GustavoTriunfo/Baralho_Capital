@@ -1,8 +1,7 @@
 
-
+var MissaoCombateDengue = true
 var Cartas = {
-    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Redenção.png', tipo: 'TRF', pontos: 0},
-    2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/HabeasCorpus.png', tipo: 'DEF', pontos: 10},
+  
     3: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Preso.png', tipo: 'RV', pontos: 0},
     4: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Descoberto.png', tipo: 'RV', pontos: 0},
     5: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Chantageado.png', tipo: 'RV', pontos: 0},
@@ -37,6 +36,8 @@ var Cartas = {
     34: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Amigo Oculto II.png', tipo: 'DEF', pontos: 50},
     35: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Amigo Oculto III.png', tipo: 'DEF', pontos: 100},
     36: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Morte.png', tipo: '?', pontos: 0},
+    37: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Redenção.png', tipo: 'TRF', pontos: 0},
+    38: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/HabeasCorpus.png', tipo: 'DEF', pontos: 10},
     51: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/O Bom Samaritano.png', tipo: 'INV', pontos: 0},
     100: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Cheio de Amigos.png', tipo: 'FM', pontos: 10},
     101: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Famoso I.png', tipo: 'FM', pontos: 25},
@@ -64,8 +65,12 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
         const tipo = selecionarTipoCarta(id_carta)
 
         if (tipo == 'R'){
+            if(objetoJogador.transformacao == true){
+                objetoJogador.transformacao = false
+            }
             atualizarRuindade(objetoJogador, valores)
         }  else if (tipo == 'TRF'){
+            objetoJogador.transformacao = true
             transformar(objetoJogador);
         } else if (tipo == 'DEF'){
             objetoJogador.defesa += valores
@@ -75,20 +80,32 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
             objetoJogador.investimento += valores
         } else if (tipo == 'FM'){
             objetoJogador.fama += valores
-        } else if (tipo == 'RV'){
+        } else if (tipo == 'RV' && id_carta != 3){
             objetoJogador.reves += valores
         } else if (tipo == '?'){
-           terminarJogo();
-        }
-        atualizarSalario(objetoJogador, id_carta);
+            terminarJogo();
+        } else if (id_carta == 3){
+            terminarJogo();
+         }
+      
         atualizarTelaStatus(objetoJogador);
+        if(MissaoCombateDengue){
+        tocarEfeitoRisadaMosquitoAleatorio();
+        exibirImagemTemporizada()
+        danoBoss()
+        }
     } else {
         console.error("ID de carta inválido:", id_carta);
     }
 }
 
+function terminarJogo(){
+    hamburgerButton.style.display = 'none';
+    endgameOverlay.style.display = 'block';
+}
+
 function atualizarTelaStatus(objetoJogador){
-    atualizarDinheiroTela(objetoJogador.saldo)
+    
 
     var ruindadeSpan = document.getElementById('ruindadeJogador');
     ruindadeSpan.textContent = objetoJogador.ruindade;
@@ -105,20 +122,55 @@ function atualizarTelaStatus(objetoJogador){
     var ataqueSpan = document.getElementById('ataqueJogador');
     ataqueSpan.textContent = objetoJogador.ataque;
 
+    var transformacaoSpan = document.getElementById('transformacaoJogador');
+    if(objetoJogador.transformacao == true){
+        transformacaoSpan.textContent = true  
+    } else{
+        transformacaoSpan.textContent = false  
+    }
+
 }
 
 function atualizarSalario(objetoJogador, id_carta){
     if(objetoJogador.fama > 0){
-        objetoJogador.salario += 500
-    } else if(objetoJogador.investimento > 0){
-        objetoJogador.salario += 500
-    } else if(id_carta == 14){
+        objetoJogador.salario += 100
+    } if(objetoJogador.investimento > 0){
+        objetoJogador.salario += 100
+    } if(id_carta == 14){
         objetoJogador.saldo += 25000
     }else if(id_carta == 15){
         objetoJogador.saldo += 50000
     }else if(id_carta == 16){
         objetoJogador.saldo += 100000
+    } else if(id_carta == 32){
+        objetoJogador.saldo += 350000
+    } else if(id_carta == 27){
+        objetoJogador.saldo += 500000
+    } else if(id_carta == 103){
+        objetoJogador.saldo += 100000
+    } else if(id_carta == 26){
+        objetoJogador.saldo += 100000
+    } else if(id_carta == 23){
+        objetoJogador.salario += 10000
+    } else if(id_carta == 24){
+        objetoJogador.saldo += 15000
+    } else if(id_carta == 11){
+        console.log('aumento porcentagem...')
+        console.log(objetoJogador.salario)
+        objetoJogador.salario += objetoJogador.salario * 1.5
+        console.log(objetoJogador.salario)
+    } else if(id_carta == 12){
+        console.log('aumento porcentagem...')
+        console.log(objetoJogador.salario)
+        objetoJogador.salario += objetoJogador.salario * 1.7
+        console.log(objetoJogador.salario)
+    } else if(id_carta == 13){
+        console.log('aumento porcentagem...')
+        console.log(objetoJogador.salario)
+        objetoJogador.salario += objetoJogador.salario * 1.9
+        console.log(objetoJogador.salario)
     }
+    objetoJogador.saldo += objetoJogador.salario
 }
 
 // Função para atualizar a ruindade do jogador
@@ -217,17 +269,4 @@ function selecionarImagem(idImagem, novaCarta) {
     novaCarta.appendChild(imagem);
 }
 
-
-// Função para atualizar o valor do dinheiro na label
-function atualizarDinheiroTela(valor) {
-    var dinheiroLabel = document.getElementById('moneyLabel');
-    // Formatando o valor para o padrão brasileiro
-    var valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    dinheiroLabel.textContent = 'Dinheiro: ' + valorFormatado;
   
-    var dinheiroSpan = document.getElementById('dinheiroJogador');
-    dinheiroSpan.textContent = valorFormatado;
-  }
-  
-
- // atualizarDinheiro(jogadorAtual.saldo);
