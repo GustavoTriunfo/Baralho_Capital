@@ -66,7 +66,7 @@ $(document).click(function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique para o documento
 
     // Verificar se há uma carta ativa
-    if ($(".player-card.active").length) {
+    if ($(".player-card.active").length && maximoCartasDevolvidas != 0) {
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
 
@@ -76,7 +76,7 @@ $(document).click(function(event) {
 
         // Esconde a div de pré-visualização
         $("#cardPreviewOverlay").removeClass("d-block");
-
+        maximoCartasDevolvidas -= 1
         rearrangeCards()
     }
 });
@@ -90,11 +90,14 @@ $(document).on("click", "#botaoJogar", function(event) {
 
         var idCarta = $(".player-card.active").attr("id");
         console.log(idCarta)
+        ocultarMaoJogador()
         atualizarStatusJogador(jogadorAtual, idCarta)
-
+        atualizarStatusJogo()
+        maximoCartasDevolvidas = 2
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
 
+      
         // Obtém o elemento card-holder
            // Remove a carta específica do card-holder
         $(".card-holder").find("[data-card-number='" + cardNumber + "']").remove();

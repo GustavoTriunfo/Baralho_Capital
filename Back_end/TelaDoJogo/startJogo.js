@@ -61,26 +61,33 @@ function selecionarIdCarta()
         return Math.floor(Math.random() * (80 - 51 + 1)) + 51;
     }
 }
-
 function criarCartasNoInicio() {
-    
     var contador = 0;
 
-    // Loop para criar cartas alternadas para jogador e oponente
-    for (var i = 0; i < 8; i++) {
-        // Adiciona um intervalo de tempo entre a criação de cada carta
-        setTimeout(function() {
-            // Calcula para quem a carta deve ser criada com base no contador
-            if (contador % 2 === 0) {
-                criarCartaParaJogador();
-            } else {
-                criarCartaParaOponente();
-            }
-            // Incrementa o contador para a próxima iteração
-            contador++;
-        }, i * 500); // Multiplica o índice pelo intervalo de tempo desejado (1000ms = 1 segundo)
+    function criarCartaComIntervalo() {
+        // Calcula para quem a carta deve ser criada com base no contador
+        if (contador % 2 === 0) {
+            ocultarMaoJogador();
+            criarCartaParaJogador();
+        } else {
+            criarCartaParaOponente();
+        }
+        // Incrementa o contador para a próxima iteração
+        contador++;
+
+        // Se ainda houver cartas para criar, programa a próxima execução
+        if (contador < 8) {
+            setTimeout(criarCartaComIntervalo, 500);
+        } else {
+            // Quando todas as cartas forem criadas, retorne ao estado normal
+            setTimeout(retornarAoEstadoNormal, 500);
+        }
     }
+
+    // Inicia o processo de criação de cartas com um intervalo inicial
+    setTimeout(criarCartaComIntervalo, 0);
 }
+
 
 // Função para criar uma carta para o jogador
 function criarCartaParaJogador() {
@@ -142,9 +149,10 @@ startButton.addEventListener('click', function() {
     startButton.style.display = 'none';
     // Oculta o overlay preto
     startOverlay.style.display = 'none';
+
     iniciarMusica();
     criarCartasNoInicio();
-    configurations.style.display = 'block';
+    
   });
 
   function iniciarMusica() {

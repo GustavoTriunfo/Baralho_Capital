@@ -57,6 +57,53 @@ function selecionarTipoCarta(id){
     return Cartas[id].tipo;
 };
 
+function atualizarStatusJogo(){
+    if(verificarFim() === false){
+        if(jogadorAtual === jogador2){
+            turnoJogador()
+            alternarJogador()
+        } else{
+            turnoBoss()
+            alternarJogador()
+            atualizarStatusJogo()
+        }
+      
+    }else{
+        terminarJogo()
+    }
+    
+}
+
+function turnoJogador(){
+    reproduzirEfeitoSonoroCartaNaMesa();
+    danoBoss()
+    tocarEfeitoSoco()
+    alterarVidaBoss(vidaBoss -= 10)
+}
+
+function turnoBoss(){
+    jogadaBoss()
+}
+
+function jogadaBoss() {
+    iniciarCronometro()
+    setTimeout(function() {
+        reproduzirEfeitoSonoroCartaNaMesa();
+        visualizacaoCartaBoss();
+        tocarEfeitoRisadaMosquitoAleatorio();
+        exibirImagemTemporizada()
+       
+        cronometroAtivo = false;
+    }, Math.floor(Math.random() * 3000) + 3000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos)
+}
+
+function verificarFim(){
+    if(verificarBarraDeProgressoZerada()){
+        return true
+    } else{
+        return false
+    }
+}
 // Função para atualizar o status do jogador com base no ID da carta escolhida
 function atualizarStatusJogador(objetoJogador, id_carta) {
     // Verifica se o ID da carta está presente no objeto de valores de cartas
@@ -90,9 +137,8 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
       
         atualizarTelaStatus(objetoJogador);
         if(MissaoCombateDengue){
-        tocarEfeitoRisadaMosquitoAleatorio();
-        exibirImagemTemporizada()
-        danoBoss()
+        
+       
         }
     } else {
         console.error("ID de carta inválido:", id_carta);
@@ -100,7 +146,6 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
 }
 
 function terminarJogo(){
-    hamburgerButton.style.display = 'none';
     endgameOverlay.style.display = 'block';
 }
 
