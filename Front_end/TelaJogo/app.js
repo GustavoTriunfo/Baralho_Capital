@@ -77,7 +77,7 @@ function atualizarStatusJogo(){
 function turnoJogador(){
     reproduzirEfeitoSonoroCartaNaMesa();
     danoBoss()
-    tocarEfeitoSoco()
+
     alterarVidaBoss(vidaBoss -= 10)
 }
 
