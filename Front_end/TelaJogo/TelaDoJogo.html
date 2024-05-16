@@ -10,6 +10,23 @@
 </head>
 <body>
 
+  <div class="overlay-transition-boss" style="display: none;"></div>
+
+  <div class="black-overlay" style="display: block;">
+    <div class="inner-black-div">
+      <div class="square"></div>
+    </div>
+    <div class="control-buttons">
+      <button id="move-up">↑</button>
+      
+        <button id="move-left">←</button>
+        <button id="move-down">↓</button>
+        <button id="move-right">→</button>
+     
+    </div>
+  </div>
+  
+
   <div class="progress" style="height: 30px; border-radius: 0px;">
     <div id="bossHealthBar" class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
@@ -53,10 +70,13 @@
 
         <img id="imagemBaralho" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/baralho_na_mesa.png" alt="Baralho" style="pointer-events: none;">
         
-        <!-- Cartas na mão do jogador -->
+       
         <div class="card-holder" id="maoJogador" style="pointer-events: 'none';">
-          
+          <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/left hand.png" class="player-hand-image left" id="hand-left">
+        
+          <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/right hand.png" class="player-hand-image right" id="hand-right">
         </div>
+
         <div id="statusMenu" class="status-menu bg-light p-4 rounded" style="display: none; z-index: 9999;">
           <!-- Botão para fechar o menu de status -->
           <button class="close-btn btn btn-sm btn-danger" onclick="fecharMenuStatus()">Fechar</button>
@@ -114,8 +134,9 @@
 <script src="/Baralho_Capital/Front_end/TelaJogo/app.js"></script>
 <script src="/Baralho_Capital/Front_end/TelaJogo/playerCard.js"></script>
 <script src="/Baralho_Capital/Back_end/TelaDoJogo/startJogo.js"></script>
+<script src="/Baralho_Capital/Front_end/TelaJogo/miniGame.js"></script>
 
-<audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Undertale OST - Bonetrousle.mp3" preload="auto" loop></audio>
+<audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demon_s-Crest-OST_-The-Infinite-Demon-.wav" preload="auto" loop></audio>
 <audio id="efeitoSonoroCartaColocadaNaMesa" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3"></audio>
 
 
@@ -123,7 +144,8 @@
   var numeroCarta = 0
   var valorProduto = 0, idProduto = 0
 
-
+  var faseDois = false
+  var transicaoBoss = false
   var vidaBoss = 100
 
   function mostrarMenuStatus() {
@@ -176,16 +198,46 @@ function alterarVidaBoss(porcentagem) {
 }
 
 function alterarMusicaBoss() {
-  var audioElement = document.getElementById('musica');
-  var raivaIcone = document.getElementById('raiva');
-  raivaIcone.style.display = "block"
+    var audioElement = document.getElementById('musica');
+    var raivaIcone = document.getElementById('raiva');
+    var mosquito = document.getElementById('animatedImage');
+    var fundo = document.querySelector('.black-bg');
+
+    console.log("altera fase boss")
+
+    raivaIcone.style.display = "block";
+    var risadaMosquito = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mosquito-laugh.wav');
+    risadaMosquito.play(); // Inicia a música
     // Altera a música
-    audioElement.src = "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Undertale OST - Undyne.mp3";
+    audioElement.src = "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demon_s-Crest-OST_-Cursed-Towers-.wav";
     // Recarrega e inicia a nova música
     audioElement.load();
     audioElement.play();
 
+    var transicao = document.querySelector(".overlay-transition-boss");
+    transicao.style.display = "block";
+ 
+
+    // Adiciona a classe 'show' após 2 segundos
+    setTimeout(function() {
+        $(".overlay-transition-boss").addClass("show");
+
+        // Remove a classe 'show' após 3 segundos adicionais
+        setTimeout(function() {
+            mosquito.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png';
+            fundo.style.backgroundImage = 'url("/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FireBackground.gif")';
+            raivaIcone.style.display = "none";
+            $(".overlay-transition-boss").removeClass("show");
+            transicao.style.display = "none";
+            mosquito.style.top = "50px";
+            mosquito.style.width = "550px";
+            faseDois = true
+        }, 3000);
+    }, 2000);
 }
+
+
+
 
 var musica = document.getElementById('musica');
 var musicaTocando = true;
@@ -218,15 +270,27 @@ function mutarEfeitosSonoros(){
     }
 }
 
-var efeitosSonoros = [
+var efeitosSonorosFaseUm = [
     "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Laugh 1.mp3",
     "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Laugh 2.mp3",
     "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Laugh 3.mp3",
     "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito - Sound Effect.mp3"
 ];
 
+var efeitosSonorosFaseDois = [
+    "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/RisadaFaseDois_1.wav",
+    "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/RisadaFaseDois_2.wav",
+    "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/RisadaFaseDois_3.wav",
+    "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito - Sound Effect.mp3"
+];
+
 function tocarEfeitoRisadaMosquitoAleatorio() {
   if(efeitoSonoro){
+    if(faseDois === false){
+      efeitosSonoros = efeitosSonorosFaseUm
+    }else{
+      efeitosSonoros = efeitosSonorosFaseDois
+    }
     var indice = Math.floor(Math.random() * 4); // Gera um número aleatório entre 0 e 2
     var audio = new Audio(efeitosSonoros[indice]);
     audio.play();
@@ -244,32 +308,45 @@ function exibirImagemTemporizada() {
 }
 
 function danoBoss() {
-    var mosquito = [
+  var mosquitoFaseUm = [
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueFerido.png",
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png",
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueFerido.png",
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png"
     ];
 
+  var mosquitoFaseDois = [
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoFerido.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoFerido.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png"
+    ];
+  if(faseDois === false){
+    boss = mosquitoFaseUm
+  } else{
+    boss = mosquitoFaseDois
+  }
+ 
     var index = 0;
     var animatedImage = document.getElementById('animatedImage');
 
     // Define um temporizador para alternar as imagens a cada 1 segundo
     var intervalo = setInterval(function() {
-        animatedImage.src = mosquito[index]; // Altera a imagem para a próxima na sequência
+        animatedImage.src = boss[index]; // Altera a imagem para a próxima na sequência
 
         index++; // Incrementa o índice para a próxima imagem
 
         // Se chegou ao final do array, reinicia do início
-        if (index >= mosquito.length) {
+        if (index >= boss.length) {
             index = 0;
         }
-    }, 100); // Intervalo de 1 segundo
+    }, 100); 
 
     // Define outro temporizador para parar a alternância após 4 segundos (4 imagens x 1 segundo cada)
     setTimeout(function() {
         clearInterval(intervalo); // Para o intervalo de alternância
-    }, 1000); // 4 segundos
+    }, 600); 
+    console.log("dano boss")
 }
 
 function ocultarMaoJogador() {
@@ -295,7 +372,7 @@ function ocultarMaoJogador() {
 
 function visualizacaoCartaBoss(){
   
-        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Precisa de Repouso.png'
+        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDerrubado.png'
      
         var imgElement = document.createElement('img');
         imgElement.src = cardImage;

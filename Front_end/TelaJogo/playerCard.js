@@ -48,21 +48,34 @@ $(document).click(function(event) {
     }
 });
 
-  function rearrangeCards() {
+function rearrangeCards() {
     var $cards = $(".player-card");
     var spacing = -50; // Define o espaçamento entre as cartas
     var totalWidth = ($cards.outerWidth(true) + spacing) * $cards.length;
     var parentWidth = $(".card-holder").width();
     var marginLeft = (parentWidth - totalWidth) / 2;
-  
+
+    // Reposiciona as cartas
     $cards.each(function(index) {
-      var leftOffset = marginLeft + (index * ($cards.outerWidth(true) + spacing) + 30);
-      $(this).css("left", leftOffset);
+        var leftOffset = marginLeft + (index * ($cards.outerWidth(true) + spacing) + 30);
+        $(this).css("left", leftOffset);
     });
-  }
+
+    // Calcula o deslocamento horizontal das mãos
+    var handOffset = (parentWidth - totalWidth) / 2;
+
+    // Ajusta a posição da mão esquerda
+    var leftHandOffset = handOffset - $("#hand-left").outerWidth(true) + 40;
+    $("#hand-left").css("left", leftHandOffset);
+
+    // Ajusta a posição da mão direita
+    var rightHandOffset = handOffset + totalWidth - 30;
+    $("#hand-right").css("left", rightHandOffset);
+}
 
 
-  $(document).on("click", "#botaoDevolver", function(event) {
+
+$(document).on("click", "#botaoDevolver", function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique para o documento
 
     // Verificar se há uma carta ativa
@@ -70,14 +83,13 @@ $(document).click(function(event) {
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
 
-        // Obtém o elemento card-holder
-           // Remove a carta específica do card-holder
+        // Remove a carta específica do card-holder
         $(".card-holder").find("[data-card-number='" + cardNumber + "']").remove();
 
         // Esconde a div de pré-visualização
         $("#cardPreviewOverlay").removeClass("d-block");
         maximoCartasDevolvidas -= 1
-        rearrangeCards()
+        rearrangeCards();
     }
 });
 
@@ -87,7 +99,7 @@ $(document).on("click", "#botaoJogar", function(event) {
 
     // Verificar se há uma carta ativa
     if ($(".player-card.active").length) {
-
+        console.log("jogador jogou")
         var idCarta = $(".player-card.active").attr("id");
         console.log(idCarta)
         ocultarMaoJogador()

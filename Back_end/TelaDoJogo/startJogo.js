@@ -38,28 +38,7 @@ function alternarJogador() {
 
 function selecionarIdCarta()
 {
-    if(Math.floor(Math.random() * (90 - 1 + 1)) + 1 > 70){
-        return Math.floor(Math.random() * (111 - 100 + 1)) + 100;
-    }
-    else if(jogadorAtual.ruindade > 0 && jogadorAtual.ruindade <= 150){
-        if(jogadorAtual.ruindade >= 100 && Math.floor(Math.random() * (7 - 3 + 1)) + 3 >= 6){
-            return Math.floor(Math.random() * (7 - 3 + 1)) + 3;
-        }
-        id = Math.floor(Math.random() * (38 - 8 + 1)) + 8;
-        if(id == 36){
-            //chama método acabar
-            return id
-        } else{
-            return id
-        }
-    }else if(jogadorAtual.ruindade > 150){
-        if(jogadorAtual.historicoCartasJogadas.includes(4)){
-            return 3
-        }
-        return 4
-    } else if(jogadorAtual.investimento > 0){
-        return Math.floor(Math.random() * (80 - 51 + 1)) + 51;
-    }
+    return 1
 }
 function criarCartasNoInicio() {
     var contador = 0;
