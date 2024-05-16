@@ -1,3 +1,17 @@
+@media only screen and (orientation: landscape) {
+  body {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
+
 .btn.disabled,
 .btn:disabled {
   /* Adicione estilos de sua escolha aqui */
@@ -427,3 +441,4 @@ left: 77%; /* Distância da esquerda */
   0% { transform: translateY(0); }
   100% { transform: translateY(-20px); }
 }
+
