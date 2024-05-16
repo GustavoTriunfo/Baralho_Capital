@@ -439,18 +439,25 @@ function tocarEfeitoSoco() {
 }
 
 function checkOrientation() {
-      if (window.innerHeight < window.innerWidth) {
-        document.querySelector('.content').style.display = 'none';
-        document.querySelector('.landscape-warning').style.display = 'block';
-      } else {
-        document.querySelector('.content').style.display = 'block';
-        document.querySelector('.landscape-warning').style.display = 'none';
-      }
-    }
+  const contentElement = document.querySelector('.content');
+  const warningElement = document.querySelector('.landscape-warning');
 
-    window.addEventListener('resize', checkOrientation);
-    window.addEventListener('load', checkOrientation);
-    window.addEventListener('orientationchange', checkOrientation);
+  if (contentElement && warningElement) {
+    if (window.innerHeight < window.innerWidth) {
+      contentElement.style.display = 'none';
+      warningElement.style.display = 'block';
+    } else {
+      contentElement.style.display = 'block';
+      warningElement.style.display = 'none';
+    }
+  } else {
+    console.error('Elementos não encontrados.');
+  }
+}
+
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('load', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
 
   </script>
   
