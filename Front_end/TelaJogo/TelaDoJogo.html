@@ -10,6 +10,10 @@
 </head>
 <body>
 
+  <div class="landscape-warning">
+    Por favor, gire seu dispositivo para o modo retrato.
+  </div>
+
   <div class="overlay-transition-boss" style="display: none;"></div>
 
   <div class="black-overlay" style="display: none;">
@@ -434,34 +438,19 @@ function tocarEfeitoSoco() {
   }
 }
 
-function preventRotation() {
-      if (window.innerHeight > window.innerWidth) {
-        document.body.style.transform = '';
-        document.body.style.transformOrigin = '';
-        document.body.style.width = '';
-        document.body.style.height = '';
-        document.body.style.overflowX = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.left = '';
+function checkOrientation() {
+      if (window.innerHeight < window.innerWidth) {
+        document.querySelector('.content').style.display = 'none';
+        document.querySelector('.landscape-warning').style.display = 'block';
       } else {
-        document.body.style.transform = 'rotate(-90deg)';
-        document.body.style.transformOrigin = 'left top';
-        document.body.style.width = '100vh';
-        document.body.style.height = '100vw';
-        document.body.style.overflowX = 'hidden';
-        document.body.style.position = 'absolute';
-        document.body.style.top = '100%';
-        document.body.style.left = '0';
+        document.querySelector('.content').style.display = 'block';
+        document.querySelector('.landscape-warning').style.display = 'none';
       }
     }
 
-    // Evento para detectar a mudança de orientação
-    window.addEventListener('resize', preventRotation);
-    window.addEventListener('orientationchange', preventRotation);
-
-    // Chama a função inicialmente
-    preventRotation();
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('load', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
 
   </script>
   
