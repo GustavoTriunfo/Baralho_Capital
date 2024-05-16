@@ -224,12 +224,14 @@ function alterarMusicaBoss() {
     // Adiciona a classe 'show' após 2 segundos
     setTimeout(function() {
         $(".overlay-transition-boss").addClass("show");
-
-        // Remove a classe 'show' após 3 segundos adicionais
-        setTimeout(function() {
+      setTimeout(function(){
             mosquito.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png';
             fundo.style.backgroundImage = 'url("/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FireBackground.gif")';
             raivaIcone.style.display = "none";
+      }, 1000);
+        // Remove a classe 'show' após 3 segundos adicionais
+        setTimeout(function() {
+      
             $(".overlay-transition-boss").removeClass("show");
             transicao.style.display = "none";
             mosquito.style.top = "50px";
