@@ -6,7 +6,7 @@
     height: 100vw;
     overflow: hidden;
     background-color: #2f045e; /* Cor de fundo quando em paisagem */
-    background-image: url(/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FundoRetrato.png);
+    background-image: url(/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FundoRetratoArrumado.png);
     background-repeat:no-repeat;
     background-size: contain;
   }
