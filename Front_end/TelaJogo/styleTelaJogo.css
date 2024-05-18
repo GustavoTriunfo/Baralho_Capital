@@ -495,3 +495,65 @@ left: 77%; /* Distância da esquerda */
   100% { transform: translateY(-20px); }
 }
 
+
+
+
+
+
+
+.overlayLoucura {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite que cliques passem através do overlay */
+  z-index: 9999;
+}
+
+.overlayLoucura img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cobrir toda a tela */
+  opacity: 0; /* Começa invisível */
+  animation: fadeInOut 8s infinite; /* Animação de fade in/out */
+  z-index: 9999;
+}
+
+.overlayLoucura img:nth-child(1) {
+  opacity: 1.0; /* Opacidade maior para a primeira imagem */
+  animation: fadeInOut 12s linear infinite; /* Maior duração para a primeira imagem */
+}
+
+.overlayLoucura img:nth-child(2) {
+  animation: fadeInOut 8s linear 2s infinite;
+}
+
+.overlayLoucura img:nth-child(3) {
+  animation: fadeInOut 8s linear 4s infinite;
+}
+
+.overlayLoucura img:nth-child(4) {
+  animation: fadeInOut 8s linear 6s infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+#mosquitoNotes{
+  display: none;
+  width: 150px;
+  height: auto;
+  top: 0px;
+  left: 50px;
+  position: fixed;
+}
+

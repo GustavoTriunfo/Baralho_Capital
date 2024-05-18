@@ -2,9 +2,9 @@
 var MissaoCombateDengue = true
 var Cartas = {
   
-    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDeAgua2.png', tipo: 'DEF', pontos: 0},
+    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDeAguaCarta.png', tipo: 'DEF', pontos: 0},
     2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAlado.png', tipo: 'ATK', pontos: 0},
-    5: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Chantageado.png', tipo: 'RV', pontos: 0},
+    3: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ZumbidoDaLoucura.png', tipo: 'RV', pontos: 0},
     6: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso I.png', tipo: 'RV', pontos: 0},
     7: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso II.png', tipo: 'RV', pontos: 0},
     8: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Estrategista I.png', tipo: 'DEF', pontos: 20},
@@ -19,16 +19,16 @@ function selecionarTipoCarta(id){
 };
 
 function atualizarStatusJogo(){
-    console.log("entrou atualizar status")
+    
     if(verificarFim() === false){
         if(jogadorAtual === jogador2){
-            console.log("vez jogador")
+           
             turnoJogador()
             alternarJogador()
         } else{
-            console.log("vez boss")
+            
             if(vidaBoss == 60){
-                console.log("entrou no clicke vidaBoss")
+                
                 transicaoBoss = true
             }
             turnoBoss()
@@ -54,7 +54,7 @@ function turnoBoss(){
 
 function jogadaBoss() {
     if(transicaoBoss === false){
-        console.log("entrou no if transicaoBoss")
+        
     iniciarCronometro(15)
     setTimeout(function() {
         reproduzirEfeitoSonoroCartaNaMesa();
@@ -120,6 +120,9 @@ function verificarCartaBoss(id){
     if(id === 2){
         iniciarCronometroMinigame(15)
         iniciarMinigameFuga()
+    } else if(3){
+        zumbidoLoucura()
+        retornarAoEstadoNormal()
     }
 }
 

@@ -10,6 +10,16 @@
 </head>
 <body>
 
+ 
+
+  <div class="overlayLoucura" id="overlayLoucura">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy01.gif" alt="Imagem 1">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy02.gif" alt="Imagem 2">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy03.gif" alt="Imagem 3">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy04.gif" alt="Imagem 4">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy05.gif" alt="Imagem 5">
+  </div>
+
   <div class="landscape-warning">
     Por favor, gire seu dispositivo para o modo retrato.
   </div>
@@ -51,6 +61,7 @@
 
 
     <div class="black-bg">
+      <img id="mosquitoNotes" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoSinging.gif" alt="mosquito notes">
         <!-- Fundo preto sólido -->
         <img style="display: block; position: fixed; top: -10px; left: -10px; width: 80px; z-index: 99;" id="iconeBoss" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Boss.gif" />
         <img style="display: none; position: fixed; top: 70px; right: 145px; width: 40px; z-index: 99;" id="raiva" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/angry2.gif" />
@@ -212,7 +223,7 @@ function alterarMusicaBoss() {
     var mosquito = document.getElementById('animatedImage');
     var fundo = document.querySelector('.black-bg');
 
-    console.log("altera fase boss")
+    
 
     raivaIcone.style.display = "block";
     var risadaMosquito = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mosquito-laugh.wav');
@@ -392,7 +403,7 @@ function visualizacaoCartaBoss(){
        if (true){
         reproduzirEfeitoCartaEspecial()
        }
-        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAladoCartaEspecial.png'
+        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ZumbidoDaLoucura.png'
         
         var imgElement = document.createElement('img');
         imgElement.src = cardImage;
@@ -412,7 +423,7 @@ function fecharvisualizacaoCartaBoss(){
     });
 
     cartaBoss.classList.add("d-none");
-    verificarCartaBoss(2)
+    verificarCartaBoss(3)
     
 }
 
@@ -505,6 +516,42 @@ function reproduzirEfeitoMosquitaoAparicao() {
 function reproduzirEfeitoCartaEspecial() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_create.wav');
     audio.play();
+}
+
+var audioLoucura1 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
+audioLoucura1.loop = true; 
+audioLoucura1.volume = 0.7; 
+
+var audioLoucura2 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_disturbing.wav');
+audioLoucura2.loop = true; 
+audioLoucura2.volume = 0.5; 
+
+function reproduzirEfeitoZumbidoLoucura() {
+    audioLoucura1.play();
+    audioLoucura2.play();
+}
+
+function pararEfeitoZumbidoLoucura() {
+    audioLoucura1.pause();
+    audioLoucura1.currentTime = 0;
+
+    audioLoucura2.pause();
+    audioLoucura2.currentTime = 0;
+}
+
+
+function zumbidoLoucura() {
+  reproduzirEfeitoZumbidoLoucura()
+  notasMosquito = document.getElementById('mosquitoNotes').style.display = 'block'; 
+  document.getElementById('overlayLoucura').style.display = 'block'; 
+
+  setTimeout(pararZumbidoLoucura, 15000);
+}
+
+function pararZumbidoLoucura() {
+  notasMosquito = document.getElementById('mosquitoNotes').style.display = 'none'; 
+  document.getElementById('overlayLoucura').style.display = 'none';
+  pararEfeitoZumbidoLoucura()
 }
 
 
