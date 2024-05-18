@@ -56,7 +56,6 @@
         <img style="display: none; position: fixed; top: 70px; right: 145px; width: 40px; z-index: 99;" id="raiva" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/angry2.gif" />
         <img style="display: none; position: fixed; top: 10px; right: 55px; width: 80px;" id="risada" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/haha.gif" />
         <img id="animatedImage" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png" />
-       <!-- <img id="rostoEstranho" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png" style="position: fixed; top: 200px;" alt="Strange" width="350" height="auto">-->
         <div class="opponent-cards">
           
           </div>
@@ -69,7 +68,6 @@
 
       <div id="tempo-minigame-div" class="d-none" style="position: fixed; top: 50px;">
         <p id="tempo-minigame" class="text-white text-center font-weight-bold" style="white-space: nowrap; font-size: 18px;">Tempo restante: 16s...</p>
-        <!--<img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/loading2.gif" style="width: 50px; height: auto; display: block; margin: 0 auto;">-->
       </div>
       
      
@@ -358,13 +356,14 @@ function danoBoss() {
     // Define outro temporizador para parar a alternância após 4 segundos (4 imagens x 1 segundo cada)
     setTimeout(function() {
         clearInterval(intervalo); // Para o intervalo de alternância
-    }, 600); 
-    console.log("dano boss antes de trocar a imagem")
-    if(animatedImage.src === '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueFerido.png'){
-      animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png'
-    } else if (animatedImage.src === '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoFerido.png'){
-      animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png'
-    }
+    
+    
+    if (animatedImage.src.endsWith('MosquitoDengueFerido.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png';
+        } else if (animatedImage.src.endsWith('mosquitaoFerido.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png';
+        }
+      }, 600); 
 }
 
 function ocultarMaoJogador() {

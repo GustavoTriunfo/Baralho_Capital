@@ -90,8 +90,20 @@ $(document).on("click", "#botaoDevolver", function(event) {
         $("#cardPreviewOverlay").removeClass("d-block");
         maximoCartasDevolvidas -= 1
         rearrangeCards();
+        if(maximoCartasDevolvidas === 0){
+            let botaoDevolverDesabilitado = document.getElementById('botaoDevolver')
+            botaoDevolverDesabilitado.classList.add('disabled');
+        }
     }
 });
+
+function habilitarBotaoDevolver() {
+    let botaoDevolverDesabilitado = document.getElementById('botaoDevolver');
+    
+    if (botaoDevolverDesabilitado.classList.contains('disabled')) {
+        botaoDevolverDesabilitado.classList.remove('disabled'); 
+    }
+}
 
 
 $(document).on("click", "#botaoJogar", function(event) {
@@ -107,6 +119,7 @@ $(document).on("click", "#botaoJogar", function(event) {
         atualizarStatusJogador(jogadorAtual, idCarta)
         atualizarStatusJogo()
         maximoCartasDevolvidas = 2
+        habilitarBotaoDevolver()
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
 
