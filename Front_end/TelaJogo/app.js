@@ -2,7 +2,7 @@
 var MissaoCombateDengue = true
 var Cartas = {
   
-    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDerrubado.png', tipo: 'DEF', pontos: 0},
+    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDeAgua2.png', tipo: 'DEF', pontos: 0},
     2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAlado.png', tipo: 'ATK', pontos: 0},
     5: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Chantageado.png', tipo: 'RV', pontos: 0},
     6: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso I.png', tipo: 'RV', pontos: 0},
