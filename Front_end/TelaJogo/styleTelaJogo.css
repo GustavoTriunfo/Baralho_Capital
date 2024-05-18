@@ -5,7 +5,7 @@
     width: 100vh;
     height: 100vw;
     overflow: hidden;
-    background-image: url(/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FundoRetratoArrumado.png);
+    background-image: url(/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FundoRetrato.png);
     background-repeat:no-repeat;
     background-size: contain;
   }

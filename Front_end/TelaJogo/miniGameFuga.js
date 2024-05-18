@@ -163,30 +163,13 @@ function iniciarMinigameFuga(){
   blackOverlay.style.display = "block";
   criarInimigos(30, 10);
   gameEnded = false; 
+  reproduzirEfeitoMinigameStart()
  // alert('Sobreviva até que o tempo acabe!')
 }
 
 function finalizarMinigameFuga(){
-  let blackOverlay = document.querySelector('.black-overlay');
-  blackOverlay.style.display = "none";
-
-
-    const enemies = document.querySelectorAll('.enemy');
-    enemies.forEach(enemy => {
-      enemy.remove();
-    });
-    //clearInterval(cronometroMinigameAtual);
-    cronometroAtivo = false
-    enemyPositions = [];
-
+ 
   if (!gameEnded) {
-  //alert("Game Over! Você colidiu com um inimigo.");
-  gameEnded = true; 
-  jogadaBoss()
-  }
-}
-
-function finalizarMinigameFugaVitorioso(){
     let blackOverlay = document.querySelector('.black-overlay');
     blackOverlay.style.display = "none";
   
@@ -195,13 +178,34 @@ function finalizarMinigameFugaVitorioso(){
       enemies.forEach(enemy => {
         enemy.remove();
       });
-      
-     
+      //clearInterval(cronometroMinigameAtual);
+      cronometroAtivo = false
       enemyPositions = [];
+  //alert("Game Over! Você colidiu com um inimigo.");
+    gameEnded = true; 
+    reproduzirEfeitoMinigameOverLoser()
+    jogadaBoss()
+  }
+}
+
+function finalizarMinigameFugaVitorioso(){
   
     if (!gameEnded) {
-    //alert("Você sobreviveu!! :D");
-    gameEnded = true; 
-    retornarAoEstadoNormal()
+        let blackOverlay = document.querySelector('.black-overlay');
+        blackOverlay.style.display = "none";
+      
+      
+          const enemies = document.querySelectorAll('.enemy');
+          enemies.forEach(enemy => {
+            enemy.remove();
+          });
+          
+         
+          enemyPositions = [];
+        
+        //alert("Você sobreviveu!! :D");
+        gameEnded = true; 
+        retornarAoEstadoNormal()
+        reproduzirEfeitoMinigameVictory()
     }
   }

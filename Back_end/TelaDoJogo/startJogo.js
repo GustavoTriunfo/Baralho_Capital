@@ -143,8 +143,8 @@ startButton.addEventListener('click', function() {
 }
 
 function reproduzirEfeitoSonoroCartaNaMesa() {
-    var efeitoSonoro = document.getElementById("efeitoSonoroCartaColocadaNaMesa");
-    efeitoSonoro.play();
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
+    audio.play();
 }
 
 

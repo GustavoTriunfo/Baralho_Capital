@@ -145,7 +145,6 @@
 <script src="/Baralho_Capital/Front_end/TelaJogo/miniGameFuga.js"></script>
 
 <audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demon_s-Crest-OST_-The-Infinite-Demon-.wav" preload="auto" loop></audio>
-<audio id="efeitoSonoroCartaColocadaNaMesa" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3"></audio>
 
 
 <script>
@@ -239,12 +238,13 @@ function alterarMusicaBoss() {
       }, 1000);
         // Remove a classe 'show' após 3 segundos adicionais
         setTimeout(function() {
-      
+            
             $(".overlay-transition-boss").removeClass("show");
             transicao.style.display = "none";
             mosquito.style.top = "50px";
             mosquito.style.width = "550px";
             faseDois = true
+            reproduzirEfeitoMosquitaoAparicao()
         }, 3000);
     }, 2800);
 }
@@ -359,7 +359,12 @@ function danoBoss() {
     setTimeout(function() {
         clearInterval(intervalo); // Para o intervalo de alternância
     }, 600); 
-    console.log("dano boss")
+    console.log("dano boss antes de trocar a imagem")
+    if(animatedImage.src === '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueFerido.png'){
+      animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png'
+    } else if (animatedImage.src === '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoFerido.png'){
+      animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png'
+    }
 }
 
 function ocultarMaoJogador() {
@@ -384,7 +389,9 @@ function ocultarMaoJogador() {
 }
 
 function visualizacaoCartaBoss(){
-       
+       if (true){
+        reproduzirEfeitoCartaEspecial()
+       }
         var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAlado.png'
         
         var imgElement = document.createElement('img');
@@ -474,6 +481,33 @@ function tocarEfeitoSoco() {
     audio.play();
   }
 }
+
+function reproduzirEfeitoMinigameStart() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_sfx_star.wav');
+    audio.play();
+}
+function reproduzirEfeitoMinigameOverLoser() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/snd_fall2.wav');
+    audio.play();
+}
+
+function reproduzirEfeitoMinigameVictory() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/snd_levelup.wav');
+    audio.play();
+}
+
+
+function reproduzirEfeitoMosquitaoAparicao() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_f_orchhit_l.wav');
+    audio.play();
+}
+
+function reproduzirEfeitoCartaEspecial() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_create.wav');
+    audio.play();
+}
+
+
 
 function checkOrientation() {
   const contentElement = document.querySelector('.content');
