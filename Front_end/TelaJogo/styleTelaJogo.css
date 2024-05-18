@@ -114,6 +114,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo preto com 50% de opacidade */
+  border: 6px solid #000000;
   z-index: 999; /* Garante que fique acima de todas as outras divs */
 }
 
@@ -126,6 +127,7 @@
   height: 490px; /* Ajuste a altura conforme necessário */
   margin: auto;
   margin-top: 50px; /* Espaço superior para afastar do topo */
+  border: 4px solid #fc0404;
   z-index: 1000; /* Garante que fique acima da div de fundo preto transparente */
 }
 
