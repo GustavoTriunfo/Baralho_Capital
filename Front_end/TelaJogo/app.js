@@ -2,8 +2,8 @@
 var MissaoCombateDengue = true
 var Cartas = {
   
-    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDerrubado.png', tipo: 'RV', pontos: 0},
-    4: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Descoberto.png', tipo: 'RV', pontos: 0},
+    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDerrubado.png', tipo: 'DEF', pontos: 0},
+    2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAlado.png', tipo: 'ATK', pontos: 0},
     5: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Chantageado.png', tipo: 'RV', pontos: 0},
     6: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso I.png', tipo: 'RV', pontos: 0},
     7: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso II.png', tipo: 'RV', pontos: 0},
@@ -55,21 +55,22 @@ function turnoBoss(){
 function jogadaBoss() {
     if(transicaoBoss === false){
         console.log("entrou no if transicaoBoss")
-    iniciarCronometro()
+    iniciarCronometro(15)
     setTimeout(function() {
         reproduzirEfeitoSonoroCartaNaMesa();
         visualizacaoCartaBoss();
         tocarEfeitoRisadaMosquitoAleatorio();
         exibirImagemTemporizada()
-       
+      
         cronometroAtivo = false;
-    }, Math.floor(Math.random() * 3000) + 3000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos)
+    }, Math.floor(Math.random() * 3000) + 3000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos) 
 }else{
     transicaoBoss = false
     setTimeout(function() {
         jogadaBoss()
     }, 7000);
 }
+
 }
 
 function verificarFim(){
@@ -115,7 +116,12 @@ function atualizarTelaStatus(objetoJogador){
 
 }
 
-
+function verificarCartaBoss(id){
+    if(id === 2){
+        iniciarCronometroMinigame(15)
+        iniciarMinigameFuga()
+    }
+}
 
 // Obtém a referência para o elemento da imagem que o jogador irá clicar
 var imagemBaralho = document.getElementById('imagemBaralho');

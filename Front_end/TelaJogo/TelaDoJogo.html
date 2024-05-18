@@ -66,6 +66,11 @@
         <p id="tempo-restante" class="text-white text-center font-weight-bold" style="white-space: nowrap; font-size: 18px;">Aguardando Adversário: 16 segundos...</p>
         <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/loading2.gif" style="width: 50px; height: auto; display: block; margin: 0 auto;">
       </div>
+
+      <div id="tempo-minigame-div" class="d-none" style="position: fixed; top: 50px;">
+        <p id="tempo-minigame" class="text-white text-center font-weight-bold" style="white-space: nowrap; font-size: 18px;">Tempo restante: 16s...</p>
+        <!--<img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/loading2.gif" style="width: 50px; height: auto; display: block; margin: 0 auto;">-->
+      </div>
       
      
       
@@ -137,13 +142,16 @@
 <script src="/Baralho_Capital/Front_end/TelaJogo/app.js"></script>
 <script src="/Baralho_Capital/Front_end/TelaJogo/playerCard.js"></script>
 <script src="/Baralho_Capital/Back_end/TelaDoJogo/startJogo.js"></script>
-<script src="/Baralho_Capital/Front_end/TelaJogo/miniGame.js"></script>
+<script src="/Baralho_Capital/Front_end/TelaJogo/miniGameFuga.js"></script>
 
 <audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demon_s-Crest-OST_-The-Infinite-Demon-.wav" preload="auto" loop></audio>
 <audio id="efeitoSonoroCartaColocadaNaMesa" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3"></audio>
 
 
 <script>
+
+  var cronometroMinigameAtual = null
+
   var numeroCarta = 0
   var valorProduto = 0, idProduto = 0
 
@@ -376,9 +384,9 @@ function ocultarMaoJogador() {
 }
 
 function visualizacaoCartaBoss(){
-  
-        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDerrubado.png'
-     
+       
+        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAlado.png'
+        
         var imgElement = document.createElement('img');
         imgElement.src = cardImage;
 
@@ -397,16 +405,17 @@ function fecharvisualizacaoCartaBoss(){
     });
 
     cartaBoss.classList.add("d-none");
-    retornarAoEstadoNormal()
+    verificarCartaBoss(2)
+    
 }
 
 var cronometroAtivo = false; // Variável de controle para o cronômetro
 
-function iniciarCronometro() {
+function iniciarCronometro(tempoRecebido) {
     var elementoTempo = document.getElementById("tempo-restante-div");
     elementoTempo.classList.remove("d-none");
     
-    var tempoRestante = 15; // Tempo inicial em segundos
+    var tempoRestante = tempoRecebido; // Tempo inicial em segundos
 
     cronometroAtivo = true; // Define o cronômetro como ativo
     
@@ -419,6 +428,32 @@ function iniciarCronometro() {
             clearInterval(cronometro); // Para o cronômetro
             elementoTempo.classList.add("d-none");
             document.getElementById("tempo-restante").textContent = "Aguardando Adversário: 16 segundos..." 
+            return;
+        }
+        
+        // Decrementa o tempo restante
+        tempoRestante--;
+    }, 1000);
+}
+
+function iniciarCronometroMinigame(tempoRecebido) {
+    var elementoTempo = document.getElementById("tempo-minigame-div");
+    elementoTempo.classList.remove("d-none");
+    
+    var tempoRestante = tempoRecebido; // Tempo inicial em segundos
+
+    cronometroAtivo = true; // Define o cronômetro como ativo
+    
+    var cronometro = setInterval(function() {
+        // Atualiza o tempo restante na tela
+        document.getElementById("tempo-minigame").textContent = "Tempo restante: " + tempoRestante + "s...";
+        
+        // Verifica se o tempo acabou ou se o cronômetro foi interrompido
+        if (tempoRestante <= 0 || !cronometroAtivo) {
+            clearInterval(cronometro); // Para o cronômetro
+            elementoTempo.classList.add("d-none");
+            document.getElementById("tempo-minigame").textContent = "Tempo restante: 16s..." 
+            finalizarMinigameFugaVitorioso()
             return;
         }
         
