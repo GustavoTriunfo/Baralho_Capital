@@ -167,7 +167,7 @@
 <script>
 
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
-  var cartaJogadorRecente = 32
+  var cartaJogadorRecente = 22
   var cartaBossRecente = 0
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
@@ -396,6 +396,56 @@ function danoBoss() {
       }, 600); 
 }
 
+function choqueDanoBoss() {
+  reproduzirEfeitoSomChoque()
+  var mosquitoFaseUm = [
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueChoque.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueChoque.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png"
+    ];
+
+  var mosquitoFaseDois = [
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoChoque.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoChoque.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png"
+    ];
+  if(faseDois === false){
+    boss = mosquitoFaseUm
+  } else{
+    boss = mosquitoFaseDois
+  }
+ 
+    var index = 0;
+    var animatedImage = document.getElementById('animatedImage');
+
+    // Define um temporizador para alternar as imagens a cada 1 segundo
+    var intervalo = setInterval(function() {
+        animatedImage.src = boss[index]; // Altera a imagem para a próxima na sequência
+
+        index++; // Incrementa o índice para a próxima imagem
+
+        // Se chegou ao final do array, reinicia do início
+        if (index >= boss.length) {
+            index = 0;
+        }
+    }, 100); 
+
+    // Define outro temporizador para parar a alternância após 4 segundos (4 imagens x 1 segundo cada)
+    setTimeout(function() {
+        clearInterval(intervalo); // Para o intervalo de alternância
+    
+    
+    if (animatedImage.src.endsWith('MosquitoDengueChoque.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png';
+        } else if (animatedImage.src.endsWith('mosquitaoChoque.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png';
+        }
+      }, 2700); 
+}
+
+
 function ocultarMaoJogador() {
     var maoJogador = document.getElementById('maoJogador');
     var baralho = document.getElementById('imagemBaralho');
@@ -536,6 +586,12 @@ function reproduzirEfeitoCartaEspecial() {
 
 function reproduzirEfeitoSomCoracao() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Fast Heart Beat - Sound Effect.mp3');
+    audio.play();
+    audio.volume = 1; 
+}
+
+function reproduzirEfeitoSomChoque() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/choque.mp3');
     audio.play();
     audio.volume = 1; 
 }

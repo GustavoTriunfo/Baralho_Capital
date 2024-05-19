@@ -164,8 +164,9 @@ function verificarCartaJogador(){
         quantidadeDanoNoBoss = 10
     } else if(cartaJogadorRecente === 22){
         quantidadeDanoNoBoss = 20
+        choqueDanoBoss()
     }
-    danoBoss()
+   // danoBoss()
     alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
     return
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'DEF'){
