@@ -91,6 +91,10 @@
       <div id="tempo-minigame-div" class="d-none" style="position: fixed; top: 50px;">
         <p id="tempo-minigame" class="text-white text-center font-weight-bold" style="white-space: nowrap; font-size: 18px;">Tempo restante: 16s...</p>
       </div>
+
+      <div id="tempo-missao-div" class="d-none">
+        <p id="tempo-missao" class="text-white font-weight-bold" style="white-space: nowrap; font-size: 18px; position: fixed; top: -20px; left: 30px; z-index: 5;"></p>
+      </div>
       
      
       
@@ -176,6 +180,7 @@
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
   var defendidoContraUmaPicadaParalizante = false
+  var tempoMissaoZerado = false
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
   var alteracaoBossJaAconteceu = false
 
@@ -294,7 +299,7 @@ var efeitoSonoro = true;
 var maximoCartasDevolvidas = 2
 
 function pararMusica() {
-    if (musicaTocando) {
+    if (musicaTocando || tempoMissaoZerado === true) {
         musica.pause(); // Pausa a música se estiver tocando
         musicaTocando = false;
         imagemMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songFalse.png";
@@ -353,6 +358,7 @@ function exibirImagemTemporizada() {
 }
 
 function danoBoss() {
+  tocarEfeitoSoco()
   var mosquitoFaseUm = [
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueFerido.png",
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png",
@@ -599,6 +605,38 @@ function iniciarCronometroMinigame(tempoRecebido) {
         tempoRestante--;
     }, 1000);
 }
+
+function iniciarCronometroTempoMissao(tempoRecebido) {
+    var elementoTempo = document.getElementById("tempo-missao-div");
+    elementoTempo.classList.remove("d-none");
+    
+    var tempoRestante = tempoRecebido; // Tempo inicial em segundos
+
+    
+    var cronometro = setInterval(function() {
+        // Atualiza o tempo restante na tela com formatação
+        document.getElementById("tempo-missao").textContent = formatarTempo(tempoRestante);
+        
+        // Verifica se o tempo acabou ou se o cronômetro foi interrompido
+        if (tempoRestante <= 0) {
+            clearInterval(cronometro); // Para o cronômetro
+            elementoTempo.classList.add("d-none");
+            tempoMissaoZerado = true;
+            terminarJogo()
+            return;
+        }
+        
+        // Decrementa o tempo restante
+        tempoRestante--;
+    }, 1000);
+}
+
+function formatarTempo(segundos) {
+    var minutos = Math.floor(segundos / 60);
+    var segundos = segundos % 60;
+    return (minutos < 10 ? "0" : "") + minutos + ":" + (segundos < 10 ? "0" : "") + segundos;
+}
+
 
 var efeitosSonoroSoco = [
     "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Soco 1.mp3",

@@ -109,6 +109,8 @@ function verificarFim(){
         return true
     } else if(quantidadeHPJogador <= 0){
         return true
+    } else if(tempoMissaoZerado){
+        return true
     }
     return false
 }
@@ -121,7 +123,8 @@ function terminarJogo(){
     if(verificarBarraDeProgressoZerada()){
         var endgameOverlay = document.getElementById('endgameOverlay');
         endgameOverlay.style.display = 'block';
-    } else if(quantidadeHPJogador <= 0){
+    } else if(quantidadeHPJogador <= 0 || tempoMissaoZerado === true){
+        pararMusica()
         reproduzirEfeitoDerrotaJogador()
         var endgamePlayerLose = document.getElementById('endgamePlayerLose');
         endgamePlayerLose.style.display = 'block';
@@ -163,20 +166,23 @@ function verificarCartaJogador(){
        
     }  else if(cartaJogadorRecente === 17){
         quantidadeDanoNoBoss = 20
+        danoBoss()
     } else if(cartaJogadorRecente === 18){
         quantidadeDanoNoBoss = 10
+        danoBoss()
     } else if(cartaJogadorRecente === 19){
         quantidadeDanoNoBoss = 10
+        danoBoss()
     } else if(cartaJogadorRecente === 20){
         quantidadeDanoNoBoss = 20
         fumacaDanoBoss()
     } else if(cartaJogadorRecente === 21){
         quantidadeDanoNoBoss = 10
+        danoBoss()
     } else if(cartaJogadorRecente === 22){
         quantidadeDanoNoBoss = 20
         choqueDanoBoss()
     }
-   // danoBoss()
     alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
     return
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'DEF'){

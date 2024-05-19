@@ -129,6 +129,7 @@ startButton.addEventListener('click', function() {
     // Oculta o overlay preto
     startOverlay.style.display = 'none';
 
+    iniciarCronometroTempoMissao(900)
     iniciarMusica();
     criarCartasNoInicio();
     
