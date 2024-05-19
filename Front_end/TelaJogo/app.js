@@ -85,7 +85,7 @@ function jogadaBoss() {
         exibirImagemTemporizada()
       
         cronometroAtivo = false;
-    }, Math.floor(Math.random() * 3000) + 3000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos) 
+    }, Math.floor(Math.random() * 3000) + 5000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos) 
 }else{
     transicaoBoss = false
     setTimeout(function() {
@@ -107,9 +107,10 @@ function escolhaDoBoss(){
 function verificarFim(){
     if(verificarBarraDeProgressoZerada()){
         return true
-    } else{
-        return false
+    } else if(quantidadeHPJogador <= 0){
+        return true
     }
+    return false
 }
 // Função para atualizar o status do jogador com base no ID da carta escolhida
 function atualizarStatusJogador(objetoJogador, id_carta) {
@@ -117,7 +118,15 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
 }
 
 function terminarJogo(){
-    endgameOverlay.style.display = 'block';
+    if(verificarBarraDeProgressoZerada()){
+        var endgameOverlay = document.getElementById('endgameOverlay');
+        endgameOverlay.style.display = 'block';
+    } else if(quantidadeHPJogador <= 0){
+        reproduzirEfeitoDerrotaJogador()
+        var endgamePlayerLose = document.getElementById('endgamePlayerLose');
+        endgamePlayerLose.style.display = 'block';
+    }
+
 }
 
 function atualizarTelaStatus(objetoJogador){
@@ -160,6 +169,7 @@ function verificarCartaJogador(){
         quantidadeDanoNoBoss = 10
     } else if(cartaJogadorRecente === 20){
         quantidadeDanoNoBoss = 20
+        fumacaDanoBoss()
     } else if(cartaJogadorRecente === 21){
         quantidadeDanoNoBoss = 10
     } else if(cartaJogadorRecente === 22){

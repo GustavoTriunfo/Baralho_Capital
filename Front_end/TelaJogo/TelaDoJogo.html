@@ -10,6 +10,10 @@
 </head>
 <body>
 
+  <div class="endgamePlayerLose" id="endgamePlayerLose">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/playerLose.png" alt="Imagem derrota" id="imagemDerrota" style="width: 250px; height: auto; position: fixed; left: 60px; top: 120px;">
+  </div>
+
   <div class="susto-overlay" id="sustoOverlay">
     <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/AtaqueSusto.png" alt="Imagem de Susto" id="imagemSusto">
     <div class="fundo-preto" id="fundoPreto"></div>
@@ -167,7 +171,7 @@
 <script>
 
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
-  var cartaJogadorRecente = 22
+  var cartaJogadorRecente = 20
   var cartaBossRecente = 0
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
@@ -446,6 +450,56 @@ function choqueDanoBoss() {
 }
 
 
+function fumacaDanoBoss() {
+  reproduzirEfeitoSomMosquitoTosse()
+  var mosquitoFaseUm = [
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueTossindo.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueTossindo.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png"
+    ];
+
+  var mosquitoFaseDois = [
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoTossindo.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoTossindo.png",
+        "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png"
+    ];
+  if(faseDois === false){
+    boss = mosquitoFaseUm
+  } else{
+    boss = mosquitoFaseDois
+  }
+ 
+    var index = 0;
+    var animatedImage = document.getElementById('animatedImage');
+
+    // Define um temporizador para alternar as imagens a cada 1 segundo
+    var intervalo = setInterval(function() {
+        animatedImage.src = boss[index]; // Altera a imagem para a próxima na sequência
+
+        index++; // Incrementa o índice para a próxima imagem
+
+        // Se chegou ao final do array, reinicia do início
+        if (index >= boss.length) {
+            index = 0;
+        }
+    }, 100); 
+
+    // Define outro temporizador para parar a alternância após 4 segundos (4 imagens x 1 segundo cada)
+    setTimeout(function() {
+        clearInterval(intervalo); // Para o intervalo de alternância
+    
+    
+    if (animatedImage.src.endsWith('MosquitoDengueTossindo.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png';
+        } else if (animatedImage.src.endsWith('mosquitaoTossindo.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png';
+        }
+      }, 5500); 
+}
+
+
 function ocultarMaoJogador() {
     var maoJogador = document.getElementById('maoJogador');
     var baralho = document.getElementById('imagemBaralho');
@@ -596,6 +650,18 @@ function reproduzirEfeitoSomChoque() {
     audio.volume = 1; 
 }
 
+function reproduzirEfeitoDerrotaJogador() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Darkest Dungeon - Death door bell.mp3');
+    audio.play();
+    audio.volume = 1; 
+}
+
+function reproduzirEfeitoSomMosquitoTosse() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoTossindo.mp3');
+    audio.play();
+    audio.volume = 1; 
+}
+
 var audioLoucura1 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
 audioLoucura1.loop = true; 
 audioLoucura1.volume = 0.7; 
@@ -664,7 +730,7 @@ function diminuirVidaJogador(){
   }
  } else{
   ajustarOpacidadeVida(1)
- 
+  terminarJogo()
  }
 }
 
@@ -675,7 +741,9 @@ function ajustarOpacidadeVida(opacidade) {
     vidaJogadorOverlay.style.opacity = opacidade;
 }
 
-
+document.getElementById('imagemDerrota').addEventListener('click', function() {
+    window.location.href = '/Baralho_Capital/Front_end/TelaMissoes/mapaMissoes.html';
+});
 
 
 
