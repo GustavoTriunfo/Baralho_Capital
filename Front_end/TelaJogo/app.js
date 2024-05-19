@@ -2,33 +2,56 @@
 var MissaoCombateDengue = true
 var Cartas = {
   
-    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BarrilDeAguaCarta.png', tipo: 'DEF', pontos: 0},
-    2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAladoCartaEspecial.png', tipo: 'ATK', pontos: 0},
-    3: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ZumbidoDaLoucuraCartaEspecial.png', tipo: 'ATK', pontos: 0},
-    6: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso I.png', tipo: 'RV', pontos: 0},
-    7: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Rabo Preso II.png', tipo: 'RV', pontos: 0},
-    8: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Estrategista I.png', tipo: 'DEF', pontos: 20},
-    9: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Estrategista II.png', tipo: 'DEF', pontos: 40},
-    10: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Duas Caras.png', tipo: 'R', pontos: 50},
-    11: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Chantageador I.png', tipo: 'R', pontos: 15},
-    12: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/Chantageador II.png', tipo: 'R', pontos: 25}
+    1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAladoCartaEspecial.png', tipo: 'ATK'},
+    2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ZumbidoDaLoucuraCartaEspecial.png', tipo: 'ATK'},
+    3: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PicadaSurpresa.png', tipo: 'ATK'},
+    4: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PicadaParalizante.png', tipo: 'ATK'},
+    5: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BlitzAlada.png', tipo: 'EST'},
+    6: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/EnxameDeAgulhas.png', tipo: 'EST'},
+    7: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OfensivaSanguessuga.png', tipo: 'EST'},
+    8: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/SugadouroNoturno.png', tipo: 'EST'},
+    9: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/LagoaDeIncubação.png', tipo: 'EST'},
+    10: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ReservatorioMortal.png', tipo: 'EST'},
+    11: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/CriadouroDeLarvas.png', tipo: 'EST'},
+    12: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/InfusãoVital.png', tipo: 'CR'},
+    13: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/TransfusaoRestauradora.png', tipo: 'CR'},
+    16: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BombardeioDeFumace.png', tipo: 'ATK'},
+    17: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/GranadaInseticida.png', tipo: 'ATK'},
+    18: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OChinelo.png', tipo: 'ATK'},
+    19: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OFamosoTapa.png', tipo: 'ATK'},
+    20: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OInseticida.png', tipo: 'ATK'},
+    21: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OSoco.png', tipo: 'ATK'},
+    22: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/RaqueteEletrica.png', tipo: 'ATK'},
+    23: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/RepelenteSupremo.png', tipo: 'DEF'},
+    24: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/RedeProtetora.png', tipo: 'DEF'},
+    25: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/RemediosCura.png', tipo: 'CR'},
+    26: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/FirstAid.png', tipo: 'CR'},
+    27: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BrigadaAnti-Mosquito.png', tipo: 'EST'},
+    28: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/EsquadraoAnti-Dengue.png', tipo: 'EST'},
+    29: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ForcaDeDefesaSanitaria.png', tipo: 'EST'},
+    30: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OperacaoLimpeza.png', tipo: 'EST'},
+    31: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/VigilantesDaSaudePublica.png', tipo: 'EST'},
+    32: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PatrulhaAnti-Dengue.png', tipo: 'EST'} 
 };
 
 function selecionarTipoCarta(id){
     return Cartas[id].tipo;
 };
 
+function selecionarCaminhoImagem(id){
+    return Cartas[id].caminhoImagem;
+}
+
 function atualizarStatusJogo(){
     
     if(verificarFim() === false){
         if(jogadorAtual === jogador2){
-           
             turnoJogador()
             alternarJogador()
         } else{
             
-            if(vidaBoss == 60){
-                
+            if(vidaBoss <= 60 && alteracaoBossJaAconteceu === false){
+                console.log('entrou na transicaoBoss')
                 transicaoBoss = true
             }
             turnoBoss()
@@ -43,9 +66,8 @@ function atualizarStatusJogo(){
 }
 
 function turnoJogador(){
+    verificarCartaJogador()
     reproduzirEfeitoSonoroCartaNaMesa();
-    danoBoss()
-    alterarVidaBoss(vidaBoss -= 10)
 }
 
 function turnoBoss(){
@@ -57,7 +79,7 @@ function jogadaBoss() {
         
     iniciarCronometro(15)
     setTimeout(function() {
-        reproduzirEfeitoSonoroCartaNaMesa();
+       
         visualizacaoCartaBoss();
         tocarEfeitoRisadaMosquitoAleatorio();
         exibirImagemTemporizada()
@@ -71,6 +93,15 @@ function jogadaBoss() {
     }, 7000);
 }
 
+}
+
+function escolhaDoBoss(){
+    cartaBossRecente = 3
+    if (cartaBossRecente === 1 || cartaBossRecente === 2){
+        reproduzirEfeitoCartaEspecial()
+       } else{
+        reproduzirEfeitoSonoroCartaNaMesa();
+       }
 }
 
 function verificarFim(){
@@ -116,12 +147,67 @@ function atualizarTelaStatus(objetoJogador){
 
 }
 
-function verificarCartaBoss(id){
-    if(id === 2){
+function verificarCartaJogador(){
+    if(selecionarTipoCarta(cartaJogadorRecente) === 'ATK'){
+    if(cartaJogadorRecente === 16){
+        quantidadeDanoNoBoss = 30
+       
+    }  else if(cartaJogadorRecente === 17){
+        quantidadeDanoNoBoss = 20
+    } else if(cartaJogadorRecente === 18){
+        quantidadeDanoNoBoss = 10
+    } else if(cartaJogadorRecente === 19){
+        quantidadeDanoNoBoss = 10
+    } else if(cartaJogadorRecente === 20){
+        quantidadeDanoNoBoss = 20
+    } else if(cartaJogadorRecente === 21){
+        quantidadeDanoNoBoss = 10
+    } else if(cartaJogadorRecente === 22){
+        quantidadeDanoNoBoss = 20
+    }
+    danoBoss()
+    alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
+    return
+} else if(selecionarTipoCarta(cartaJogadorRecente) === 'DEF'){
+    if(cartaJogadorRecente === 23){
+        defendidoContraPicadaSurpresa = true
+    } else if(cartaJogadorRecente === 24){
+        defendidoContraUmaPicadaParalizante = true
+    }
+    return
+} else if(selecionarTipoCarta(cartaJogadorRecente) === 'INV'){
+    if(cartaJogadorRecente === 30 && cartaBossRecente === 9){
+        aumentoPorcentagemAtaqueContraMosquito()
+    } else if(cartaJogadorRecente === 29 && cartaBossRecente === 10){
+        aumentoPorcentagemAtaqueContraMosquito()
+    } else if(cartaBossRecente === 5 || cartaBossRecente === 6 || cartaBossRecente === 7 || cartaBossRecente === 8 || cartaBossRecente === 11){
+        if(cartaJogadorRecente === 27 || cartaJogadorRecente === 28 || cartaJogadorRecente === 29 || cartaJogadorRecente === 30 || cartaJogadorRecente === 31 || cartaJogadorRecente === 32){
+        aumentoPorcentagemAtaqueContraMosquito()
+        }
+        return
+    }
+
+} else if(selecionarTipoCarta(cartaJogadorRecente) === 'CR'){
+    if(cartaJogadorRecente === 25){
+        quantidadeDeCura = 20
+    } else if(cartaJogadorRecente === 26){
+        quantidadeDeCura = 50
+    }
+    curarVidaJogador(quantidadeDeCura)
+    return
+}
+}
+
+function verificarCartaBoss(){
+    if(cartaBossRecente === 1){
         iniciarCronometroMinigame(15)
         iniciarMinigameFuga()
-    } else if(3){
+    } else if(cartaBossRecente === 2){
         zumbidoLoucura()
+        retornarAoEstadoNormal()
+    } else if(cartaBossRecente === 3){
+        iniciarSusto()
+        diminuirVidaJogador()
         retornarAoEstadoNormal()
     }
 }

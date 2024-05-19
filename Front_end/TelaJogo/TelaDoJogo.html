@@ -10,7 +10,14 @@
 </head>
 <body>
 
- 
+  <div class="susto-overlay" id="sustoOverlay">
+    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/AtaqueSusto.png" alt="Imagem de Susto" id="imagemSusto">
+    <div class="fundo-preto" id="fundoPreto"></div>
+</div>
+
+
+  <div class="vida-jogador-overlay" id="vidaJogadorOverlay"></div>
+
 
   <div class="overlayLoucura" id="overlayLoucura">
     <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy01.gif" alt="Imagem 1">
@@ -159,6 +166,15 @@
 
 <script>
 
+  ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
+  var cartaJogadorRecente = 32
+  var cartaBossRecente = 0
+  var quantidadeHPJogador = 50
+  var defendidoContraUmaPicadaSurpresa = false
+  var defendidoContraUmaPicadaParalizante = false
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
+  var alteracaoBossJaAconteceu = false
+
   var cronometroMinigameAtual = null
 
   var numeroCarta = 0
@@ -199,8 +215,10 @@
   
 function alterarVidaBoss(porcentagem) {
   // Verifica se a porcentagem está dentro do intervalo válido (0-100)
-  if(vidaBoss == 50){
-    alterarMusicaBoss()
+  if(vidaBoss <= 50 && alteracaoBossJaAconteceu === false){
+    console.log('entrou no alterarVidaBoss')
+    alteracaoBossJaAconteceu = true
+    alterarFaseBoss()
   }
   if (porcentagem >= 0 && porcentagem <= 100) {
     // Seleciona a barra de vida do boss pelo ID
@@ -217,7 +235,7 @@ function alterarVidaBoss(porcentagem) {
 
 }
 
-function alterarMusicaBoss() {
+function alterarFaseBoss() {
     var audioElement = document.getElementById('musica');
     var raivaIcone = document.getElementById('raiva');
     var mosquito = document.getElementById('animatedImage');
@@ -400,13 +418,10 @@ function ocultarMaoJogador() {
 }
 
 function visualizacaoCartaBoss(){
-       if (true){
-        reproduzirEfeitoCartaEspecial()
-       }
-        var cardImage = '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ZumbidoDaLoucuraCartaEspecial.png'
+        escolhaDoBoss()
         
         var imgElement = document.createElement('img');
-        imgElement.src = cardImage;
+        imgElement.src = selecionarCaminhoImagem(cartaBossRecente);
 
         var cartaBoss = document.getElementById('opponentCardPreviewOverlay');
         cartaBoss.classList.remove("d-none");
@@ -423,7 +438,8 @@ function fecharvisualizacaoCartaBoss(){
     });
 
     cartaBoss.classList.add("d-none");
-    verificarCartaBoss(3)
+
+    verificarCartaBoss(cartaBossRecente)
     
 }
 
@@ -518,6 +534,12 @@ function reproduzirEfeitoCartaEspecial() {
     audio.play();
 }
 
+function reproduzirEfeitoSomCoracao() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Fast Heart Beat - Sound Effect.mp3');
+    audio.play();
+    audio.volume = 1; 
+}
+
 var audioLoucura1 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
 audioLoucura1.loop = true; 
 audioLoucura1.volume = 0.7; 
@@ -553,6 +575,80 @@ function pararZumbidoLoucura() {
   document.getElementById('overlayLoucura').style.display = 'none';
   pararEfeitoZumbidoLoucura()
 }
+
+function curarVidaJogador(numero){
+  if(quantidadeHPJogador < 50){
+    if(numero === 20){
+      if(quantidadeHPJogador + numero < 50){
+        quantidadeHPJogador += numero
+        if(quantidadeHPJogador === 30){
+          valorCura = 0.4
+        }
+      } else{
+        quantidadeHPJogador = 50
+        valorCura = 0
+      }
+    } else if (numero === 50){
+      quantidadeHPJogador = 50
+      valorCura = 0
+    }
+    ajustarOpacidadeVida(valorCura)
+  } else{
+    return
+  }
+}
+
+function diminuirVidaJogador(){
+  quantidadeHPJogador -= 20
+ if(quantidadeHPJogador > 0){
+  if(quantidadeHPJogador === 30){
+    ajustarOpacidadeVida(0.4)
+  } else if(quantidadeHPJogador === 10){
+    ajustarOpacidadeVida(0.7)
+  }
+ } else{
+  ajustarOpacidadeVida(1)
+ 
+ }
+}
+
+function ajustarOpacidadeVida(opacidade) {
+    var vidaJogadorOverlay = document.getElementById('vidaJogadorOverlay');
+    if (opacidade < 0) opacidade = 0; // Garante que a opacidade não seja menor que 0
+    if (opacidade > 1) opacidade = 1; // Garante que a opacidade não seja maior que 1
+    vidaJogadorOverlay.style.opacity = opacidade;
+}
+
+
+
+
+
+function iniciarSusto() {
+    var sustoOverlay = document.getElementById('sustoOverlay');
+    var imagemSusto = document.getElementById('imagemSusto');
+    var fundoPreto = document.getElementById('fundoPreto');
+    pararMusica()
+    var audioSusto = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
+    audioSusto.play();
+    // Mostrar a overlay e iniciar a animação
+    sustoOverlay.style.display = 'block';
+    setTimeout(() => {
+        sustoOverlay.classList.add('active');
+    }, 100); // Pequeno delay para garantir transição
+
+    // Após 4 segundos, ocultar tudo e resetar a animação
+    setTimeout(() => {
+        sustoOverlay.classList.remove('active');
+        setTimeout(() => {
+            sustoOverlay.style.display = 'none';
+        }, 3000); // Tempo para a transição de volta ao normal
+        pararMusica()
+        reproduzirEfeitoSomCoracao()
+    }, 6000); // Duração total da animação antes do reset
+}
+
+
+
 
 
 

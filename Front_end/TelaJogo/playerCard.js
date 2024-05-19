@@ -115,8 +115,8 @@ $(document).on("click", "#botaoJogar", function(event) {
         var idCarta = $(".player-card.active").attr("id");
         console.log(idCarta)
         ocultarMaoJogador()
-        tocarEfeitoSoco()
-        atualizarStatusJogador(jogadorAtual, idCarta)
+        //tocarEfeitoSoco()
+        //atualizarStatusJogador(jogadorAtual, idCarta)
         atualizarStatusJogo()
         maximoCartasDevolvidas = 2
         habilitarBotaoDevolver()

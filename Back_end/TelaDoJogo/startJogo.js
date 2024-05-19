@@ -38,7 +38,7 @@ function alternarJogador() {
 
 function selecionarIdCarta()
 {
-    return 1
+    return cartaJogadorRecente
 }
 function criarCartasNoInicio() {
     var contador = 0;
