@@ -138,7 +138,7 @@ startButton.addEventListener('click', function() {
   function iniciarMusica() {
     // Obtém o elemento de áudio
     var audio = document.getElementById('musica');
-    audio.volume = 0.1;
+    audio.volume = 0.2;
     // Inicia a reprodução da música
     audio.play();
 }

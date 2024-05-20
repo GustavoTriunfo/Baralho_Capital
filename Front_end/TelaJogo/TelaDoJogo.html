@@ -176,8 +176,8 @@
 <script>
 
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
-  var cartaJogadorRecente = 16
-  var cartaBossRecente = 0
+  var cartaJogadorRecente = 24
+  var cartaBossRecente = 4
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
   var defendidoContraUmaPicadaParalizante = false
@@ -705,6 +705,18 @@ function reproduzirEfeitoSomMosquitoTosse() {
     audio.play();
 }
 
+function reproduzirEfeitoSomSpray() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/SPRAY.mp3');
+    audio.volume = 0.3; 
+    audio.play();
+}
+
+function reproduzirEfeitoSomRedeProtetora() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/defenseNet.mp3');
+    audio.volume = 1; 
+    audio.play();
+}
+
 function reproduzirEfeitoSomExplosao() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_explosion.wav');
     audio.volume = 0.2; 
@@ -718,12 +730,14 @@ function reproduzirEfeitoBombardeioFumace() {
 }
 
 var audioLoucura1 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
-audioLoucura1.loop = true; 
 audioLoucura1.volume = 0.7; 
+audioLoucura1.loop = true; 
+
 
 var audioLoucura2 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_disturbing.wav');
-audioLoucura2.loop = true; 
 audioLoucura2.volume = 0.5; 
+audioLoucura2.loop = true; 
+
 
 function reproduzirEfeitoZumbidoLoucura() {
     audioLoucura1.play();
@@ -810,7 +824,11 @@ function iniciarSusto() {
     var audioSusto = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
     audioSusto.volume = 0.2; 
     audioSusto.play();
-    // Mostrar a overlay e iniciar a animação
+    if(cartaBossRecente === 4){
+      imagemSusto.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/AtaqueSustoParalizante.png'
+    } else{
+      imagemSusto.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/AtaqueSusto.png'
+    }
     sustoOverlay.style.display = 'block';
     setTimeout(() => {
         sustoOverlay.classList.add('active');

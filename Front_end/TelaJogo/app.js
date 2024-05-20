@@ -105,7 +105,7 @@ function jogadaBoss() {
 }
 
 function escolhaDoBoss(){
-    cartaBossRecente = 3
+   // cartaBossRecente = 3
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
         reproduzirEfeitoCartaEspecial()
        } else{
@@ -200,9 +200,11 @@ function verificarCartaJogador(){
 
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'DEF'){
     if(cartaJogadorRecente === 23){
-        defendidoContraPicadaSurpresa = true
+        defendidoContraUmaPicadaSurpresa = true
+        reproduzirEfeitoSomSpray()
     } else if(cartaJogadorRecente === 24){
         defendidoContraUmaPicadaParalizante = true
+        reproduzirEfeitoSomRedeProtetora()
     }
     return
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'INV'){
@@ -236,9 +238,25 @@ function verificarCartaBoss(){
         zumbidoLoucura()
         retornarAoEstadoNormal()
     } else if(cartaBossRecente === 3){
+        if(defendidoContraUmaPicadaSurpresa === false){
         iniciarSusto()
         diminuirVidaJogador()
         retornarAoEstadoNormal()
+        }else{
+            defendidoContraUmaPicadaSurpresa = false
+            retornarAoEstadoNormal()
+        }
+    } else if(cartaBossRecente === 4){
+        if(defendidoContraUmaPicadaParalizante === false){
+        iniciarSusto()
+        setTimeout(function(){
+            jogadaBoss()   
+        },8000)
+      
+        }else{
+            defendidoContraUmaPicadaParalizante = false
+            retornarAoEstadoNormal()
+        }
     }
 }
 
