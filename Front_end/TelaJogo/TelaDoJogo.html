@@ -791,6 +791,7 @@ function iniciarSusto() {
     var fundoPreto = document.getElementById('fundoPreto');
     pararMusica()
     var audioSusto = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
+    audioSusto.volume = 0.2; 
     audioSusto.play();
     // Mostrar a overlay e iniciar a animação
     sustoOverlay.style.display = 'block';
