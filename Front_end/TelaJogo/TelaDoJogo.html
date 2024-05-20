@@ -22,6 +22,7 @@
 
   <div class="vida-jogador-overlay" id="vidaJogadorOverlay"></div>
 
+  <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/fighting cloud.gif" alt="ImagemFumace" id="ImagemFumace" style="display: none; position: fixed; top: -200px; right: -90px; z-index: 999; width: 600px; height: auto;">
 
   <div class="overlayLoucura" id="overlayLoucura">
     <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy01.gif" alt="Imagem 1">
@@ -175,12 +176,13 @@
 <script>
 
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
-  var cartaJogadorRecente = 20
+  var cartaJogadorRecente = 16
   var cartaBossRecente = 0
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
   var defendidoContraUmaPicadaParalizante = false
   var tempoMissaoZerado = false
+  var bombardeioFumaceAcontecendo = false
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
   var alteracaoBossJaAconteceu = false
 
@@ -299,7 +301,7 @@ var efeitoSonoro = true;
 var maximoCartasDevolvidas = 2
 
 function pararMusica() {
-    if (musicaTocando || tempoMissaoZerado === true) {
+    if (musicaTocando || tempoMissaoZerado === true || bombardeioFumaceAcontecendo) {
         musica.pause(); // Pausa a música se estiver tocando
         musicaTocando = false;
         imagemMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songFalse.png";
@@ -456,7 +458,10 @@ function choqueDanoBoss() {
 }
 
 
-function fumacaDanoBoss() {
+function fumacaDanoBoss(tempoAnimacao) {
+  if(cartaJogadorRecente === 17){
+    reproduzirEfeitoSomExplosao()
+  }
   reproduzirEfeitoSomMosquitoTosse()
   var mosquitoFaseUm = [
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueTossindo.png",
@@ -502,7 +507,7 @@ function fumacaDanoBoss() {
         } else if (animatedImage.src.endsWith('mosquitaoTossindo.png')) {
             animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitao.png';
         }
-      }, 3500); 
+      }, tempoAnimacao); //3500
 }
 
 
@@ -678,26 +683,38 @@ function reproduzirEfeitoCartaEspecial() {
 
 function reproduzirEfeitoSomCoracao() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Fast Heart Beat - Sound Effect.mp3');
-    audio.play();
     audio.volume = 1; 
+    audio.play();
 }
 
 function reproduzirEfeitoSomChoque() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/choque.mp3');
-    audio.play();
     audio.volume = 1; 
+    audio.play();
 }
 
 function reproduzirEfeitoDerrotaJogador() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Darkest Dungeon - Death door bell.mp3');
-    audio.play();
     audio.volume = 1; 
+    audio.play();
 }
 
 function reproduzirEfeitoSomMosquitoTosse() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoTossindo.mp3');
-    audio.play();
     audio.volume = 1; 
+    audio.play();
+}
+
+function reproduzirEfeitoSomExplosao() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_explosion.wav');
+    audio.volume = 0.2; 
+    audio.play();
+}
+
+function reproduzirEfeitoBombardeioFumace() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/BombardeioFumace.mp3');
+    audio.volume = 0.2; 
+    audio.play();
 }
 
 var audioLoucura1 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
@@ -811,6 +828,26 @@ function iniciarSusto() {
 }
 
 
+function ataqueBombardeioFumace(){
+  pararMusica()
+  reproduzirEfeitoBombardeioFumace()
+  if (animatedImage.src.endsWith('MosquitoDengue.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueComMedo.png';
+        } else if (animatedImage.src.endsWith('mosquitao.png')) {
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mosquitaoComMedo.png';
+        }
+        setTimeout(() => {
+          var fumacaBombardeio = document.getElementById('ImagemFumace');
+          fumacaBombardeio.style.display = 'block'
+          fumacaDanoBoss(5000)
+              setTimeout(() => {
+                alterarVidaBoss(vidaBoss -= 30)
+                fumacaBombardeio.style.display = 'none'
+                bombardeioFumaceAcontecendo = false
+                pararMusica()
+            }, 5000);
+        }, 13000); 
+}
 
 
 

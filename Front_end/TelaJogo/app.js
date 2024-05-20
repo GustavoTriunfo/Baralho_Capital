@@ -51,8 +51,10 @@ function atualizarStatusJogo(){
         } else{
             
             if(vidaBoss <= 60 && alteracaoBossJaAconteceu === false){
-                console.log('entrou na transicaoBoss')
                 transicaoBoss = true
+            } else if(cartaJogadorRecente === 16){
+                console.log('entrou no bombardeio')
+                bombardeioFumaceAcontecendo = true
             }
             turnoBoss()
             alternarJogador()
@@ -75,7 +77,7 @@ function turnoBoss(){
 }
 
 function jogadaBoss() {
-    if(transicaoBoss === false){
+    if(transicaoBoss === false && bombardeioFumaceAcontecendo === false){
         
     iniciarCronometro(15)
     setTimeout(function() {
@@ -87,10 +89,17 @@ function jogadaBoss() {
         cronometroAtivo = false;
     }, Math.floor(Math.random() * 3000) + 5000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos) 
 }else{
-    transicaoBoss = false
-    setTimeout(function() {
-        jogadaBoss()
-    }, 7000);
+    if(bombardeioFumaceAcontecendo === true){
+        setTimeout(function() {
+            jogadaBoss()
+        }, 22000);
+    } else{
+        transicaoBoss = false
+        setTimeout(function() {
+            jogadaBoss()
+        }, 7000);
+    }
+
 }
 
 }
@@ -162,11 +171,10 @@ function atualizarTelaStatus(objetoJogador){
 function verificarCartaJogador(){
     if(selecionarTipoCarta(cartaJogadorRecente) === 'ATK'){
     if(cartaJogadorRecente === 16){
-        quantidadeDanoNoBoss = 30
-       
+        ataqueBombardeioFumace()
     }  else if(cartaJogadorRecente === 17){
         quantidadeDanoNoBoss = 20
-        danoBoss()
+        fumacaDanoBoss(3500)
     } else if(cartaJogadorRecente === 18){
         quantidadeDanoNoBoss = 10
         danoBoss()
@@ -175,7 +183,7 @@ function verificarCartaJogador(){
         danoBoss()
     } else if(cartaJogadorRecente === 20){
         quantidadeDanoNoBoss = 20
-        fumacaDanoBoss()
+        fumacaDanoBoss(3500)
     } else if(cartaJogadorRecente === 21){
         quantidadeDanoNoBoss = 10
         danoBoss()
@@ -183,8 +191,13 @@ function verificarCartaJogador(){
         quantidadeDanoNoBoss = 20
         choqueDanoBoss()
     }
-    alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
-    return
+    if(cartaJogadorRecente !== 16){
+        alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
+        return
+    } else{
+        return
+    }
+
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'DEF'){
     if(cartaJogadorRecente === 23){
         defendidoContraPicadaSurpresa = true
