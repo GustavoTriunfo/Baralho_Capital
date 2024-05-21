@@ -77,7 +77,7 @@ function turnoBoss(){
 }
 
 function jogadaBoss() {
-    if(transicaoBoss === false && bombardeioFumaceAcontecendo === false){
+    if(transicaoBoss === false && bombardeioFumaceAcontecendo === false && jogoAcabou === false){
         
     iniciarCronometro(15)
     setTimeout(function() {
@@ -114,7 +114,7 @@ function escolhaDoBoss(){
 }
 
 function verificarFim(){
-    if(verificarBarraDeProgressoZerada()){
+    if(vidaBoss <= 0){
         return true
     } else if(quantidadeHPJogador <= 0){
         return true
@@ -129,14 +129,25 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
 }
 
 function terminarJogo(){
-    if(verificarBarraDeProgressoZerada()){
+    if(jogoAcabou === false){
+    if(vidaBoss <= 0){
+        pararMusica()
+        reproduzirEfeitoMorteMosquito()
+        reproduzirMusicaVitoriaJogador()
+        var animatedImage = document.getElementById('animatedImage');
+        animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Grave.png';
+        animatedImage.style.top = "0px";
+        animatedImage.style.width = "350px";
         var endgameOverlay = document.getElementById('endgameOverlay');
         endgameOverlay.style.display = 'block';
+        jogoAcabou = true
     } else if(quantidadeHPJogador <= 0 || tempoMissaoZerado === true){
         pararMusica()
         reproduzirEfeitoDerrotaJogador()
         var endgamePlayerLose = document.getElementById('endgamePlayerLose');
         endgamePlayerLose.style.display = 'block';
+        jogoAcabou = true
+    }
     }
 
 }
@@ -171,6 +182,9 @@ function atualizarTelaStatus(objetoJogador){
 function verificarCartaJogador(){
     if(selecionarTipoCarta(cartaJogadorRecente) === 'ATK'){
     if(cartaJogadorRecente === 16){
+        if(cartaBossRecente === 2){
+            pararZumbidoLoucura()
+        }
         ataqueBombardeioFumace()
     }  else if(cartaJogadorRecente === 17){
         quantidadeDanoNoBoss = 20
@@ -257,6 +271,8 @@ function verificarCartaBoss(){
             defendidoContraUmaPicadaParalizante = false
             retornarAoEstadoNormal()
         }
+    } else{
+        retornarAoEstadoNormal()   
     }
 }
 

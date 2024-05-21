@@ -176,8 +176,9 @@
 <script>
 
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
-  var cartaJogadorRecente = 16
-  var cartaBossRecente = 2
+  var jogoAcabou = false
+  var cartaJogadorRecente = 17
+  var cartaBossRecente = 5
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
   var defendidoContraUmaPicadaParalizante = false
@@ -205,41 +206,29 @@
     statusMenu.style.display = 'none';
   }
 
-  function verificarBarraDeProgressoZerada() {
-    // Obter o elemento da barra de progresso
-    var barraDeProgresso = document.getElementById('bossHealthBar');
 
-    // Obter o valor atual da barra de progresso
-    var valorAtual = parseInt(barraDeProgresso.getAttribute('aria-valuenow'));
-
-    // Verificar se a barra de progresso está zerada
-    if (valorAtual === 0) {
-        return true
-        // Faça algo aqui se a barra de progresso estiver zerada
-    } else {
-        return false
-        // Faça algo aqui se a barra de progresso não estiver zerada
-    }
-}
-
-
-  
 function alterarVidaBoss(porcentagem) {
-  // Verifica se a porcentagem está dentro do intervalo válido (0-100)
+  
   if(vidaBoss <= 50 && alteracaoBossJaAconteceu === false){
     console.log('entrou no alterarVidaBoss')
     alteracaoBossJaAconteceu = true
     alterarFaseBoss()
   }
-  if (porcentagem >= 0 && porcentagem <= 100) {
+  
+  if (porcentagem <= 100) {
     // Seleciona a barra de vida do boss pelo ID
     var bossHealthBar = document.getElementById('bossHealthBar');
     // Define a largura da barra de progresso com base na porcentagem fornecida
-    bossHealthBar.style.width = porcentagem + '%';
-    // Atualiza o valor da porcentagem atual (para acessibilidade)
-    bossHealthBar.setAttribute('aria-valuenow', porcentagem);
 
-    //vidaBoss = porcentagem * vidaTotalBoss / 100; // Suponha que vidaTotalBoss seja a vida máxima do boss
+    if(porcentagem < 0){
+      porcentagem = 0
+      bossHealthBar.style.width = porcentagem + '%';
+      bossHealthBar.setAttribute('aria-valuenow', porcentagem);
+      terminarJogo()
+    }
+    bossHealthBar.style.width = porcentagem + '%';
+    bossHealthBar.setAttribute('aria-valuenow', porcentagem);
+  
   } else {
     console.error('Porcentagem inválida. A porcentagem deve estar entre 0 e 100.');
   }
@@ -623,7 +612,7 @@ function iniciarCronometroTempoMissao(tempoRecebido) {
         document.getElementById("tempo-missao").textContent = formatarTempo(tempoRestante);
         
         // Verifica se o tempo acabou ou se o cronômetro foi interrompido
-        if (tempoRestante <= 0) {
+        if (tempoRestante <= 0 || jogoAcabou === true) {
             clearInterval(cronometro); // Para o cronômetro
             elementoTempo.classList.add("d-none");
             tempoMissaoZerado = true;
@@ -717,8 +706,20 @@ function reproduzirEfeitoSomRedeProtetora() {
     audio.play();
 }
 
+function reproduzirEfeitoMorteMosquito() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MorteMosquito.mp3');
+    audio.volume = 1; 
+    audio.play();
+}
+
 function reproduzirEfeitoSomExplosao() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_explosion.wav');
+    audio.volume = 0.2; 
+    audio.play();
+}
+
+function reproduzirMusicaVitoriaJogador() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demons Crest OST_ The Throne Refused.mp3');
     audio.volume = 0.2; 
     audio.play();
 }
