@@ -38,8 +38,12 @@ function alternarJogador() {
 
 function selecionarIdCarta()
 {
-    return cartaJogadorRecente
+    let min = 16; 
+    let max = 32; 
+    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
+    return cartaSelecionada
 }
+
 function criarCartasNoInicio() {
     var contador = 0;
 
@@ -74,12 +78,13 @@ function criarCartaParaJogador() {
     var quantidadeCartas = document.querySelectorAll('.player-card').length;
     // Verifica se o jogador já tem 5 cartas
     if (quantidadeCartas >= 5) {
-        console.log("O jogador já possui o número máximo de cartas.");
+       
         return; // Sai da função se o limite for atingido
     }
     // Calcula o número da nova carta
     var idCorrespondente = selecionarIdCarta();
-    console.log(idCorrespondente)
+    //selecionarIdCarta()
+
     // Cria uma nova div para representar a nova carta
     var novaCarta = document.createElement('div');
     // Adiciona as classes de estilo
@@ -104,7 +109,7 @@ function criarCartaParaOponente() {
     var quantidadeCartas = document.querySelectorAll('.opponent-card').length;
     // Verifica se o oponente já tem 5 cartas
     if (quantidadeCartas >= 5) {
-        console.log("O oponente já possui o número máximo de cartas.");
+     
         return; // Sai da função se o limite for atingido
     }
     // Calcula o número da nova carta
@@ -129,7 +134,7 @@ startButton.addEventListener('click', function() {
     // Oculta o overlay preto
     startOverlay.style.display = 'none';
 
-    iniciarCronometroTempoMissao(900)
+    iniciarCronometroTempoMissao(600)
     iniciarMusica();
     criarCartasNoInicio();
     

@@ -2,7 +2,6 @@
 
 
   function toggleMenu() {
-    console.log("Toggle menu clicked");
     var overlay = document.getElementById("menuOverlay");
     if (overlay.classList.contains("show")) {
         overlay.classList.remove("show");

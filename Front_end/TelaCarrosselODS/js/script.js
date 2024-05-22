@@ -715,7 +715,7 @@
 		if ( plugins.bootstrapModalDialog.length ) {
 
 			$( '[data-toggle=modal]' ).on( 'click', function () {
-				console.log( 321321 );
+				
 				$html.addClass( 'html-modal-open' )
 			} )
 

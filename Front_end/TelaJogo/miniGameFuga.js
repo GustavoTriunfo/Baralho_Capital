@@ -164,7 +164,6 @@ function iniciarMinigameFuga(){
   criarInimigos(30, 10);
   gameEnded = false; 
   reproduzirEfeitoMinigameStart()
- // alert('Sobreviva até que o tempo acabe!')
 }
 
 function finalizarMinigameFuga(){
@@ -178,10 +177,8 @@ function finalizarMinigameFuga(){
       enemies.forEach(enemy => {
         enemy.remove();
       });
-      //clearInterval(cronometroMinigameAtual);
       cronometroAtivo = false
       enemyPositions = [];
-  //alert("Game Over! Você colidiu com um inimigo.");
     gameEnded = true; 
     reproduzirEfeitoMinigameOverLoser()
     jogadaBoss()
@@ -203,7 +200,6 @@ function finalizarMinigameFugaVitorioso(){
          
           enemyPositions = [];
         
-        //alert("Você sobreviveu!! :D");
         gameEnded = true; 
         retornarAoEstadoNormal()
         reproduzirEfeitoMinigameVictory()

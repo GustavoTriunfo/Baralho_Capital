@@ -177,7 +177,7 @@
 
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
   var jogoAcabou = false
-  var cartaJogadorRecente = 17
+  var cartaJogadorRecente = 16
   var cartaBossRecente = 5
   var quantidadeHPJogador = 50
   var defendidoContraUmaPicadaSurpresa = false
@@ -208,30 +208,27 @@
 
 
 function alterarVidaBoss(porcentagem) {
-  
+  console.log(vidaBoss)
   if(vidaBoss <= 50 && alteracaoBossJaAconteceu === false){
-    console.log('entrou no alterarVidaBoss')
     alteracaoBossJaAconteceu = true
     alterarFaseBoss()
   }
   
-  if (porcentagem <= 100) {
     // Seleciona a barra de vida do boss pelo ID
     var bossHealthBar = document.getElementById('bossHealthBar');
     // Define a largura da barra de progresso com base na porcentagem fornecida
 
-    if(porcentagem < 0){
+    if(porcentagem <= 0){
       porcentagem = 0
+      vidaBoss = -100
       bossHealthBar.style.width = porcentagem + '%';
       bossHealthBar.setAttribute('aria-valuenow', porcentagem);
-      terminarJogo()
+    } else if(porcentagem >= 100){
+      porcentagem = 100
+      vidaBoss = 100
     }
     bossHealthBar.style.width = porcentagem + '%';
     bossHealthBar.setAttribute('aria-valuenow', porcentagem);
-  
-  } else {
-    console.error('Porcentagem inválida. A porcentagem deve estar entre 0 e 100.');
-  }
 
 }
 
@@ -398,6 +395,7 @@ function danoBoss() {
 }
 
 function choqueDanoBoss() {
+ 
   reproduzirEfeitoSomChoque()
   var mosquitoFaseUm = [
         "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueChoque.png",
@@ -522,10 +520,10 @@ function ocultarMaoJogador() {
 }
 
 function visualizacaoCartaBoss(){
-        escolhaDoBoss()
+        cartaSelecionada = escolhaDoBoss()
         
         var imgElement = document.createElement('img');
-        imgElement.src = selecionarCaminhoImagem(cartaBossRecente);
+        imgElement.src = selecionarCaminhoImagem(cartaSelecionada);
 
         var cartaBoss = document.getElementById('opponentCardPreviewOverlay');
         cartaBoss.classList.remove("d-none");

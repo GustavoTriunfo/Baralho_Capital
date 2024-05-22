@@ -111,18 +111,18 @@ $(document).on("click", "#botaoJogar", function(event) {
 
     // Verificar se há uma carta ativa
     if ($(".player-card.active").length) {
-        console.log("jogador jogou")
+        
         var idCarta = $(".player-card.active").attr("id");
-        console.log(idCarta)
+        cartaJogadorRecente = parseInt(idCarta)
+        
         ocultarMaoJogador()
         //atualizarStatusJogador(jogadorAtual, idCarta)
         atualizarStatusJogo()
         maximoCartasDevolvidas = 2
         habilitarBotaoDevolver()
+
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
-
-      
         // Obtém o elemento card-holder
            // Remove a carta específica do card-holder
         $(".card-holder").find("[data-card-number='" + cardNumber + "']").remove();

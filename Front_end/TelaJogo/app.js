@@ -53,12 +53,12 @@ function atualizarStatusJogo(){
             if(vidaBoss <= 60 && alteracaoBossJaAconteceu === false){
                 transicaoBoss = true
             } else if(cartaJogadorRecente === 16){
-                console.log('entrou no bombardeio')
                 bombardeioFumaceAcontecendo = true
-            }
+            }  
             turnoBoss()
             alternarJogador()
             atualizarStatusJogo()
+            
         }
       
     }else{
@@ -73,12 +73,15 @@ function turnoJogador(){
 }
 
 function turnoBoss(){
+    if(vidaBoss > 20){
     jogadaBoss()
+    } else{
+        terminarJogo()
+    }
 }
 
 function jogadaBoss() {
-    if(transicaoBoss === false && bombardeioFumaceAcontecendo === false && jogoAcabou === false){
-        
+    if(transicaoBoss === false && bombardeioFumaceAcontecendo === false && !vidaBoss <= 0){
     iniciarCronometro(15)
     setTimeout(function() {
        
@@ -93,7 +96,7 @@ function jogadaBoss() {
         setTimeout(function() {
             jogadaBoss()
         }, 22000);
-    } else{
+    } else if(vidaBoss > 0){
         transicaoBoss = false
         setTimeout(function() {
             jogadaBoss()
@@ -105,12 +108,16 @@ function jogadaBoss() {
 }
 
 function escolhaDoBoss(){
-   // cartaBossRecente = 3
+   let min = 1; 
+   let max = 13; 
+   let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
+   cartaBossRecente = cartaSelecionada
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
         reproduzirEfeitoCartaEspecial()
        } else{
         reproduzirEfeitoSonoroCartaNaMesa();
        }
+    return cartaSelecionada
 }
 
 function verificarFim(){
@@ -130,17 +137,23 @@ function atualizarStatusJogador(objetoJogador, id_carta) {
 
 function terminarJogo(){
     if(jogoAcabou === false){
-    if(vidaBoss <= 0){
+
+    if(vidaBoss <= 20){
+        pararZumbidoLoucura()
         pararMusica()
         reproduzirEfeitoMorteMosquito()
         reproduzirMusicaVitoriaJogador()
-        var animatedImage = document.getElementById('animatedImage');
-        animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Grave.png';
-        animatedImage.style.top = "0px";
-        animatedImage.style.width = "350px";
         var endgameOverlay = document.getElementById('endgameOverlay');
         endgameOverlay.style.display = 'block';
         jogoAcabou = true
+        setTimeout(function(){
+            var animatedImage = document.getElementById('animatedImage');
+            animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Grave.png';
+            animatedImage.style.top = "0px";
+            animatedImage.style.width = "350px";
+        },4000)
+ 
+
     } else if(quantidadeHPJogador <= 0 || tempoMissaoZerado === true){
         pararMusica()
         reproduzirEfeitoDerrotaJogador()
@@ -180,6 +193,7 @@ function atualizarTelaStatus(objetoJogador){
 }
 
 function verificarCartaJogador(){
+    quantidadeDanoNoBoss = 0
     if(selecionarTipoCarta(cartaJogadorRecente) === 'ATK'){
     if(cartaJogadorRecente === 16){
         if(cartaBossRecente === 2){
@@ -205,6 +219,7 @@ function verificarCartaJogador(){
         quantidadeDanoNoBoss = 20
         choqueDanoBoss()
     }
+   
     if(cartaJogadorRecente !== 16){
         alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
         return
@@ -271,7 +286,13 @@ function verificarCartaBoss(){
             defendidoContraUmaPicadaParalizante = false
             retornarAoEstadoNormal()
         }
-    } else{
+    } else if(cartaBossRecente === 12){
+        alterarVidaBoss(vidaBoss += 20)
+        retornarAoEstadoNormal()   
+    } else if(cartaBossRecente === 13){
+        alterarVidaBoss(vidaBoss += 100)
+        retornarAoEstadoNormal()   
+    }else{
         retornarAoEstadoNormal()   
     }
 }
@@ -285,7 +306,7 @@ imagemBaralho.addEventListener('click', function() {
     var quantidadeCartas = document.querySelectorAll('.player-card').length;
     // Verifica se o jogador já tem 5 cartas
     if (quantidadeCartas >= 5) {
-        console.log("O jogador já possui o número máximo de cartas.");
+    
         return; // Sai da função se o limite for atingido
     }
     // Calcula o número da nova carta
