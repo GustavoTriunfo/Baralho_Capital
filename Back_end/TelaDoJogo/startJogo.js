@@ -137,7 +137,7 @@ startButton.addEventListener('click', function() {
     iniciarCronometroTempoMissao(600)
     iniciarMusica();
     criarCartasNoInicio();
-    
+    atualizarTelaStatus()
   });
 
   function iniciarMusica() {

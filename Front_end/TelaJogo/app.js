@@ -46,7 +46,9 @@ function atualizarStatusJogo(){
     
     if(verificarFim() === false){
         if(jogadorAtual === jogador2){
+            atualizarTelaStatus()
             turnoJogador()
+            quantidadeCartasJogadas++
             alternarJogador()
         } else{
             
@@ -57,6 +59,8 @@ function atualizarStatusJogo(){
             }  
             turnoBoss()
             alternarJogador()
+            quantidadeCartasJogadas++
+            atualizarTelaStatus()
             atualizarStatusJogo()
             
         }
@@ -90,7 +94,7 @@ function jogadaBoss() {
         exibirImagemTemporizada()
       
         cronometroAtivo = false;
-    }, Math.floor(Math.random() * 3000) + 5000); // Atraso de 3 a 5 segundos (3000 a 5000 milissegundos) 
+    }, Math.floor(Math.random() * 3000) + 5000);
 }else{
     if(bombardeioFumaceAcontecendo === true){
         setTimeout(function() {
@@ -104,20 +108,19 @@ function jogadaBoss() {
     }
 
 }
-
 }
 
 function escolhaDoBoss(){
    let min = 1; 
    let max = 13; 
    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
-   //cartaBossRecente = cartaSelecionada
+   cartaBossRecente = cartaSelecionada
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
         reproduzirEfeitoCartaEspecial()
        } else{
         reproduzirEfeitoSonoroCartaNaMesa();
        }
-    return cartaBossRecente
+    return cartaSelecionada
 }
 
 function verificarFim(){
@@ -165,31 +168,31 @@ function terminarJogo(){
 
 }
 
-function atualizarTelaStatus(objetoJogador){
+function atualizarTelaStatus(){
+
+    var vidaJogador = document.getElementById('vidaJogador');
+    vidaJogador.textContent = quantidadeHPJogador
+
+    var vidaMosquito = document.getElementById('vidaMosquito');
+    vidaMosquito.textContent = vidaBoss
     
+    var cartasJogadas = document.getElementById('cartasJogadas');
+    cartasJogadas.textContent = quantidadeCartasJogadas
 
-    var ruindadeSpan = document.getElementById('ruindadeJogador');
-    ruindadeSpan.textContent = objetoJogador.ruindade;
-    
-    var investimentoSpan = document.getElementById('investimentoJogador');
-    investimentoSpan.textContent = objetoJogador.investimento;
+    var danoCausadoTotal = document.getElementById('danoCausado');
+    danoCausadoTotal.textContent = danoCausado
 
-    var famaSpan = document.getElementById('famaJogador');
-    famaSpan.textContent = objetoJogador.fama;
+    var defesaContraPicadaSur = document.getElementById('defesaContraPicadaSur');
+    defesaContraPicadaSur.textContent = defendidoContraUmaPicadaSurpresa
 
-    var defesaSpan = document.getElementById('defesaJogador');
-    defesaSpan.textContent = objetoJogador.defesa;
+    var defesaContraPicadaPar = document.getElementById('defesaContraPicadaPar');
+    defesaContraPicadaPar.textContent = defendidoContraUmaPicadaParalizante
 
-    var ataqueSpan = document.getElementById('ataqueJogador');
-    ataqueSpan.textContent = objetoJogador.ataque;
+    var investimentosContraMosquitoTotal = document.getElementById('investimentosContraMosquito');
+    investimentosContraMosquitoTotal.textContent = investimentosContraMosquito
 
-    var transformacaoSpan = document.getElementById('transformacaoJogador');
-    if(objetoJogador.transformacao == true){
-        transformacaoSpan.textContent = true  
-    } else{
-        transformacaoSpan.textContent = false  
-    }
-
+    var danoRecebido = document.getElementById('danoRecebido');
+    danoRecebido.textContent = picadasRecebidas
 }
 
 function verificarCartaJogador(){
@@ -221,6 +224,7 @@ function verificarCartaJogador(){
     }
    
     if(cartaJogadorRecente !== 16){
+        danoCausado += quantidadeDanoNoBoss
         alterarVidaBoss(vidaBoss -= quantidadeDanoNoBoss)
         return
     } else{
@@ -247,7 +251,7 @@ function verificarCartaJogador(){
         }
         return
     }
-
+    investimentosContraMosquito += 10
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'CR'){
     if(cartaJogadorRecente === 25){
         quantidadeDeCura = 20
@@ -268,9 +272,9 @@ function verificarCartaBoss(){
         retornarAoEstadoNormal()
     } else if(cartaBossRecente === 3){
         if(defendidoContraUmaPicadaSurpresa === false){
+            picadasRecebidas++
         iniciarSusto()
         diminuirVidaJogador()
-        //alterarVidaJogador(quantidadeHPJogador -= 20)
         retornarAoEstadoNormal()
         }else{
             defendidoContraUmaPicadaSurpresa = false
@@ -278,6 +282,7 @@ function verificarCartaBoss(){
         }
     } else if(cartaBossRecente === 4){
         if(defendidoContraUmaPicadaParalizante === false){
+            picadasRecebidas++
         iniciarSusto()
         setTimeout(function(){
             jogadaBoss()   

@@ -120,7 +120,7 @@ $(document).on("click", "#botaoJogar", function(event) {
         atualizarStatusJogo()
         maximoCartasDevolvidas = 2
         habilitarBotaoDevolver()
-
+        atualizarTelaStatus()
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
         // Obtém o elemento card-holder

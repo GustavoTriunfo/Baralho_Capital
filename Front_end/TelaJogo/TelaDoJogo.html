@@ -120,16 +120,15 @@
           <!-- Conteúdo do menu de status -->
           <h2 class="text-center mb-4">Status do Jogador</h2>
           <div class="status-info">
-            <p class="mb-2"><strong>Nome:</strong> <span id="nomeJogador" class="text-primary">Nome do Jogador</span></p>
-            <p class="mb-2"><strong>Dinheiro:</strong> <span id="dinheiroJogador" class="text-success"></span></p>
-            <p class="mb-2"><strong>INV:</strong> <span id="investimentoJogador" class="text-info"></span></p>
-            <p class="mb-2"><strong>FM:</strong> <span id="famaJogador" class="text-info"></span></p>
-            <p class="mb-2"><strong>DEF:</strong> <span id="defesaJogador" class="text-info"></span></p>
-            <p class="mb-2"><strong>R:</strong> <span id="ruindadeJogador" class="text-info"></span></p>
-            <p class="mb-2"><strong>RV:</strong> <span id="revesJogador" class="text-info"></span></p>
-            <p class="mb-2"><strong>ATK:</strong> <span id="ataqueJogador" class="text-info"></span></p>
-            <p class="mb-2"><strong>TRF:</strong> <span id="transformacaoJogador" class="text-info">false</span></p>
-            <p class="mb-2"><strong>Legenda: INV = Investimento/ FM = Fama/ DEF = Defesa/ R = Ruindade/ RV = Revés/ ATK = Ataque/ TRF = Transformação</strong> <span id="legenda" class="text-info"></span></p>
+            <p class="mb-2"><strong>Nome Jogador(a):</strong> <span id="nomeJogador" class="text-primary"></span></p>
+            <p class="mb-2"><strong>Vida Jogador: </strong> <span id="vidaJogador" class="text-success"></span></p>
+            <p class="mb-2"><strong>Vida Mosquito: </strong> <span id="vidaMosquito" class="text-danger"></span></p>
+            <p class="mb-2"><strong>Quantidade Cartas Jogadas: </strong> <span id="cartasJogadas" class="text-info"></span></p>
+            <p class="mb-2"><strong>Dano Causado: </strong> <span id="danoCausado" class="text-info"></span></p>
+            <p class="mb-2"><strong>Defesa contra Picada Surpresa: </strong> <span id="defesaContraPicadaSur" class="text-info"></span></p>
+            <p class="mb-2"><strong>Defesa contra Picada Paralizante: </strong> <span id="defesaContraPicadaPar" class="text-info"></span></p>
+            <p class="mb-2"><strong>Investimentos contra Mosquito da Dengue: </strong> <span id="investimentosContraMosquito" class="text-info"></span></p>
+            <p class="mb-2"><strong>Picadas Recebidas: </strong> <span id="danoRecebido" class="text-info"></span></p>
           </div>
         </div>
 
@@ -149,7 +148,6 @@
   <div id="playerHealthBar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
-<!-- Caixa de opções -->
 <div id="menuOverlay" class="menu-overlay">
   <div class="menu-options">
     <button onclick="pararMusica()">
@@ -192,6 +190,10 @@
   var defendidoContraUmaPicadaParalizante = false
   var tempoMissaoZerado = false
   var bombardeioFumaceAcontecendo = false
+  var quantidadeCartasJogadas = 0
+  var danoCausado = 0
+  var investimentosContraMosquito = 0
+  var picadasRecebidas = 0
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
   var alteracaoBossJaAconteceu = false
 
@@ -236,26 +238,6 @@ function alterarVidaBoss(porcentagem) {
     }
     bossHealthBar.style.width = porcentagem + '%';
     bossHealthBar.setAttribute('aria-valuenow', porcentagem);
-
-}
-
-function alterarVidaJogador(porcentagem) {
-  
-    // Seleciona a barra de vida do boss pelo ID
-    var quantidadeVidaJogador = document.getElementById('playerHealthBar');
-    // Define a largura da barra de progresso com base na porcentagem fornecida
-
-    if(porcentagem <= 0){
-      porcentagem = 0
-      quantidadeHPJogador = 0
-      quantidadeVidaJogador.style.width = porcentagem + '%';
-      quantidadeVidaJogador.setAttribute('aria-valuenow', porcentagem);
-    } else if(porcentagem >= 50){
-      porcentagem = 50
-      quantidadeHPJogador = 50
-    }
-    quantidadeVidaJogador.style.width = porcentagem + '%';
-    quantidadeVidaJogador.setAttribute('aria-valuenow', porcentagem);
 
 }
 
@@ -892,6 +874,7 @@ function ataqueBombardeioFumace(){
           fumacaBombardeio.style.display = 'block'
           fumacaDanoBoss(5000)
               setTimeout(() => {
+                danoCausado += 30
                 alterarVidaBoss(vidaBoss -= 30)
                 fumacaBombardeio.style.display = 'none'
                 bombardeioFumaceAcontecendo = false
