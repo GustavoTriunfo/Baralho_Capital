@@ -20,6 +20,8 @@
 </div>
 
 
+
+
   <div class="vida-jogador-overlay" id="vidaJogadorOverlay"></div>
 
   <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/fighting cloud.gif" alt="ImagemFumace" id="ImagemFumace" style="display: none; position: fixed; top: -200px; right: -90px; z-index: 999; width: 600px; height: auto;">
@@ -57,6 +59,8 @@
   </div>
 
 
+  
+  
   <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
     <button id="botaoDevolver" class="btn btn-custom-primary">Devolver</button>
     <button id="botaoJogar" class="btn btn-custom-secondary">Jogar</button>
@@ -141,6 +145,10 @@
   <img id="startButton" src="/Baralho_Capital/imagensTelaInicial/startButton.gif" alt="Start Button" width="150" height="auto">
 </div>
 
+<div class="fundoBarraVidaJogador" id="playerLifeBar">
+  <div id="playerHealthBar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
 <!-- Caixa de opções -->
 <div id="menuOverlay" class="menu-overlay">
   <div class="menu-options">
@@ -178,8 +186,8 @@
   ///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
   var jogoAcabou = false
   var cartaJogadorRecente = 16
-  var cartaBossRecente = 5
-  var quantidadeHPJogador = 50
+  var cartaBossRecente = 3
+  var quantidadeHPJogador = 100.0
   var defendidoContraUmaPicadaSurpresa = false
   var defendidoContraUmaPicadaParalizante = false
   var tempoMissaoZerado = false
@@ -208,7 +216,6 @@
 
 
 function alterarVidaBoss(porcentagem) {
-  console.log(vidaBoss)
   if(vidaBoss <= 50 && alteracaoBossJaAconteceu === false){
     alteracaoBossJaAconteceu = true
     alterarFaseBoss()
@@ -229,6 +236,26 @@ function alterarVidaBoss(porcentagem) {
     }
     bossHealthBar.style.width = porcentagem + '%';
     bossHealthBar.setAttribute('aria-valuenow', porcentagem);
+
+}
+
+function alterarVidaJogador(porcentagem) {
+  
+    // Seleciona a barra de vida do boss pelo ID
+    var quantidadeVidaJogador = document.getElementById('playerHealthBar');
+    // Define a largura da barra de progresso com base na porcentagem fornecida
+
+    if(porcentagem <= 0){
+      porcentagem = 0
+      quantidadeHPJogador = 0
+      quantidadeVidaJogador.style.width = porcentagem + '%';
+      quantidadeVidaJogador.setAttribute('aria-valuenow', porcentagem);
+    } else if(porcentagem >= 50){
+      porcentagem = 50
+      quantidadeHPJogador = 50
+    }
+    quantidadeVidaJogador.style.width = porcentagem + '%';
+    quantidadeVidaJogador.setAttribute('aria-valuenow', porcentagem);
 
 }
 
@@ -767,33 +794,40 @@ function pararZumbidoLoucura() {
 }
 
 function curarVidaJogador(numero){
-  if(quantidadeHPJogador < 50){
+  var quantidadeVidaJogador = document.getElementById('playerHealthBar');
+  if(quantidadeHPJogador < 100){
     if(numero === 20){
-      if(quantidadeHPJogador + numero < 50){
-        quantidadeHPJogador += numero
-        if(quantidadeHPJogador === 30){
+      if(quantidadeHPJogador + 33.3 < 100){
+        quantidadeHPJogador += 33.3
+        if(quantidadeHPJogador === 33.3){
           valorCura = 0.4
         }
       } else{
-        quantidadeHPJogador = 50
+        quantidadeHPJogador = 100
         valorCura = 0
       }
     } else if (numero === 50){
-      quantidadeHPJogador = 50
+      quantidadeHPJogador = 100
       valorCura = 0
     }
     ajustarOpacidadeVida(valorCura)
+    quantidadeVidaJogador.style.width = quantidadeHPJogador + '%';
+    quantidadeVidaJogador.setAttribute('aria-valuenow', quantidadeHPJogador);
   } else{
     return
   }
 }
 
 function diminuirVidaJogador(){
-  quantidadeHPJogador -= 20
- if(quantidadeHPJogador > 0){
-  if(quantidadeHPJogador === 30){
+  var quantidadeVidaJogador = document.getElementById('playerHealthBar');
+  quantidadeHPJogador -= 33.3
+  quantidadeVidaJogador.style.width = quantidadeHPJogador + '%';
+  quantidadeVidaJogador.setAttribute('aria-valuenow', quantidadeHPJogador);
+  
+ if(quantidadeHPJogador > 2){
+  if(quantidadeHPJogador === 66.7){
     ajustarOpacidadeVida(0.4)
-  } else if(quantidadeHPJogador === 10){
+  } else if(quantidadeHPJogador === 33.4){
     ajustarOpacidadeVida(0.7)
   }
  } else{

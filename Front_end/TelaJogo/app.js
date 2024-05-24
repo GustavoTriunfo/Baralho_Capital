@@ -111,13 +111,13 @@ function escolhaDoBoss(){
    let min = 1; 
    let max = 13; 
    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
-   cartaBossRecente = cartaSelecionada
+   //cartaBossRecente = cartaSelecionada
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
         reproduzirEfeitoCartaEspecial()
        } else{
         reproduzirEfeitoSonoroCartaNaMesa();
        }
-    return cartaSelecionada
+    return cartaBossRecente
 }
 
 function verificarFim(){
@@ -154,7 +154,7 @@ function terminarJogo(){
         },4000)
  
 
-    } else if(quantidadeHPJogador <= 0 || tempoMissaoZerado === true){
+    } else if(quantidadeHPJogador <= 2 || tempoMissaoZerado === true){
         pararMusica()
         reproduzirEfeitoDerrotaJogador()
         var endgamePlayerLose = document.getElementById('endgamePlayerLose');
@@ -270,6 +270,7 @@ function verificarCartaBoss(){
         if(defendidoContraUmaPicadaSurpresa === false){
         iniciarSusto()
         diminuirVidaJogador()
+        //alterarVidaJogador(quantidadeHPJogador -= 20)
         retornarAoEstadoNormal()
         }else{
             defendidoContraUmaPicadaSurpresa = false

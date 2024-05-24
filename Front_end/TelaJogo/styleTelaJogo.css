@@ -63,6 +63,36 @@
   z-index: 99999; /* Garantir que a overlay fique no topo */
 }
 
+#playerLifeBar {
+  position: fixed;
+  bottom: 0;
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajuste para a centralização */
+  width: 370px; /* Largura da barra de vida */
+  height: 20px;
+  z-index: 4; /* Certifique-se de que a barra esteja acima do fundo */
+}
+
+#playerHealthBar {
+  height: 100%;
+  background-color: #04fc3a;
+  transition: width 0.5s ease; /* Transição suave ao alterar a largura */
+}
+
+.bg-success {
+  border-style:groove;
+  background-color: #04fc3a !important; /* Cor de sucesso para a barra de vida */
+}
+
+#ImagemFundoBarra {
+  position: fixed;
+  bottom: 0;
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajuste para a centralização */
+  z-index: 999; /* Abaixo da barra de vida */
+  width: 370px; /* Largura da imagem de fundo */
+  height: auto;
+}
 
 .vida-jogador-overlay {
   position: fixed;
