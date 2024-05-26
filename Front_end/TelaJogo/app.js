@@ -111,9 +111,11 @@ function escolhaDoBoss(){
    let max = 13; 
    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
    if(cartaSelecionada === 4 && faseDois === false){
-    cartaSelecionada = 11
+    cartaSelecionada = 3
    } else if(cartaSelecionada === 13 && vidaBoss >= 50){
-    cartaSelecionada = 7
+    cartaSelecionada = 3
+   } else if(cartaSelecionada === 1 && controleAtaqueMosquitoIdUm > 3){
+    cartaSelecionada = 3
    }
    cartaBossRecente = cartaSelecionada
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
@@ -257,6 +259,7 @@ function verificarCartaJogador(){
 
 function verificarCartaBoss(){
     if(cartaBossRecente === 1){
+        controleAtaqueMosquitoIdUm += 1
         iniciarCronometroMinigame(15)
         iniciarMinigameFuga()
     } else if(cartaBossRecente === 2){
