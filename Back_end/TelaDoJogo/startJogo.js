@@ -39,11 +39,11 @@ function alternarJogador() {
 function selecionarIdCarta()
 {   let min = 16; 
     let max = 32; 
-    if(cartasInvestimentosContraMosquito > 5 && cartasInvestimentosContraMosquito <= 10){
+    if(cartasInvestimentosContraMosquito > 5 && cartasInvestimentosContraMosquito <= 7){
         min = 18; 
-    } else if (cartasInvestimentosContraMosquito > 10){
+    } else if (cartasInvestimentosContraMosquito > 7 && cartasInvestimentosContraMosquito < 10){
         min = 16; 
-    } else if(cartasInvestimentosContraMosquito > 14){
+    } else if(cartasInvestimentosContraMosquito >= 10){
         min = 16; 
         max = 26;
     }else{

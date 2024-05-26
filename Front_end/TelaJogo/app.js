@@ -120,10 +120,11 @@ function escolhaDoBoss(){
     else if(cartaSelecionada === 12 && vidaBoss === 100){
     cartaSelecionada = 3
     }
-    else if(vidaBoss <= 50 && vidaBoss > 30){
+//     else if(vidaBoss <= 50 && vidaBoss > 30){
+//     cartaSelecionada = 3
+//    } 
+    else if(vidaBoss <= 30){
     cartaSelecionada = 3
-   } else if(vidaBoss <= 30){
-    cartaSelecionada = 13
    }
    cartaBossRecente = cartaSelecionada
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
