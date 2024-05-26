@@ -37,9 +37,16 @@ function alternarJogador() {
 }
 
 function selecionarIdCarta()
-{
-    let min = 16; 
+{   let min = 16; 
     let max = 32; 
+    if(cartasInvestimentosContraMosquito > 5 && cartasInvestimentosContraMosquito <= 10){
+        min = 18; 
+    } else if (cartasInvestimentosContraMosquito > 10){
+        min = 16; 
+    }else{
+        min = 23
+    }
+   
     let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
     return cartaSelecionada
 }
@@ -143,7 +150,7 @@ startButton.addEventListener('click', function() {
   function iniciarMusica() {
     // Obtém o elemento de áudio
     var audio = document.getElementById('musica');
-    audio.volume = 0.2;
+    audio.volume = 0.4;
     // Inicia a reprodução da música
     audio.play();
 }

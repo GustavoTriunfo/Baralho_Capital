@@ -176,7 +176,7 @@
 <script src="/Baralho_Capital/Back_end/TelaDoJogo/startJogo.js"></script>
 <script src="/Baralho_Capital/Front_end/TelaJogo/miniGameFuga.js"></script>
 
-<audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demon_s-Crest-OST_-The-Infinite-Demon-.wav" preload="auto" loop></audio>
+<audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Danse macabre.mp3" preload="auto" loop></audio>
 
 
 <script>
@@ -192,7 +192,7 @@
   var bombardeioFumaceAcontecendo = false
   var quantidadeCartasJogadas = 0
   var danoCausado = 0
-  var investimentosContraMosquito = 0
+  var cartasInvestimentosContraMosquito = 0
   var picadasRecebidas = 0
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
   var alteracaoBossJaAconteceu = false
@@ -229,7 +229,7 @@ function alterarVidaBoss(porcentagem) {
 
     if(porcentagem <= 0){
       porcentagem = 0
-      vidaBoss = -100
+      vidaBoss = 0
       bossHealthBar.style.width = porcentagem + '%';
       bossHealthBar.setAttribute('aria-valuenow', porcentagem);
     } else if(porcentagem >= 100){
@@ -253,7 +253,7 @@ function alterarFaseBoss() {
     var risadaMosquito = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mosquito-laugh.wav');
     risadaMosquito.play(); // Inicia a música
     // Altera a música
-    audioElement.src = "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Demon_s-Crest-OST_-Cursed-Towers-.wav";
+    audioElement.src = "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Kuroshitsuji II Ost - Danse Macabre";
     // Recarrega e inicia a nova música
     audioElement.load();
     audioElement.play();
@@ -551,7 +551,8 @@ function fecharvisualizacaoCartaBoss(){
     cartaBoss.classList.add("d-none");
 
     verificarCartaBoss(cartaBossRecente)
-    
+    quantidadeCartasJogadas += 1
+    atualizarTelaStatus()
 }
 
 var cronometroAtivo = false; // Variável de controle para o cronômetro
@@ -580,6 +581,7 @@ function iniciarCronometro(tempoRecebido) {
         tempoRestante--;
     }, 1000);
 }
+var cronometroAtivoJogo = false;
 
 function iniciarCronometroMinigame(tempoRecebido) {
     var elementoTempo = document.getElementById("tempo-minigame-div");
@@ -587,14 +589,14 @@ function iniciarCronometroMinigame(tempoRecebido) {
     
     var tempoRestante = tempoRecebido; // Tempo inicial em segundos
 
-    cronometroAtivo = true; // Define o cronômetro como ativo
+    cronometroAtivoJogo = true; // Define o cronômetro como ativo
     
     var cronometro = setInterval(function() {
         // Atualiza o tempo restante na tela
         document.getElementById("tempo-minigame").textContent = "Tempo restante: " + tempoRestante + "s...";
         
         // Verifica se o tempo acabou ou se o cronômetro foi interrompido
-        if (tempoRestante <= 0 || !cronometroAtivo) {
+        if (tempoRestante <= 0 || !cronometroAtivoJogo) {
             clearInterval(cronometro); // Para o cronômetro
             elementoTempo.classList.add("d-none");
             document.getElementById("tempo-minigame").textContent = "Tempo restante: 16s..." 
@@ -719,6 +721,12 @@ function reproduzirEfeitoMorteMosquito() {
     audio.play();
 }
 
+function reproduzirEfeitoCuraJogador() {
+    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_piano9.wav');
+    audio.volume = 1; 
+    audio.play();
+}
+
 function reproduzirEfeitoSomExplosao() {
     var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_explosion.wav');
     audio.volume = 0.2; 
@@ -792,6 +800,7 @@ function curarVidaJogador(numero){
       quantidadeHPJogador = 100
       valorCura = 0
     }
+    reproduzirEfeitoCuraJogador()
     ajustarOpacidadeVida(valorCura)
     quantidadeVidaJogador.style.width = quantidadeHPJogador + '%';
     quantidadeVidaJogador.setAttribute('aria-valuenow', quantidadeHPJogador);

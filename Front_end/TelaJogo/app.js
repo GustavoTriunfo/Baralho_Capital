@@ -26,12 +26,12 @@ var Cartas = {
     24: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/RedeProtetora.png', tipo: 'DEF'},
     25: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/RemediosCura.png', tipo: 'CR'},
     26: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/FirstAid.png', tipo: 'CR'},
-    27: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BrigadaAnti-Mosquito.png', tipo: 'EST'},
-    28: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/EsquadraoAnti-Dengue.png', tipo: 'EST'},
-    29: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ForcaDeDefesaSanitaria.png', tipo: 'EST'},
-    30: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OperacaoLimpeza.png', tipo: 'EST'},
-    31: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/VigilantesDaSaudePublica.png', tipo: 'EST'},
-    32: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PatrulhaAnti-Dengue.png', tipo: 'EST'} 
+    27: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/BrigadaAnti-Mosquito.png', tipo: 'INV'},
+    28: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/EsquadraoAnti-Dengue.png', tipo: 'INV'},
+    29: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ForcaDeDefesaSanitaria.png', tipo: 'INV'},
+    30: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/OperacaoLimpeza.png', tipo: 'INV'},
+    31: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/VigilantesDaSaudePublica.png', tipo: 'INV'},
+    32: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PatrulhaAnti-Dengue.png', tipo: 'INV'} 
 };
 
 function selecionarTipoCarta(id){
@@ -46,9 +46,7 @@ function atualizarStatusJogo(){
     
     if(verificarFim() === false){
         if(jogadorAtual === jogador2){
-            atualizarTelaStatus()
             turnoJogador()
-            quantidadeCartasJogadas++
             alternarJogador()
         } else{
             
@@ -59,8 +57,6 @@ function atualizarStatusJogo(){
             }  
             turnoBoss()
             alternarJogador()
-            quantidadeCartasJogadas++
-            atualizarTelaStatus()
             atualizarStatusJogo()
             
         }
@@ -114,6 +110,11 @@ function escolhaDoBoss(){
    let min = 1; 
    let max = 13; 
    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
+   if(cartaSelecionada === 4 && faseDois === false){
+    cartaSelecionada = 11
+   } else if(cartaSelecionada === 13 && vidaBoss >= 50){
+    cartaSelecionada = 7
+   }
    cartaBossRecente = cartaSelecionada
     if (cartaBossRecente === 1 || cartaBossRecente === 2){
         reproduzirEfeitoCartaEspecial()
@@ -189,7 +190,7 @@ function atualizarTelaStatus(){
     defesaContraPicadaPar.textContent = defendidoContraUmaPicadaParalizante
 
     var investimentosContraMosquitoTotal = document.getElementById('investimentosContraMosquito');
-    investimentosContraMosquitoTotal.textContent = investimentosContraMosquito
+    investimentosContraMosquitoTotal.textContent = cartasInvestimentosContraMosquito
 
     var danoRecebido = document.getElementById('danoRecebido');
     danoRecebido.textContent = picadasRecebidas
@@ -241,17 +242,8 @@ function verificarCartaJogador(){
     }
     return
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'INV'){
-    if(cartaJogadorRecente === 30 && cartaBossRecente === 9){
-        aumentoPorcentagemAtaqueContraMosquito()
-    } else if(cartaJogadorRecente === 29 && cartaBossRecente === 10){
-        aumentoPorcentagemAtaqueContraMosquito()
-    } else if(cartaBossRecente === 5 || cartaBossRecente === 6 || cartaBossRecente === 7 || cartaBossRecente === 8 || cartaBossRecente === 11){
-        if(cartaJogadorRecente === 27 || cartaJogadorRecente === 28 || cartaJogadorRecente === 29 || cartaJogadorRecente === 30 || cartaJogadorRecente === 31 || cartaJogadorRecente === 32){
-        aumentoPorcentagemAtaqueContraMosquito()
-        }
-        return
-    }
-    investimentosContraMosquito += 10
+    cartasInvestimentosContraMosquito += 1
+  
 } else if(selecionarTipoCarta(cartaJogadorRecente) === 'CR'){
     if(cartaJogadorRecente === 25){
         quantidadeDeCura = 20
