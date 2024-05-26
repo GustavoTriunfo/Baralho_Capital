@@ -43,6 +43,9 @@ function selecionarIdCarta()
         min = 18; 
     } else if (cartasInvestimentosContraMosquito > 10){
         min = 16; 
+    } else if(cartasInvestimentosContraMosquito > 14){
+        min = 16; 
+        max = 26;
     }else{
         min = 23
     }
