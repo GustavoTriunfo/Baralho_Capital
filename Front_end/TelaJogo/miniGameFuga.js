@@ -180,6 +180,7 @@ function finalizarMinigameFuga(){
       cronometroAtivo = false
       enemyPositions = [];
     gameEnded = true; 
+    cronometroAtivoJogo = true
     reproduzirEfeitoMinigameOverLoser()
     jogadaBoss()
   }
