@@ -17,7 +17,7 @@
       overflow: hidden; /* Oculta a parte da imagem fora da tela */
     }
     #map {
-      width: 200%; /* Aumenta o tamanho da imagem para cobrir toda a tela */
+      width: 250%; /* Aumenta o tamanho da imagem para cobrir toda a tela */
       height: 200%; /* Aumenta o tamanho da imagem para cobrir toda a tela */
       position: absolute;
       top: 0;
@@ -28,13 +28,22 @@
       height: auto;
       cursor: grab; /* Altera o cursor para indicar que a imagem é arrastável */
     }
-    #icon {
+    #iconDengue {
       position: absolute;
       top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50px; /* Tamanho do ícone */
-      height: 50px; /* Tamanho do ícone */
+      width: 100px; /* Tamanho do ícone */
+      height: 100px; /* Tamanho do ícone */
+      cursor: pointer;
+    }
+    #iconIncendio {
+      position: absolute;
+      top: 60%; /* Centraliza verticalmente */
+      right:45%; /* Desloca para a direita */
+      transform: translate(-50%, -50%); /* Centraliza o ícone */
+      width: 80px; /* Tamanho do ícone */
+      height: 80px; /* Tamanho do ícone */
       cursor: pointer;
     }
   </style>
@@ -45,8 +54,16 @@
     <div id="map">
       <img src="/Baralho_Capital/Front_end/TelaMissoes/imagensMapa/mapaCidade.png" class="img-fluid" alt="Mapa">
     </div>
-    <!-- Ícone -->
-    <img style="width: 150px; height: auto;" id="icon" src="/Baralho_Capital/Front_end/TelaMissoes/imagensMapa/IconeDengue.png" alt="Ícone" onclick="iniciarJogo('solo')">
+    
+    <!-- Ícone Dengue -->
+    <div id="iconDengue">
+      <img src="/Baralho_Capital/Front_end/TelaMissoes/imagensMapa/IconeDengue.png" class="img-fluid" alt="ÍconeDengue" onclick="iniciarJogoDengue('solo')">
+    </div>
+    
+    <!-- Ícone Incendio -->
+    <div id="iconIncendio">
+      <img src="/Baralho_Capital/Front_end/TelaMissoes/imagensMapa/IconeIncendio.png" class="img-fluid" alt="ÍconeIncendio" onclick="iniciarJogoIncendio('solo')">
+    </div>
   </div>
 
   <!-- Scripts do Bootstrap -->
@@ -81,17 +98,19 @@
       document.getElementById('map-container').scrollTop = startScrollTop + deltaY;
     }
 
-    function openPopup() {
-      // Aqui você pode adicionar código para abrir uma nova div ou fazer qualquer outra ação desejada
-      
+    function iniciarJogoDengue(tipoJogo) {
+      // Constrói a URL com o parâmetro de consulta tipoJogo
+      var url = '/Baralho_Capital/Front_end/TelaJogoDengue/TelaDoJogoDengue.html?tipo=' + tipoJogo;
+      // Redireciona para a nova URL
+      window.location.href = url;
     }
 
-    function iniciarJogo(tipoJogo) {
-    // Constrói a URL com o parâmetro de consulta tipoJogo
-    var url = '/Baralho_Capital/Front_end/TelaJogo/TelaDoJogo.html?tipo=' + tipoJogo;
-    // Redireciona para a nova URL
-    window.location.href = url;
-}
+    function iniciarJogoIncendio(tipoJogo) {
+      // Constrói a URL com o parâmetro de consulta tipoJogo
+      var url = '/Baralho_Capital/Front_end/TelaJogoIncendio/TelaDoJogoIncendio.html?tipo=' + tipoJogo;
+      // Redireciona para a nova URL
+      window.location.href = url;
+    }
   </script>
 </body>
 </html>

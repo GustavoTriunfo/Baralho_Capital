@@ -1,0 +1,662 @@
+@media only screen and (orientation: landscape) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+    background-image: url(/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FundoRetrato.png);
+    background-repeat:no-repeat;
+    background-size: contain;
+  }
+
+  .landscape-warning {
+    display: block;
+  }
+
+  .content {
+    display: none;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  body {
+    transform: none;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000;
+  }
+
+  .landscape-warning {
+    display: none;
+  }
+
+  .content {
+    display: block;
+  }
+}
+
+.landscape-warning {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+}
+
+.endgamePlayerLose{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 1; 
+  z-index: 99999; /* Garantir que a overlay fique no topo */
+}
+
+#playerLifeBar {
+  position: fixed;
+  bottom: 0;
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajuste para a centralização */
+  width: 370px; /* Largura da barra de vida */
+  height: 20px;
+  z-index: 4; /* Certifique-se de que a barra esteja acima do fundo */
+}
+
+#playerHealthBar {
+  height: 100%;
+  background-color: #04fc3a;
+  transition: width 0.5s ease; /* Transição suave ao alterar a largura */
+}
+
+.bg-success {
+  border-style:groove;
+  background-color: #04fc3a !important; /* Cor de sucesso para a barra de vida */
+}
+
+#ImagemFundoBarra {
+  position: fixed;
+  bottom: 0;
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajuste para a centralização */
+  z-index: 999; /* Abaixo da barra de vida */
+  width: 370px; /* Largura da imagem de fundo */
+  height: auto;
+}
+
+.vida-jogador-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0; 
+  pointer-events: none; /* Permitir cliques através da overlay */
+  z-index: 10000; /* Garantir que a overlay fique no topo */
+  transition: opacity 0.5s ease; /* Transição suave para mudanças de opacidade */
+}
+
+
+.btn.disabled,
+.btn:disabled {
+  /* Adicione estilos de sua escolha aqui */
+  opacity: 0.5; /* Por exemplo, reduza a opacidade */
+  cursor: not-allowed; /* Altera o cursor para indicar que o botão não está disponível */
+}
+
+.disabled {
+  /* Adicione estilos de sua escolha aqui */
+  opacity: 0.5; /* Reduz a opacidade para indicar que o elemento está desabilitado */
+  cursor: not-allowed; /* Altera o cursor para indicar que o elemento não está disponível para clique */
+  /* Outros estilos conforme necessário */
+}
+
+.overlay-transition-boss {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0; /* Inicialmente transparente */
+  z-index: 9999; /* Para garantir que esteja acima de tudo */
+  transition: opacity 1s ease; /* Adiciona transição suave */
+}
+
+.overlay-transition-boss.show {
+  opacity: 1; /* Opacidade máxima */
+}
+
+.bg-danger{
+  border-style:groove;
+  background-color: #fc0404 !important;
+}
+
+.player-hand-image.left {
+  width: 130px; /* Define a largura da imagem */
+  height: auto; /* Mantém a proporção de aspecto original */
+  position: fixed;
+  bottom: -120px;
+  left: 50px; /* Posição inicial da mão esquerda */
+}
+
+.player-hand-image.right {
+  width: 130px; /* Define a largura da imagem */
+  height: auto; /* Mantém a proporção de aspecto original */
+  position: fixed;
+  bottom: -120px;
+  right: 50px; /* Posição inicial da mão direita */
+}
+
+.black-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo preto com 50% de opacidade */
+  border: 6px solid #000000;
+  z-index: 999; /* Garante que fique acima de todas as outras divs */
+}
+
+.inner-black-div {
+  position: fixed;
+  top: 5px;
+  left: 35px;
+  background-color: black;
+  width: 80%; /* Ajuste a largura conforme necessário */
+  height: 490px; /* Ajuste a altura conforme necessário */
+  margin: auto;
+  margin-top: 50px; /* Espaço superior para afastar do topo */
+  border: 4px solid #fc0404;
+  z-index: 1000; /* Garante que fique acima da div de fundo preto transparente */
+}
+
+.square {
+  position: fixed;;
+  top: 400px; /* Posição inicial no centro vertical */
+  left: 200px; /* Posição inicial no centro horizontal */
+  transform: translate(-50%, -50%); /* Centraliza o quadrado */
+  width: 10px;
+  height: 10px;
+  background-color: rgb(0, 255, 60);
+}
+
+.enemy {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
+
+.control-buttons {
+  position: fixed;
+  bottom: 20px; /* Posiciona os botões na parte inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-buttons button {
+  width: 80px; /* Aumenta o tamanho dos botões */
+  height: 80px; /* Aumenta o tamanho dos botões */
+  font-size: 50px; /* Aumenta o tamanho do texto dos botões */
+  margin: 10px;
+}
+
+#move-up {
+  position: fixed;
+  bottom: 80px; /* Adiciona espaço abaixo do botão "up" */
+}
+
+#move-left {
+  position: fixed;
+  left: -150px; /* Adiciona espaço à direita do botão "left" */
+  bottom: 40px
+}
+
+#move-right {
+  position: fixed;
+  right: -150px; /* Adiciona espaço à esquerda do botão "right" */
+  bottom: 40px
+}
+
+#move-down{
+  position: fixed;
+  bottom: -20px;
+}
+
+.black-bg {
+  position: relative;
+ /*background-image: url(/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/FireBackground.gif);*/
+  background-size: cover;
+  background-color: black;
+  height: 300px; /* Altura personalizada da área preta */
+  z-index: 1;
+}
+
+#tempo-restante-div {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+#tempo-minigame-div {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+#tempo-missao-div {
+  position: fixed;
+  
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+#configurations{
+  width: 180px;
+  height: auto;
+  position: fixed;
+  top: 400px; /* Ajuste conforme necessário */
+  right: -30px; /* Ajuste conforme necessário */
+  z-index: 11; /* Garante que o botão fique acima do fundo preto */
+  background-size: contain;
+  border: none; /* Remova a borda do botão */
+  cursor: pointer; /* Defina o cursor para mostrar que o botão é clicável */
+}
+
+#startOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto com 80% de transparência */
+  z-index: 99; /* Z-index alto para cobrir toda a tela */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#startButton {
+  cursor: pointer;
+}
+
+#endgameOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto com 80% de transparência */
+  z-index: 999; /* Z-index alto para cobrir toda a tela */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-image {
+  position: relative;
+  background-image: url('/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/wooden.jpg'); /* Altere o caminho da sua imagem */
+  background-size: cover;
+  background-position: center;
+  height: 55vh; /* Altura personalizada da imagem de fundo */
+  z-index: 3;
+}
+
+#rostoEstranho {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Garante que a imagem esteja acima das cartas */
+}
+
+#imagemBaralho {
+  position: absolute; /* Define a posição absoluta para a imagem */
+  bottom: 150px; /* Ajuste conforme necessário para a distância do fundo da página */
+  left: 25%; /* Posiciona a imagem no centro horizontalmente */
+  transform: translateX(-50%); /* Centraliza a imagem horizontalmente */
+  cursor: pointer; /* Altera o cursor para indicar que a imagem é clicável */
+  z-index: 0; /* Define um índice Z alto para garantir que a imagem esteja acima das cartas */
+  width: 180px; /* Defina a largura da imagem */
+}
+
+/* Ajusta o tamanho da imagem do baralho, se necessário */
+#imagemBaralho img {
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+
+.player-card {
+  width: 30%; /* Tamanho relativo */
+  height: auto; /* Altura automática para manter a proporção */
+  max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
+  /*border: 1px solid #000;*/
+  border-radius: 0px;
+  position: absolute;
+  bottom: 0px; /* Distância do fundo da página */
+  left: 50%;
+  transform: translateX(-50%);
+  aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
+  background-size: contain;
+  transition: transform 0.2s; /* Adicionando uma transição suave */
+}
+
+.player-card img {
+  width: 100%; /* Largura igual à largura da div */
+  height: 100%; /* Altura igual à altura da div */
+  /*object-fit: cover; /* Ajuste o conteúdo da imagem para preencher a div */
+  margin: 0; /* Remova margens */
+  padding: 0; /* Remova preenchimentos */
+}
+
+.player-card.active {
+  transform: translate(-50%, -50%) scale(1.1); /* Aumentando o tamanho da carta em 10% */
+}
+
+.card-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para centralizar e posicionar a div #statusMenu */
+#statusMenu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Defina um valor de z-index alto para garantir que a div fique à frente dos outros elementos */
+  width: 300px;
+}
+
+.opponent-card {
+  width: 15%; /* Tamanho relativo */
+  height: auto; /* Altura automática para manter a proporção */
+  max-width: 250px; /* Largura máxima para evitar que as cartas fiquem muito grandes em telas maiores */
+  /*background-color: #fff;*/
+  border: 1px solid #000;
+  border-radius: 0px;
+  position: absolute;
+  bottom: -20px; /* Ajuste conforme necessário */
+  left: 47%;
+  transform: translateX(-50%);
+  aspect-ratio: 2 / 3; /* Relação de aspecto para manter a proporção */
+  background-image: url('/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/CartaOficialFundo.png'); /* Altere o caminho da sua imagem */
+  background-size: contain;
+  cursor: default; /* Definindo o cursor como default para desabilitar interações com o jogador */
+  z-index: 2;
+}
+
+.opponent-card:nth-child(1) {
+  transform: translateX(-120%) rotate(-10deg);
+}
+
+.opponent-card:nth-child(2) {
+  transform: translateX(-70%) rotate(-5deg);
+}
+
+.opponent-card:nth-child(4) {
+  transform: translateX(0) rotate(0deg);
+}
+
+.opponent-card:nth-child(3) {
+  transform: translateX(50%) rotate(5deg);
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo transparente */
+  z-index: 10;
+}
+
+.menu-options {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.menu-options button {
+/* background: none;  Remove o fundo do botão */
+border: none; /* Remove a borda do botão */
+padding: 0; /* Remove o preenchimento interno do botão */
+width: 200px;
+height: 120px;
+position: relative; /* Permite posicionar o texto sobre a imagem */
+}
+
+.menu-options button img {
+width: 100%; /* Defina a largura da imagem para ocupar todo o espaço do botão */
+height: 100%; /* Ajuste a altura automaticamente para manter a proporção da imagem */
+object-fit: contain;
+}
+
+.menu-options button span {
+position: absolute; /* Permite posicionar o texto sobre a imagem */
+top: 10%; /* Alinha o texto ao centro verticalmente */
+left: 25%; /* Alinha o texto ao centro horizontalmente */
+transform: translate(-50%, -50%); /* Centraliza o texto */
+color: rgb(0, 0, 0); /* Define a cor do texto */
+font-size: 16px; /* Define o tamanho da fonte do texto */
+font-weight: bold; /* Define a fonte em negrito */
+}
+
+.card-preview-overlay {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+width: 270px;
+height: 410px;
+background-color: rgba(0, 0, 0, 0.5); /* cor de fundo semi-transparente */
+z-index: 9;
+transform: translate(-50%, -50%);
+background-size: cover;
+}
+
+.card-preview-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantém a proporção da imagem */
+}
+
+.boss-card-preview-overlay {
+  
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 270px;
+  height: 410px;
+  background-color: rgba(0, 0, 0, 0.5); /* cor de fundo semi-transparente */
+  z-index: 9;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  }
+  
+  .boss-card-preview-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantém a proporção da imagem */
+  }
+
+.btn-custom-primary {
+position: absolute; /* Define a posição absoluta para os botões */
+background-color: rgb(235, 10, 10); /* Cor de fundo para o botão primário personalizado */
+color: white; /* Cor do texto para o botão primário personalizado */
+top: -10%; /* Distância do topo */
+left: 0%; /* Distância da esquerda */
+}
+
+.btn-custom-secondary {
+position: absolute; /* Define a posição absoluta para os botões */
+background-color: rgb(37, 206, 7); /* Cor de fundo para o botão secundário personalizado */
+color: white; /* Cor do texto para o botão secundário personalizado */
+top: -10%; /* Distância do topo */
+left: 77%; /* Distância da esquerda */
+}
+
+.btn-boss-custom-primary {
+  position: absolute; /* Define a posição absoluta para os botões */
+  background-color: rgb(235, 10, 10); /* Cor de fundo para o botão primário personalizado */
+  color: white; /* Cor do texto para o botão primário personalizado */
+  top: -10%; /* Distância do topo */
+  left: 0%; /* Distância da esquerda */
+  }
+
+.product-image {
+  width: 100%;
+  max-width: 150px; /* Defina o tamanho máximo desejado para as imagens */
+}
+
+.selected {
+  border: 2px solid blue; /* ou qualquer outra cor desejada */
+}
+
+#animatedImage {
+  position: fixed;
+  top: 0px;
+  width: 450px;
+  height: auto;
+  -webkit-animation: mover 2s infinite alternate;
+  animation: mover 2s infinite alternate;
+}
+
+@-webkit-keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+@keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+
+
+
+
+
+
+.overlayLoucura {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite que cliques passem através do overlay */
+  z-index: 9999;
+}
+
+.overlayLoucura img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cobrir toda a tela */
+  opacity: 0; /* Começa invisível */
+  animation: fadeInOut 8s infinite; /* Animação de fade in/out */
+  z-index: 9999;
+}
+
+.overlayLoucura img:nth-child(1) {
+  opacity: 1.0; /* Opacidade maior para a primeira imagem */
+  animation: fadeInOut 12s linear infinite; /* Maior frequência para a primeira imagem */
+}
+
+
+.overlayLoucura img:nth-child(2) {
+  animation: fadeInOut 8s linear 2s infinite;
+}
+
+.overlayLoucura img:nth-child(3) {
+  animation: fadeInOut 8s linear 4s infinite;
+}
+
+.overlayLoucura img:nth-child(4) {
+  animation: fadeInOut 8s linear 6s infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+#mosquitoNotes{
+  display: none;
+  width: 150px;
+  height: auto;
+  top: 0px;
+  left: 50px;
+  position: fixed;
+}
+
+.susto-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Inicialmente oculto */
+  z-index: 10000; /* Garante que esteja no topo */
+}
+
+.susto-overlay img {
+  position: absolute;
+  background-size: cover;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 600px;
+  height: auto;
+  opacity: 0;
+  transition: transform 3s, opacity 0s;
+}
+
+.susto-overlay.active img {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(3.5); /* Ampliar a imagem */
+}
+
+.susto-overlay .fundo-preto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.susto-overlay.active .fundo-preto {
+  opacity: 1;
+}
+
+
