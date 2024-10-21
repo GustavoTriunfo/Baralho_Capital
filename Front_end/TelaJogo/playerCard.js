@@ -1,3 +1,9 @@
+import { atualizarTelaStatus, atualizarStatusJogo, verificarCartaJogador} from './app.js';
+import {ocultarMaoJogador, setQuantidadeCartasJogadas, setCartaJogadorRecente} from './script.js'
+
+
+var maximoCartasDevolvidas = 2
+
 $(document).on("click", ".player-card", function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique para o documento
   
@@ -113,14 +119,14 @@ $(document).on("click", "#botaoJogar", function(event) {
     if ($(".player-card.active").length) {
         
         var idCarta = $(".player-card.active").attr("id");
-        cartaJogadorRecente = parseInt(idCarta)
-        
+        setCartaJogadorRecente(parseInt(idCarta))
+        verificarCartaJogador()
         ocultarMaoJogador()
-        //atualizarStatusJogador(jogadorAtual, idCarta)
+        
         atualizarStatusJogo()
         maximoCartasDevolvidas = 2
         habilitarBotaoDevolver()
-        quantidadeCartasJogadas += 1
+        setQuantidadeCartasJogadas(1)
         atualizarTelaStatus()
         // Obter o número da carta ativa
         var cardNumber = $(".player-card.active").data("cardNumber");
@@ -134,3 +140,5 @@ $(document).on("click", "#botaoJogar", function(event) {
         rearrangeCards()
     }
 });
+
+export {rearrangeCards};

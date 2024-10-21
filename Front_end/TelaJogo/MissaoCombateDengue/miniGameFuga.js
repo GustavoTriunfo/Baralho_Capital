@@ -1,3 +1,8 @@
+import {reproduzirEfeitoSonoro, retornarAoEstadoNormal, setCronometroAtivo, setCronometroAtivoJogo} from '../script.js'
+import {jogadaBoss} from '../app.js'
+
+let enemyPositions = [];
+
 document.addEventListener("DOMContentLoaded", function() {
   const square = document.querySelector(".square");
   const innerBlackDiv = document.querySelector(".inner-black-div");
@@ -58,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
       checkPlayerCollision();
   }
 
-  let enemyPositions = [];
 
   function moveEnemy(enemy) {
       const enemyStyle = getComputedStyle(enemy);
@@ -158,12 +162,13 @@ function checkCollision(square1, square2) {
            rect1.top > rect2.bottom);
 }
 
-function iniciarMinigameFuga(){
+export function iniciarMinigameFuga(){
   let blackOverlay = document.querySelector('.black-overlay');
   blackOverlay.style.display = "block";
   criarInimigos(30, 10);
   gameEnded = false; 
-  reproduzirEfeitoMinigameStart()
+ 
+  reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_sfx_star.wav')
 }
 
 function finalizarMinigameFuga(){
@@ -177,16 +182,17 @@ function finalizarMinigameFuga(){
       enemies.forEach(enemy => {
         enemy.remove();
       });
-      cronometroAtivo = false
+      setCronometroAtivo(false)
       enemyPositions = [];
-    gameEnded = true; 
-    cronometroAtivoJogo = true
-    reproduzirEfeitoMinigameOverLoser()
-    jogadaBoss()
+      gameEnded = true; 
+      setCronometroAtivoJogo(true)
+    
+      reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/snd_fall2.wav')
+      jogadaBoss()
   }
 }
 
-function finalizarMinigameFugaVitorioso(){
+export function finalizarMinigameFugaVitorioso(){
   
     if (!gameEnded) {
         let blackOverlay = document.querySelector('.black-overlay');
@@ -203,6 +209,7 @@ function finalizarMinigameFugaVitorioso(){
         
         gameEnded = true; 
         retornarAoEstadoNormal()
-        reproduzirEfeitoMinigameVictory()
+       
+        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/snd_levelup.wav')
     }
   }
