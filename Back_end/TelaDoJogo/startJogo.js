@@ -1,4 +1,7 @@
-
+import { atualizarTelaStatus, selecionarImagem} from '../../Front_end/TelaJogo/app.js';
+import {rearrangeCards} from '../../Front_end/TelaJogo/playerCard.js';
+import {iniciarCronometroTempoMissao, ocultarMaoJogador, getCartasInvestimentosContraMosquito, 
+    retornarAoEstadoNormal, atualizarNumeroCarta, reproduzirEfeitoSonoro} from '../../Front_end/TelaJogo/script.js'
 
 var jogador1 = {
     saldo: 0,
@@ -32,18 +35,18 @@ var jogador2 = {
 
 var jogadorAtual = jogador1; 
 
-function alternarJogador() {
+export function alternarJogador() {
     jogadorAtual = (jogadorAtual === jogador1) ? jogador2 : jogador1;
 }
 
-function selecionarIdCarta()
+export function selecionarIdCarta() //trocar para estrutura generica
 {   let min = 16; 
     let max = 32; 
-    if(cartasInvestimentosContraMosquito > 5 && cartasInvestimentosContraMosquito <= 7){
+    if(getCartasInvestimentosContraMosquito() > 5 && getCartasInvestimentosContraMosquito() <= 7){
         min = 18; 
-    } else if (cartasInvestimentosContraMosquito > 7 && cartasInvestimentosContraMosquito < 10){
-        min = 16; 
-    } else if(cartasInvestimentosContraMosquito >= 10){
+    } else if (getCartasInvestimentosContraMosquito() > 7 && getCartasInvestimentosContraMosquito() < 10){
+        min = 16;
+    } else if(getCartasInvestimentosContraMosquito() >= 10){
         min = 16; 
         max = 26;
     }else{
@@ -93,7 +96,6 @@ function criarCartaParaJogador() {
     }
     // Calcula o número da nova carta
     var idCorrespondente = selecionarIdCarta();
-    //selecionarIdCarta()
 
     // Cria uma nova div para representar a nova carta
     var novaCarta = document.createElement('div');
@@ -102,10 +104,10 @@ function criarCartaParaJogador() {
     // Define o atributo de dados para representar o número da carta
    // novaCarta.dataset.cardNumber = idCorrespondente;
     novaCarta.id = idCorrespondente
-    novaCarta.dataset.cardNumber = numeroCarta++;
+    novaCarta.dataset.cardNumber = atualizarNumeroCarta(1);
     selecionarImagem(idCorrespondente, novaCarta);
     document.querySelector('.card-holder').appendChild(novaCarta);
-    reproduzirEfeitoSonoroCartaNaMesa();
+    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
     // Chama a função para selecionar a imagem com base no ID e definir como fundo da nova carta
    
 
@@ -131,9 +133,9 @@ function criarCartaParaOponente() {
     // Define o atributo de dados para representar o número da carta
    // novaCarta.dataset.cardNumber = novoNumero;
     novaCarta.id = idCorrespondente
-    novaCarta.dataset.cardNumber = numeroCarta++;
+    novaCarta.dataset.cardNumber = atualizarNumeroCarta(1);
     document.querySelector('.opponent-cards').appendChild(novaCarta);
-    reproduzirEfeitoSonoroCartaNaMesa();
+    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
     // Chama a função para configurar os eventos das cartas do jogador
     rearrangeCards();
 }
@@ -158,9 +160,6 @@ startButton.addEventListener('click', function() {
     audio.play();
 }
 
-function reproduzirEfeitoSonoroCartaNaMesa() {
-    var audio = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
-    audio.play();
-}
+export {jogadorAtual, jogador2};
 
 
