@@ -9,8 +9,13 @@ import {alterarFaseBossMosquitoDengue, verificarCartaEscolhidaDenguemonio, verif
 import {getBombardeioFumaceAcontecendo, acoesCartaBossMosquitoDengue, finalizarMissaoCombateDengue,
      verificarCartasMissaoDengue, atualizarTelaMissaoCombateDengue
 } from './MissaoCombateDengue/efeitosTelaMissaoCombateDengue.js'
-import {verificarCartasMissaoQueimadas, atualizarTelaMissaoCombateQueimadas, finalizarMissaoCombateQueimadas} from './MissaoCombateQueimadas/efeitosTelaMissaoCombateQueimadas.js'
+import {verificarCartasMissaoQueimadas, atualizarTelaMissaoCombateQueimadas, finalizarMissaoCombateQueimadas,
+
+} from './MissaoCombateQueimadas/efeitosTelaMissaoCombateQueimadas.js'
 import {verificarCartaEscolhidaFogareu, verificaJogadaFogareu} from './MissaoCombateQueimadas/fogareuFoguentoBoss.js'
+import {Missao} from './Missao.js'
+import {MissaoCombateDengue} from './MissaoCombateDengue/MissaoCombateDengue.js'
+import {MissaoCombateQueimadas} from './MissaoCombateQueimadas/MissaoCombateQueimadas.js'
 
 var alteracaoBossJaAconteceu = false
 var danoCausado = 0
@@ -29,11 +34,29 @@ function getParametroMissao() {
   
   export function selecionarMissao() {
     missao = getParametroMissao();
-    if (missao === 'combate-as-queimadas') {
-    } else if (missao === 'combate-mosquito-dengue') { 
+    if (missao !== undefined && missao !== null && missao !== '') {
+        const objetoMissaoCriado = selecionarObjetoMissao(missao)
+        configurarMissao(objetoMissaoCriado)
+    } else {
+        console.log('Missao não selecionada')
     }
   }
+
+  function selecionarObjetoMissao(missaoSelecionada) {
+    let objetoMissao = new Missao()
+    if (missaoSelecionada === 'combate-as-queimadas') {
+        objetoMissao = new MissaoCombateQueimadas();
+    } else if (missaoSelecionada === 'combate-mosquito-dengue') { 
+        objetoMissao = new MissaoCombateDengue();
+    }
+    return objetoMissao
+  }
   
+  export function configurarMissao(objetoMissao) {
+    objetoMissao.configurarHtml();
+    objetoMissao.configurarMusicasEEfeitosSonoros();
+  }
+
 export function selecionarTipoCarta(id){
     if (Cartas[id]) {
         return Cartas[id].tipo;
@@ -141,12 +164,12 @@ function verificarFim(){
 
 export function pararMusica() {
     let imagemBotaoMusica = document.getElementById('imagemMusica');
-    if (musicaTocando || getTempoMissaoZerado() === true || getBombardeioFumaceAcontecendo()) {
-        musica.pause(); // Pausa a música se estiver tocando
+    if (musicaTocando || getTempoMissaoZerado()|| getBombardeioFumaceAcontecendo()) {
+        musica.pause();
         musicaTocando = false;
         imagemBotaoMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songFalse.png";
     } else {
-        musica.play(); // Toca a música se estiver parada
+        musica.play();
         musicaTocando = true;
         imagemBotaoMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songTrue.png";
     }
@@ -228,6 +251,10 @@ export function selecionarImagem(idImagem, novaCarta) {
 
     // Adiciona a imagem como filho da div novaCarta
     novaCarta.appendChild(imagem);
+}
+
+export function getMusicaTocando() {
+    return musicaTocando
 }
 
 export function getCartaBossRecente() {

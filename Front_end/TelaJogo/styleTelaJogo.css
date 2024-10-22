@@ -537,16 +537,15 @@ left: 77%; /* Distância da esquerda */
   border: 2px solid blue; /* ou qualquer outra cor desejada */
 }
 
-#animatedImage {
+.animated {
   position: fixed;
-  top: 0px;
   width: 450px;
   height: auto;
   -webkit-animation: mover 2s infinite alternate;
   animation: mover 2s infinite alternate;
-
 }
 
+/* Keyframes de animação */
 @-webkit-keyframes mover {
   0% { transform: translateY(0); }
   100% { transform: translateY(-20px); }
@@ -555,6 +554,15 @@ left: 77%; /* Distância da esquerda */
 @keyframes mover {
   0% { transform: translateY(0); }
   100% { transform: translateY(-20px); }
+}
+
+/* Classe sem animação */
+.no-animation {
+  position: fixed;
+  width: 250px; /* Definindo largura específica para fogareu */
+  height: auto;
+  top: -100px; /* Posição inicial do fogareu */
+  right: 20px;
 }
 
 

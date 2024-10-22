@@ -18,25 +18,9 @@
     <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/playerLose.png" alt="Imagem derrota" id="imagemDerrota" style="width: 250px; height: auto; position: fixed; left: 60px; top: 120px;">
   </div>
 
-  <div class="susto-overlay" id="sustoOverlay">
-    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/AtaqueSusto.png" alt="Imagem de Susto" id="imagemSusto">
-    <div class="fundo-preto" id="fundoPreto"></div>
-</div>
-
-
-
 
   <div class="vida-jogador-overlay" id="vidaJogadorOverlay"></div>
 
-  <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/fighting cloud.gif" alt="ImagemFumace" id="ImagemFumace" style="display: none; position: fixed; top: -200px; right: -90px; z-index: 999; width: 600px; height: auto;">
-
-  <div class="overlayLoucura" id="overlayLoucura">
-    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy01.gif" alt="Imagem 1">
-    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy02.gif" alt="Imagem 2">
-    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy03.gif" alt="Imagem 3">
-    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy04.gif" alt="Imagem 4">
-    <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/crazy05.gif" alt="Imagem 5">
-  </div>
 
   <div class="landscape-warning">
     Por favor, gire seu dispositivo para o modo retrato.
@@ -44,23 +28,6 @@
 
   <div class="overlay-transition-boss" style="display: none;"></div>
 
-  <div class="black-overlay" style="display: none;">
-    <div class="inner-black-div">
-      <div class="square"></div>
-    </div>
-    <div class="control-buttons">
-        <button id="move-up">↑</button>
-        <button id="move-left">←</button>
-        <button id="move-down">↓</button>
-        <button id="move-right">→</button>
-     
-    </div>
-  </div>
-  
-
- 
-
-  
   
   <div id="cardPreviewOverlay" class="card-preview-overlay d-none">
     <button id="botaoDevolver" class="btn btn-custom-primary">Devolver</button>
@@ -72,19 +39,14 @@
     <button id="botaoFechar" class="btn btn-boss-custom-primary">Fechar</button>
   </div>
 
-  
-
-
 
     <div class="black-bg">
       <img id="mosquitoNotes" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoSinging.gif" alt="mosquito notes">
-        <!-- Fundo preto sólido -->
+        
         <img style="display: block; position: fixed; top: -10px; left: -10px; width: 80px; z-index: 99;" id="iconeBoss" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Boss.gif" />
-        <img style="display: none; position: fixed; top: 70px; right: 145px; width: 40px; z-index: 99;" id="raiva" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/angry2.gif" />
-        <img style="display: none; position: fixed; top: 10px; right: 55px; width: 80px;" id="risada" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/haha.gif" />
           <div class="progress fixed-progress-boss" style="height: 30px; border-radius: 0px;">
             <div id="bossHealthBar" class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            <img id="animatedImage" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png" />
+            <img id="animatedImage" />
           </div>
           <div class="opponent-cards">
           
@@ -119,21 +81,10 @@
         </div>
 
         <div id="statusMenu" class="status-menu bg-light p-4 rounded" style="display: none; z-index: 9999;">
-          <!-- Botão para fechar o menu de status -->
+          
           <button id="fecharMenuStatus" class="close-btn btn btn-sm btn-danger">Fechar</button>
-          <!-- Conteúdo do menu de status -->
+         
           <h2 class="text-center mb-4">Status do Jogador</h2>
-          <div class="status-info">
-            <p class="mb-2"><strong>Nome Jogador(a):</strong> <span id="nomeJogador" class="text-primary"></span></p>
-            <p class="mb-2"><strong>Vida Jogador: </strong> <span id="vidaJogador" class="text-success"></span></p>
-            <p class="mb-2"><strong>Vida Mosquito: </strong> <span id="vidaMosquito" class="text-danger"></span></p>
-            <p class="mb-2"><strong>Quantidade Cartas Jogadas: </strong> <span id="cartasJogadas" class="text-info"></span></p>
-            <p class="mb-2"><strong>Dano Causado: </strong> <span id="danoCausado" class="text-info"></span></p>
-            <p class="mb-2"><strong>Defesa contra Picada Surpresa: </strong> <span id="defesaContraPicadaSur" class="text-info"></span></p>
-            <p class="mb-2"><strong>Defesa contra Picada Paralizante: </strong> <span id="defesaContraPicadaPar" class="text-info"></span></p>
-            <p class="mb-2"><strong>Investimentos contra Mosquito da Dengue: </strong> <span id="investimentosContraMosquito" class="text-info"></span></p>
-            <p class="mb-2"><strong>Picadas Recebidas: </strong> <span id="danoRecebido" class="text-info"></span></p>
-          </div>
         </div>
 
       
@@ -180,16 +131,13 @@
 <script type="module" src="/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/miniGameFuga.js"></script>
 <script type="module" src="/Baralho_Capital/Front_end/TelaJogo/script.js"> </script>
 
-<audio id="musica" src="/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Danse macabre.mp3" preload="auto" loop></audio>
+<audio id="musica" preload="auto" loop></audio>
 
 <script type="module">
 import {verificarCartaBoss, getCartaBossRecente, atualizarTelaStatus, getEstadoEfeitoSonoro, setEstadoEfeitoSonoro, 
   pararMusica, selecionarMissao} from './app.js'
 import {setQuantidadeCartasJogadas} from './script.js'
-
-  var musica = document.getElementById('musica');
  
-  var imagemMusica = document.getElementById('imagemMusica');
   var mutado = document.getElementById('efeitoSons');
 
   function mostrarMenuStatus() {
@@ -232,10 +180,10 @@ function toggleMenu() {
     var overlay = document.getElementById("menuOverlay");
     if (overlay.classList.contains("show")) {
         overlay.classList.remove("show");
-        overlay.style.display = "none"; // Se a classe "show" estiver presente, oculta o menu
+        overlay.style.display = "none";
     } else {
         overlay.classList.add("show");
-        overlay.style.display = "block"; // Se a classe "show" não estiver presente, mostra o menu
+        overlay.style.display = "block";
     }
 }
 
@@ -249,7 +197,11 @@ document.getElementById('endButton').addEventListener("click", mostrarMenuStatus
 document.getElementById('redirecionarParaTelaMissoes').addEventListener("click", function() {
     window.location.href = '../TelaMissoes/mapaMissoes.html';
 });
-selecionarMissao()
+
+window.onload = function() {
+    selecionarMissao();
+};
+
 </script>
 </body>
 </html>
