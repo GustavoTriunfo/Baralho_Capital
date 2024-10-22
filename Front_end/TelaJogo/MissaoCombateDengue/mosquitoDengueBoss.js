@@ -5,7 +5,7 @@ import {tocarEfeitoSoco, getQuantidadeCartasExercitoAladoUtilizadas, getBombarde
 
 } from './efeitosTelaMissaoCombateDengue.js'
 import {getCartaBossRecente, setCartaBossRecente, getEstadoEfeitoSonoro, pararMusica, getVidaBoss, getTransicaoBoss,
-  jogadaBoss, setTransicaoBoss, setAlteracaoBossJaAconteceu, getAlteracaoBossJaAconteceu, alterarFaseBoss
+  jogadaBoss, setTransicaoBoss, getMusicaTocando
 } from '../app.js'
 
 var faseDois = false
@@ -290,8 +290,12 @@ pararEfeitoZumbidoLoucura()
 export function iniciarSusto() {
     var sustoOverlay = document.getElementById('sustoOverlay');
     var imagemSusto = document.getElementById('imagemSusto');
-    
-    pararMusica()
+    let parouMusica = false
+
+    if(getMusicaTocando()){
+      parouMusica = true
+      pararMusica()
+    }
     var audioSusto = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
     audioSusto.volume = 0.2; 
     audioSusto.play();
@@ -311,7 +315,10 @@ export function iniciarSusto() {
         setTimeout(() => {
             sustoOverlay.style.display = 'none';
         }, 3000); // Tempo para a transição de volta ao normal
-        pararMusica()
+        if (parouMusica) {
+          parouMusica = false
+          pararMusica()
+        }
         
         reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Fast Heart Beat - Sound Effect.mp3', 1)
     }, 6000); // Duração total da animação antes do reset
