@@ -1,4 +1,7 @@
 import {Missao} from '../Missao.js'
+import {CartasMissaoCombateDengue} from './cartasMissaoCombateDengue.js';
+import {setCartasJogo} from '../app.js'
+import { criarCartasNoInicio} from '../startJogo.js'
 
 export class MissaoCombateDengue extends Missao {
     configurarHtml() {
@@ -205,5 +208,13 @@ export class MissaoCombateDengue extends Missao {
         const musica = document.getElementById("musica");
         musica.src = novaFonte;
         musica.load();
+    }
+
+        configurarCartas() {
+            setCartasJogo(CartasMissaoCombateDengue)
+    }
+
+    funcoesEspecificasDaMissao() {
+        criarCartasNoInicio();
     }
 }

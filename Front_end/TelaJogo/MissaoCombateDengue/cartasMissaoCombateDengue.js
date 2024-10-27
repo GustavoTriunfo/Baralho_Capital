@@ -1,4 +1,4 @@
-var CartasMissaoCombateDengue = {
+export var CartasMissaoCombateDengue = {
     1: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ExercitoAladoCartaEspecial.png', tipo: 'ATK'},
     2: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/ZumbidoDaLoucuraCartaEspecial.png', tipo: 'ATK'},
     3: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PicadaSurpresa.png', tipo: 'ATK'},
@@ -30,5 +30,3 @@ var CartasMissaoCombateDengue = {
     31: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/VigilantesDaSaudePublica.png', tipo: 'INV'},
     32: { caminhoImagem: '/Baralho_Capital/Back_end/TelaDoJogo/ImagensDasCartas/PatrulhaAnti-Dengue.png', tipo: 'INV'} 
 };
-
-export default CartasMissaoCombateDengue;

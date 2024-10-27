@@ -6,4 +6,12 @@ export class Missao {
     configurarMusicasEEfeitosSonoros() {
         console.log("Configurando músicas e efeitos sonoros genéricos da missão.");
     }
+
+    configurarCartas() {
+        console.log('cartas configuradas')
+    }
+
+    funcoesEspecificasDaMissao() {
+        
+    }
 }
