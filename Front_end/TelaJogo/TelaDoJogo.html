@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/Baralho_Capital/Front_end/TelaJogo/styleTelaJogo.css">
 </head>
 <body>
-
+  <div class="calor"></div>
   <div class="fundoBarraVidaJogador" id="playerLifeBar">
     <div id="playerHealthBar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
@@ -39,11 +39,11 @@
     <button id="botaoFechar" class="btn btn-boss-custom-primary">Fechar</button>
   </div>
 
-
+  <img style="display: block; position: fixed; top: -10px; left: -10px; width: 80px; z-index: 99;" id="iconeBoss" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Boss.gif" />
     <div class="black-bg">
       <img id="mosquitoNotes" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoSinging.gif" alt="mosquito notes">
         
-        <img style="display: block; position: fixed; top: -10px; left: -10px; width: 80px; z-index: 99;" id="iconeBoss" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Boss.gif" />
+       
           <div class="progress fixed-progress-boss" style="height: 30px; border-radius: 0px;">
             <div id="bossHealthBar" class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             <img id="animatedImage" />
@@ -69,17 +69,17 @@
       
      
       
-      <div class="bg-image">
+      <div class="bg-image" id="mesa"> 
 
         <img id="imagemBaralho" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/baralho_na_mesa.png" alt="Baralho" style="pointer-events: none;">
-        
+    
        
         <div class="card-holder" id="maoJogador" style="pointer-events: 'none';">
           <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/left hand.png" class="player-hand-image left" id="hand-left">
         
           <img src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/right hand.png" class="player-hand-image right" id="hand-right">
         </div>
-
+      </div>
         <div id="statusMenu" class="status-menu bg-light p-4 rounded" style="display: none; z-index: 9999;">
           
           <button id="fecharMenuStatus" class="close-btn btn btn-sm btn-danger">Fechar</button>
@@ -127,7 +127,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="module" src="/Baralho_Capital/Front_end/TelaJogo/app.js"></script>
 <script type="module" src="/Baralho_Capital/Front_end/TelaJogo/playerCard.js"></script>
-<script type="module" src="/Baralho_Capital/Back_end/TelaDoJogo/startJogo.js"></script>
+<script type="module" src="/Baralho_Capital/Front_end/TelaJogo/startJogo.js"></script>
 <script type="module" src="/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/miniGameFuga.js"></script>
 <script type="module" src="/Baralho_Capital/Front_end/TelaJogo/script.js"> </script>
 

@@ -1,6 +1,5 @@
-import CartasMissaoCombateDengue from './MissaoCombateDengue/cartasMissaoCombateDengue.js';
 import {rearrangeCards} from './playerCard.js';
-import {jogadorAtual, jogador2, alternarJogador, selecionarIdCarta} from '../../Back_end/TelaDoJogo/startJogo.js'
+import {jogadorAtual, jogador2, alternarJogador, selecionarIdCarta} from './startJogo.js'
 import {reproduzirEfeitoSonoro, getTempoMissaoZerado,
     atualizarNumeroCarta} from './script.js'
 import {getQuantidadeHPJogador} from './jogador.js'
@@ -23,9 +22,10 @@ var vidaBoss = 100
 var efeitoSonoro = true;
 var missao = ''
 var transicaoBoss = false
-const Cartas = CartasMissaoCombateDengue
+let Cartas = null
 var cartaBossRecente = 3
 var musicaTocando = true;
+var objetoMissaoCriado = null;
 
 function getParametroMissao() {
     const params = new URLSearchParams(window.location.search);
@@ -35,7 +35,7 @@ function getParametroMissao() {
   export function selecionarMissao() {
     missao = getParametroMissao();
     if (missao !== undefined && missao !== null && missao !== '') {
-        const objetoMissaoCriado = selecionarObjetoMissao(missao)
+        objetoMissaoCriado = selecionarObjetoMissao(missao)
         configurarMissao(objetoMissaoCriado)
     } else {
         console.log('Missao não selecionada')
@@ -55,6 +55,11 @@ function getParametroMissao() {
   export function configurarMissao(objetoMissao) {
     objetoMissao.configurarHtml();
     objetoMissao.configurarMusicasEEfeitosSonoros();
+    objetoMissao.configurarCartas();
+  }
+
+  export function metodosEspecificosDaMissao() {
+    objetoMissaoCriado.funcoesEspecificasDaMissao()
   }
 
 export function selecionarTipoCarta(id){
@@ -305,5 +310,9 @@ export function getEstadoEfeitoSonoro() {
   export function setAlteracaoBossJaAconteceu(estado) {
     alteracaoBossJaAconteceu = estado
   }
+
+  export function setCartasJogo(objetoCartas) {
+    Cartas = objetoCartas
+}
 
  
