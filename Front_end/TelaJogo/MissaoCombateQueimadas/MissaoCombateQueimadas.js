@@ -36,7 +36,7 @@ export class MissaoCombateQueimadas extends Missao {
         const imagemBaralho = document.getElementById('imagemBaralho');
         const mesa = document.getElementById('mesa')
         const iconeBoss = document.getElementById('iconeBoss')
-        // mesa.style.display = 'none'
+        
         mesa.style.backgroundImage = 'url("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireGround.gif")'
         mesa.style.zIndex = 0
         iconeConfig.style.display = 'none'
@@ -68,17 +68,6 @@ export class MissaoCombateQueimadas extends Missao {
 
         document.body.appendChild(fogoAr);
 
-        const arvoreQueimada = document.createElement('img');
-        arvoreQueimada.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/burnedtree.png';
-        arvoreQueimada.style.position = 'fixed';
-        arvoreQueimada.style.left = '10%';             
-        arvoreQueimada.style.top = '-550px';         
-        arvoreQueimada.style.transform = 'translateX(-50%)';
-        arvoreQueimada.style.width = '900px';
-        arvoreQueimada.style.zIndex = '1';  
-
-        document.body.appendChild(arvoreQueimada);
-
         const madeiraQueimada = document.createElement('img');
         madeiraQueimada.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/burnedLog.png';
         madeiraQueimada.style.position = 'fixed';
@@ -89,6 +78,29 @@ export class MissaoCombateQueimadas extends Missao {
         madeiraQueimada.style.zIndex = '1';  
 
         document.body.appendChild(madeiraQueimada);
+
+        let botao = document.getElementById('startButton')
+        botao.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireButtonWhite.gif';
+        botao.style.width = '110px'
+    }
+
+     adicionarCartaLadoEsquerdo(enderecoImagem) {
+      
+        const carta = document.createElement('img');
+        carta.src = enderecoImagem;
+        carta.alt = 'Imagem de Carta';
+    
+        carta.style.position = 'fixed';
+        carta.style.left = '10px';       
+        carta.style.top = '50%';            
+        carta.style.transform = 'translateY(-50%)'; 
+        carta.style.width = '150px';        
+        carta.style.height = 'auto';        
+        carta.style.zIndex = '2';           
+
+        carta.classList.add('carta-animada');
+        
+        document.body.appendChild(carta);
     }
 
 
@@ -122,11 +134,23 @@ export class MissaoCombateQueimadas extends Missao {
         audioElement.play();
     }
 
+    pararAudioPorId(id) {
+        // Busca o elemento de áudio pelo ID
+        const audioElement = document.getElementById(id);
+        
+        // Verifica se o elemento existe e então pausa o áudio
+        if (audioElement) {
+            audioElement.pause();
+        } else {
+            console.log(`Áudio com ID ${id} não encontrado.`);
+        }
+    }
+
     configurarCartas() {
         setCartasJogo(CartasMissaoCombateQueimadas)
 }
 
 funcoesEspecificasDaMissao() {
-    
+    this.adicionarCartaLadoEsquerdo('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaFogo8.png')
 }
 }

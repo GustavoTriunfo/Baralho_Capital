@@ -17,7 +17,7 @@ var quantidadeCartasExercitoAladoUtilizadas = 0
 export function ataqueBombardeioFumace(){
     pararMusica()
 
-    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/BombardeioFumace.mp3', 0.2)
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/BombardeioFumace.mp3', 0.2)
     var animatedImage = document.getElementById('animatedImage');
     if (animatedImage.src.endsWith('MosquitoDengue.png')) {
               animatedImage.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueComMedo.png';
@@ -39,8 +39,8 @@ export function ataqueBombardeioFumace(){
     }
 
     var efeitosSonoroSoco = [
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Soco 1.mp3",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Soco 2.mp3"
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Soco 1.mp3",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Soco 2.mp3"
       ];
       
       export function tocarEfeitoSoco() {
@@ -141,11 +141,11 @@ export function verificarCartasMissaoDengue() {
     if(getCartaJogadorRecente() === 23){
         setDefendidoContraUmaPicadaSurpresa(true)
       
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/SPRAY.mp3', 0.3)
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/SPRAY.mp3', 0.3)
     } else if(getCartaJogadorRecente() === 24){
         setDefendidoContraUmaPicadaParalizante(true)
    
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/defenseNetAltura1.mp3', 1)
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/defenseNetAltura1.mp3', 1)
     }
     return
 } else if(selecionarTipoCarta(getCartaJogadorRecente()) === 'INV'){
@@ -196,8 +196,8 @@ export function finalizarMissaoCombateDengue() {
             pararZumbidoLoucura()
             pararMusica()
             ajustarOpacidadeVida(0)
-            reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MorteMosquito.mp3', 1)
-            reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Saint-Saëns_ Le carnaval des animaux, R. 125_ VII. Aquarium - VIII. Personnages à longues....mp3', 0.5)
+            reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/MorteMosquito.mp3', 1)
+            reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Saint-Saëns_ Le carnaval des animaux, R. 125_ VII. Aquarium - VIII. Personnages à longues....mp3', 0.5)
             var endgameOverlay = document.getElementById('endgameOverlay');
             endgameOverlay.style.display = 'block';
             setJogoAcabou(true)
@@ -211,7 +211,7 @@ export function finalizarMissaoCombateDengue() {
     
         } else if(getQuantidadeHPJogador() < 2 || getTempoMissaoZerado() === true){
             pararMusica()
-            reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Darkest Dungeon - Death door bell.mp3', 1)
+            reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Darkest Dungeon - Death door bell.mp3', 1)
             var endgamePlayerLose = document.getElementById('endgamePlayerLose');
             endgamePlayerLose.style.display = 'block';
             setJogoAcabou(true)

@@ -20,10 +20,10 @@ var faseDois = false
       
     
       raivaIcone.style.display = "block";
-      var risadaMosquito = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mosquito-laugh.wav');
+      var risadaMosquito = new Audio('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mosquito-laugh.wav');
       risadaMosquito.play(); // Inicia a música
       // Altera a música
-      audioElement.src = "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Kuroshitsuji II Ost - Danse Macabre.mp3";
+      audioElement.src = "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Kuroshitsuji II Ost - Danse Macabre.mp3";
       // Recarrega e inicia a nova música
       audioElement.load();
       audioElement.play();
@@ -49,23 +49,23 @@ var faseDois = false
               mosquito.style.width = "550px";
               faseDois = true
               
-              reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_f_orchhit_l.wav')
+              reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mus_f_orchhit_l.wav')
           }, 3000);
       }, 2800);
     }
     
     var efeitosSonorosFaseUm = [
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Laugh 1.mp3",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Laugh 2.mp3",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Laugh 3.mp3",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito - Sound Effect.mp3"
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Mosquito Laugh 1.mp3",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Mosquito Laugh 2.mp3",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Mosquito Laugh 3.mp3",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Mosquito - Sound Effect.mp3"
       ];
       
       var efeitosSonorosFaseDois = [
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/RisadaFaseDois_1.wav",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/RisadaFaseDois_2.wav",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/RisadaFaseDois_3.wav",
-        "/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito - Sound Effect.mp3"
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/RisadaFaseDois_1.wav",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/RisadaFaseDois_2.wav",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/RisadaFaseDois_3.wav",
+        "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Mosquito - Sound Effect.mp3"
       ];
       
       export function tocarEfeitoRisadaAleatoriaMosquitoDengue() {
@@ -145,7 +145,7 @@ var faseDois = false
       
       export function choqueDanoBoss() {
         let boss = []
-      reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/choque.mp3', 1)
+      reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/choque.mp3', 1)
       var mosquitoFaseUm = [
             "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueChoque.png",
             "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png",
@@ -198,9 +198,9 @@ var faseDois = false
         let boss = []
       if(getCartaJogadorRecente() === 17){
         
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_explosion.wav', 0.2)
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mus_explosion.wav', 0.2)
       }
-      reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoTossindo.mp3', 1)
+      reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/MosquitoTossindo.mp3', 1)
       
       var mosquitoFaseUm = [
             "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengueTossindo.png",
@@ -249,12 +249,12 @@ var faseDois = false
           }, tempoAnimacao); //3500
       }
 
-      var audioLoucura1 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
+      var audioLoucura1 = new Audio('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Mosquito Flying Buzz Sound Effect.mp3');
 audioLoucura1.volume = 0.7; 
 audioLoucura1.loop = true; 
 
 
-var audioLoucura2 = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_disturbing.wav');
+var audioLoucura2 = new Audio('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mus_disturbing.wav');
 audioLoucura2.volume = 0.5; 
 audioLoucura2.loop = true; 
 
@@ -296,7 +296,7 @@ export function iniciarSusto() {
       parouMusica = true
       pararMusica()
     }
-    var audioSusto = new Audio('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
+    var audioSusto = new Audio('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
     audioSusto.volume = 0.2; 
     audioSusto.play();
     if(getCartaBossRecente() === 4){
@@ -320,7 +320,7 @@ export function iniciarSusto() {
           pararMusica()
         }
         
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/Fast Heart Beat - Sound Effect.mp3', 1)
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Fast Heart Beat - Sound Effect.mp3', 1)
     }, 6000); // Duração total da animação antes do reset
   }
 
@@ -344,9 +344,9 @@ export function iniciarSusto() {
    setCartaBossRecente(cartaSelecionada)
     if (getCartaBossRecente() === 1 || getCartaBossRecente() === 2){
        
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_create.wav')
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mus_create.wav')
        } else{
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/cardInTable.mp3');
        }
   }
 

@@ -17,7 +17,7 @@ export function curarVidaJogador(numero) {
           quantidadeHPJogador = 100;
       }
       
-      reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_piano9.wav', 1);
+      reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mus_piano9.wav', 1);
 
       ajustarOpacidadeVida(1 - (quantidadeHPJogador / 100));
 
