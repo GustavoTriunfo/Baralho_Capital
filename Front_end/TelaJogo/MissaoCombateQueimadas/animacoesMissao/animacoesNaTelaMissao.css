@@ -1,22 +1,24 @@
-/* Efeito de calor */
-.calor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 10000; /* Garante que o efeito fique no topo */
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(3px) saturate(160%) brightness(95%);
-    animation: ondasCalor 3s infinite ease-in-out;
+@keyframes aparecerDoFundo {
+  0% {
+      transform: translate(80%, -100%) scale(0); /* Longe da tela e pequeno */
+      opacity: 0; /* Invisível */
   }
-  
-  /* Animação para o efeito de calor */
-  @keyframes ondasCalor {
-    0% { transform: translate(0px, 0px) scale(1); }
-    25% { transform: translate(-10px, 5px) scaleX(1.02); }
-    50% { transform: translate(10px, -5px) scale(1); }
-    75% { transform: translate(-10px, 5px) scaleX(0.98); }
-    100% { transform: translate(0px, 0px) scale(1); }
+  50% {
+      opacity: 1; /* Torna-se visível */
   }
+  100% {
+      transform: translate(10%, -50%) scale(1); /* Posição final e tamanho normal */
+      opacity: 1;
+  }
+}
+
+.carta-animada {
+  position: fixed;
+  left: 80px;              /* Posição final na lateral esquerda */
+  top: 50%;                /* Centralização vertical */
+  transform: translateY(-50%); 
+  width: 150px;            /* Tamanho da carta */
+  height: auto;
+  z-index: 2;
+  animation: aparecerDoFundo 1s ease-out forwards; /* Aplica a animação */
+}

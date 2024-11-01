@@ -129,7 +129,7 @@ export function atualizarStatusJogo(){
 }
 
 function turnoJogador(){
-    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/cardInTable.mp3');
 }
 
 function turnoBoss(){
@@ -237,7 +237,7 @@ imagemBaralho.addEventListener('click', function() {
     selecionarImagem(idCorrespondente, novaCarta);
     // Adiciona a nova carta ao elemento card-holder
     document.querySelector('.card-holder').appendChild(novaCarta);
-    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/cardInTable.mp3');
     // Chama a função para selecionar a imagem com base no ID e definir como fundo da nova carta
     
 

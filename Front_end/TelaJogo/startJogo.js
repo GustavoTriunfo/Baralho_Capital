@@ -107,7 +107,7 @@ function criarCartaParaJogador() {
     novaCarta.dataset.cardNumber = atualizarNumeroCarta(1);
     selecionarImagem(idCorrespondente, novaCarta);
     document.querySelector('.card-holder').appendChild(novaCarta);
-    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/cardInTable.mp3');
     // Chama a função para selecionar a imagem com base no ID e definir como fundo da nova carta
    
 
@@ -135,7 +135,7 @@ function criarCartaParaOponente() {
     novaCarta.id = idCorrespondente
     novaCarta.dataset.cardNumber = atualizarNumeroCarta(1);
     document.querySelector('.opponent-cards').appendChild(novaCarta);
-    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/cardInTable.mp3');
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/cardInTable.mp3');
     // Chama a função para configurar os eventos das cartas do jogador
     rearrangeCards();
 }

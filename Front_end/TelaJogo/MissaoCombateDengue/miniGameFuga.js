@@ -17,7 +17,7 @@ export function iniciarMinigameFuga() {
     criarInimigos(30, 10);
     gameEnded = false;
 
-    reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/mus_sfx_star.wav');
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/mus_sfx_star.wav');
 }
 
 function finalizarMinigameFuga() {
@@ -33,7 +33,7 @@ function finalizarMinigameFuga() {
         gameEnded = true; 
         setCronometroAtivoJogo(true);
 
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/snd_fall2.wav');
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/snd_fall2.wav');
         jogadaBoss();
     }
 }
@@ -50,7 +50,7 @@ export function finalizarMinigameFugaVitorioso() {
         gameEnded = true; 
         retornarAoEstadoNormal();
 
-        reproduzirEfeitoSonoro('/Baralho_Capital/Back_end/TelaDoJogo/musicasEEfeitos/snd_levelup.wav');
+        reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/snd_levelup.wav');
     }
 }
 
