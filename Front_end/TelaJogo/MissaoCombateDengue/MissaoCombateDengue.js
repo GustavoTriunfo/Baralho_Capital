@@ -169,9 +169,9 @@ export class MissaoCombateDengue extends Missao {
                 imgMosquito.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoSinging.gif';
                 imgMosquito.alt = 'mosquito notes'; // Texto alternativo para acessibilidade
                 imgMosquito.style.position = 'fixed';
-                imgMosquito.style.top = '150px'; // Defina a posição desejada
+                imgMosquito.style.top = '0px'; // Defina a posição desejada
                 imgMosquito.style.right = '50px'; // Defina a posição desejada
-                imgMosquito.style.width = '80px'; // Ajuste o tamanho conforme necessário
+                imgMosquito.style.width = '130px'; // Ajuste o tamanho conforme necessário
                 imgMosquito.style.zIndex = '99'; // Ajuste o z-index conforme necessário
 
                 // Adicionar os elementos à 'black-bg'
