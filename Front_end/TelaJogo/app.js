@@ -1,5 +1,5 @@
 import {rearrangeCards} from './playerCard.js';
-import {jogadorAtual, jogador2, alternarJogador, selecionarIdCarta} from './startJogo.js'
+import {jogadorAtual, jogador2, alternarJogador} from './startJogo.js'
 import {reproduzirEfeitoSonoro, getTempoMissaoZerado,
     atualizarNumeroCarta} from './script.js'
 import {getQuantidadeHPJogador} from './jogador.js'
@@ -80,6 +80,10 @@ export function selecionarCaminhoImagem(id) {
     }
 }
 
+export function selecionarIdCarta()
+{   
+    return objetoMissaoCriado.selecionarIdentificadorCarta()
+}
 
 export function alterarVidaBoss(porcentagem) {
       var bossHealthBar = document.getElementById('bossHealthBar');
@@ -211,6 +215,11 @@ export function verificarCartaBoss(){
   
 }
 
+export function criarCartasNoInicio() {
+    objetoMissaoCriado.criarCartasNoInicioDaMissao();
+}
+
+
 // Obtém a referência para o elemento da imagem que o jogador irá clicar
 var imagemBaralho = document.getElementById('imagemBaralho');
 
@@ -225,7 +234,7 @@ imagemBaralho.addEventListener('click', function() {
     }
     // Calcula o número da nova carta
     var idCorrespondente = selecionarIdCarta()
-    
+  
     // Cria uma nova div para representar a nova carta
     var novaCarta = document.createElement('div');
     // Adiciona as classes de estilo

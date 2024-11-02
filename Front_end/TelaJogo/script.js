@@ -1,22 +1,13 @@
 import {escolhaDoBoss, getCartaBossRecente, selecionarCaminhoImagem, terminarJogo} from './app.js'
 import {finalizarMinigameFugaVitorioso} from './MissaoCombateDengue/miniGameFuga.js'
 
-///////VARIAVEIS GLOBAIS SOBRE CARTAS///////
-var jogoAcabou = false
-var cartaJogadorRecente = 16
+var jogoAcabou = false;
+var cartaJogadorRecente = 16;
 var cronometroAtivo = false;
 var cronometroAtivoJogo = false;
-var defendidoContraUmaPicadaSurpresa = false
-var defendidoContraUmaPicadaParalizante = false
-var tempoMissaoZerado = false
-
-var quantidadeCartasJogadas = 0
-
-var cartasInvestimentosContraMosquito = 0
-var picadasRecebidas = 0
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-
-var numeroCarta = 0
+var tempoMissaoZerado = false;
+var quantidadeCartasJogadas = 0;
+var numeroCarta = 0;
 
 export function ocultarMaoJogador() {
   var maoJogador = document.getElementById('maoJogador');
@@ -195,38 +186,6 @@ export function getQuantidadeCartasJogadas() {
 
 export function setQuantidadeCartasJogadas(numero) {
     quantidadeCartasJogadas += numero
-}
-
-export function getDefendidoContraUmaPicadaSurpresa() {
-    return defendidoContraUmaPicadaSurpresa
-}
-
-export function setDefendidoContraUmaPicadaSurpresa(estado) {
-    defendidoContraUmaPicadaSurpresa = estado
-}
-
-export function getDefendidoContraUmaPicadaParalizante() {
-    return defendidoContraUmaPicadaParalizante
-}
-
-export function setDefendidoContraUmaPicadaParalizante(estado) {
-    defendidoContraUmaPicadaParalizante = estado
-}
-
-export function getCartasInvestimentosContraMosquito() {
-    return cartasInvestimentosContraMosquito
-}
-
-export function setCartasInvestimentosContraMosquito(numero) {
-    cartasInvestimentosContraMosquito += numero
-}
-
-export function getPicadasRecebidas() {
-    return picadasRecebidas
-}
-
-export function setPicadasRecebidas(numero) {
-    picadasRecebidas += numero
 }
 
 export function setCronometroAtivo(estado) {

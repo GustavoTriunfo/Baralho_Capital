@@ -1,7 +1,7 @@
-import { atualizarTelaStatus, selecionarImagem, metodosEspecificosDaMissao} from './app.js';
+import { atualizarTelaStatus, selecionarImagem, metodosEspecificosDaMissao, criarCartasNoInicio, selecionarIdCarta} from './app.js';
 import {rearrangeCards} from './playerCard.js';
-import {iniciarCronometroTempoMissao, ocultarMaoJogador, getCartasInvestimentosContraMosquito, 
-    retornarAoEstadoNormal, atualizarNumeroCarta, reproduzirEfeitoSonoro} from './script.js'
+import {iniciarCronometroTempoMissao, 
+     atualizarNumeroCarta, reproduzirEfeitoSonoro} from './script.js'
 
 var jogador1 = {
     saldo: 0,
@@ -39,54 +39,10 @@ export function alternarJogador() {
     jogadorAtual = (jogadorAtual === jogador1) ? jogador2 : jogador1;
 }
 
-export function selecionarIdCarta() //trocar para estrutura generica
-{   let min = 16; 
-    let max = 32; 
-    if(getCartasInvestimentosContraMosquito() > 5 && getCartasInvestimentosContraMosquito() <= 7){
-        min = 18; 
-    } else if (getCartasInvestimentosContraMosquito() > 7 && getCartasInvestimentosContraMosquito() < 10){
-        min = 16;
-    } else if(getCartasInvestimentosContraMosquito() >= 10){
-        min = 16; 
-        max = 26;
-    }else{
-        min = 23
-    }
-   
-    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
-    return cartaSelecionada
-}
-
-export function criarCartasNoInicio() {
-    var contador = 0;
-
-    function criarCartaComIntervalo() {
-        // Calcula para quem a carta deve ser criada com base no contador
-        if (contador % 2 === 0) {
-            ocultarMaoJogador();
-            criarCartaParaJogador();
-        } else {
-            criarCartaParaOponente();
-        }
-        // Incrementa o contador para a próxima iteração
-        contador++;
-
-        // Se ainda houver cartas para criar, programa a próxima execução
-        if (contador < 8) {
-            setTimeout(criarCartaComIntervalo, 500);
-        } else {
-            // Quando todas as cartas forem criadas, retorne ao estado normal
-            setTimeout(retornarAoEstadoNormal, 500);
-        }
-    }
-
-    // Inicia o processo de criação de cartas com um intervalo inicial
-    setTimeout(criarCartaComIntervalo, 0);
-}
 
 
 // Função para criar uma carta para o jogador
-function criarCartaParaJogador() {
+export function criarCartaParaJogador() {
     // Obtém a quantidade atual de cartas existentes
     var quantidadeCartas = document.querySelectorAll('.player-card').length;
     // Verifica se o jogador já tem 5 cartas
@@ -96,7 +52,7 @@ function criarCartaParaJogador() {
     }
     // Calcula o número da nova carta
     var idCorrespondente = selecionarIdCarta();
-
+   
     // Cria uma nova div para representar a nova carta
     var novaCarta = document.createElement('div');
     // Adiciona as classes de estilo
@@ -116,7 +72,7 @@ function criarCartaParaJogador() {
 }
 
 // Função para criar uma carta para o oponente
-function criarCartaParaOponente() {
+export function criarCartaParaOponente() {
     // Obtém a quantidade atual de cartas existentes
     var quantidadeCartas = document.querySelectorAll('.opponent-card').length;
     // Verifica se o oponente já tem 5 cartas
@@ -150,6 +106,7 @@ startButton.addEventListener('click', function() {
     iniciarMusica();
     metodosEspecificosDaMissao();
     atualizarTelaStatus();
+    criarCartasNoInicio();
   });
 
   function iniciarMusica() {

@@ -14,4 +14,12 @@ export class Missao {
     funcoesEspecificasDaMissao() {
         
     }
+
+    criarCartasNoInicioDaMissao() {
+
+    }
+
+    selecionarIdentificadorCarta() {
+        
+    }
 }

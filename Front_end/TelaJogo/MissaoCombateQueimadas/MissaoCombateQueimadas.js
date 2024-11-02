@@ -2,6 +2,11 @@ import {Missao} from '../Missao.js'
 import {CartasMissaoCombateQueimadas} from './cartasMissaoCombateQueimadas.js'
 import {setCartasJogo} from '../app.js'
 import {criarAnimacaoFogo} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {retornarAoEstadoNormal, ocultarMaoJogador} from '../script.js'
+import {criarCartaParaJogador} from '../startJogo.js'
+
+var criouCartasIniciaisJogador = false;
+var cartaSelecionada = 10
 
 export class MissaoCombateQueimadas extends Missao {
     configurarHtml() {
@@ -31,7 +36,6 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     criarImagensEspecificasDaMissao() {
-        const iconeConfig = document.getElementById('configurations');
         const imagemMao = document.getElementById('maoJogador');
         const imagemBaralho = document.getElementById('imagemBaralho');
         const mesa = document.getElementById('mesa')
@@ -39,9 +43,9 @@ export class MissaoCombateQueimadas extends Missao {
         
         mesa.style.backgroundImage = 'url("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireGround.gif")'
         mesa.style.zIndex = 0
-        iconeConfig.style.display = 'none'
         imagemBaralho.style.display = 'none'
-        imagemMao.style.display = 'none';  
+        //imagemMao.style.display = 'none';  
+       
         iconeBoss.style.right = '10px'
 
         const fogo = document.createElement('img');
@@ -66,7 +70,7 @@ export class MissaoCombateQueimadas extends Missao {
         fogoAr.style.width = '900px';
         fogoAr.style.zIndex = '2';  
 
-        document.body.appendChild(fogoAr);
+        //mesa.appendChild(fogoAr);
 
         const madeiraQueimada = document.createElement('img');
         madeiraQueimada.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/burnedLog.png';
@@ -77,7 +81,7 @@ export class MissaoCombateQueimadas extends Missao {
         madeiraQueimada.style.width = '300px';
         madeiraQueimada.style.zIndex = '1';  
 
-        document.body.appendChild(madeiraQueimada);
+        //document.body.appendChild(madeiraQueimada);
 
         let botao = document.getElementById('startButton')
         botao.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireButtonWhite.gif';
@@ -153,4 +157,33 @@ export class MissaoCombateQueimadas extends Missao {
 funcoesEspecificasDaMissao() {
     this.adicionarCartaLadoEsquerdo('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaFogo8.png')
 }
+
+criarCartasNoInicioDaMissao() {
+    var contador = 0;
+    ocultarMaoJogador();
+    function criarCartaComIntervalo() {
+            criarCartaParaJogador();
+        // Incrementa o contador para a próxima iteração
+        contador++;
+        // Se ainda houver cartas para criar, programa a próxima execução
+        if (contador < 4) {
+            setTimeout(criarCartaComIntervalo, 500);
+        } else {
+            // Quando todas as cartas forem criadas, retorne ao estado normal
+            setTimeout(retornarAoEstadoNormal, 500);
+        }
+    }
+    // Inicia o processo de criação de cartas com um intervalo inicial
+    setTimeout(criarCartaComIntervalo, 0);
+    }
+  
+    selecionarIdentificadorCarta() {
+        if (criouCartasIniciaisJogador === false) {
+            cartaSelecionada++
+            if (cartaSelecionada === 14){
+                criouCartasIniciaisJogador = true
+            }
+        }
+        return cartaSelecionada
+    }
 }

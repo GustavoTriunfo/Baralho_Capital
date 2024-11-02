@@ -1,8 +1,5 @@
-import {reproduzirEfeitoSonoro, iniciarCronometroMinigame, retornarAoEstadoNormal, getDefendidoContraUmaPicadaSurpresa,
-    setPicadasRecebidas, setDefendidoContraUmaPicadaSurpresa, getDefendidoContraUmaPicadaParalizante,
-    setDefendidoContraUmaPicadaParalizante, setCartasInvestimentosContraMosquito, getCartaJogadorRecente,
-    getQuantidadeCartasJogadas, getCartasInvestimentosContraMosquito, getPicadasRecebidas, setJogoAcabou, getJogoAcabou,
-    getTempoMissaoZerado
+import {reproduzirEfeitoSonoro, iniciarCronometroMinigame, retornarAoEstadoNormal, getCartaJogadorRecente,
+    getQuantidadeCartasJogadas, setJogoAcabou, getJogoAcabou, getTempoMissaoZerado
 } from '../script.js'
 import {alterarVidaBoss, jogadaBoss, getVidaBoss, getCartaBossRecente, pararMusica, setDanoCausado, selecionarTipoCarta,
     getDanoCausado
@@ -10,6 +7,9 @@ import {alterarVidaBoss, jogadaBoss, getVidaBoss, getCartaBossRecente, pararMusi
 import {iniciarMinigameFuga} from './miniGameFuga.js'
 import {zumbidoLoucura, iniciarSusto, fumacaDanoBoss, choqueDanoBoss, danoBoss, pararZumbidoLoucura} from './mosquitoDengueBoss.js'
 import {diminuirVidaJogador, curarVidaJogador, getQuantidadeHPJogador, ajustarOpacidadeVida} from '../jogador.js'
+import {getCartasInvestimentosContraMosquito, setCartasInvestimentosContraMosquito, getDefendidoContraUmaPicadaSurpresa,
+     setDefendidoContraUmaPicadaSurpresa, getDefendidoContraUmaPicadaParalizante, setDefendidoContraUmaPicadaParalizante,
+     getPicadasRecebidas, setPicadasRecebidas} from './MissaoCombateDengue.js'
 
 var bombardeioFumaceAcontecendo = false
 var quantidadeCartasExercitoAladoUtilizadas = 0

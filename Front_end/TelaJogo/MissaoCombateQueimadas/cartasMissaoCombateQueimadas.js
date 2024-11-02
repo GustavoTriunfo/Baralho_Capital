@@ -9,4 +9,8 @@ export var CartasMissaoCombateQueimadas = {
     8: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaFogo7.png', tipo: 'ATK'},
     9: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaFogo8.png', tipo: 'ATK'},
     10: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaFogo9.png', tipo: 'ATK'},
+    11: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogador1.png', tipo: 'EST'},
+    12: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogador9.png', tipo: 'EST'},
+    13: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogador3.png', tipo: 'EST'},
+    14: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogadorX.png', tipo: 'EST'},
 }

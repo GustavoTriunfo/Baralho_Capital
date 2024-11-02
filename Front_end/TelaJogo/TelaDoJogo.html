@@ -120,8 +120,11 @@
 </div>
 
 
-
-<img id="configurations" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/options.png" style="display: block;">
+<button id="toggleButton">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -190,7 +193,11 @@ function toggleMenu() {
 
 document.getElementById("botaoFechar").addEventListener("click", fecharVisualizacaoCartaBoss);
 document.getElementById('imagemMusica').addEventListener("click", pararMusica);
-document.getElementById('configurations').addEventListener("click", toggleMenu);
+document.getElementById('toggleButton').addEventListener("click", () => {
+    const toggleButton = document.getElementById('toggleButton');
+    toggleButton.classList.toggle("active");
+    toggleMenu();
+});
 document.getElementById('efeitoSons').addEventListener("click", mutarEfeitosSonoros);
 document.getElementById('mostrarMenuStatus').addEventListener("click", mostrarMenuStatus);
 document.getElementById('fecharMenuStatus').addEventListener("click", fecharMenuStatus);
