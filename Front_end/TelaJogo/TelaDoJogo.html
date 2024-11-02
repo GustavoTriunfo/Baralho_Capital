@@ -40,9 +40,8 @@
     <button id="botaoFechar" class="btn btn-boss-custom-primary">Fechar</button>
   </div>
 
-  <img style="display: block; position: fixed; top: -10px; left: -10px; width: 80px; z-index: 99;" id="iconeBoss" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Boss.gif" />
+  <img style="display: block; position: fixed; top: -10px; left: -10px; width: 80px; z-index: 7;" id="iconeBoss" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/Boss.gif" />
     <div class="black-bg">
-      <img id="mosquitoNotes" src="/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoSinging.gif" alt="mosquito notes">
         
        
           <div class="progress fixed-progress-boss" style="height: 30px; border-radius: 0px;">
@@ -126,6 +125,14 @@
   <span class="bar"></span>
 </button>
 
+<button id="arrowButton" style="display: none;"></button>
+
+<div id="pokedexOverlay" style="display: none;">
+  <div id="pokedexGrid" class="pokedex-grid">
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -139,7 +146,7 @@
 
 <script type="module">
 import {verificarCartaBoss, getCartaBossRecente, atualizarTelaStatus, getEstadoEfeitoSonoro, setEstadoEfeitoSonoro, 
-  pararMusica, selecionarMissao} from './app.js'
+  pararMusica, selecionarMissao, getMissaoSelecionada} from './app.js'
 import {setQuantidadeCartasJogadas} from './script.js'
  
   var mutado = document.getElementById('efeitoSons');
@@ -194,6 +201,15 @@ function toggleMenu() {
 document.getElementById("botaoFechar").addEventListener("click", fecharVisualizacaoCartaBoss);
 document.getElementById('imagemMusica').addEventListener("click", pararMusica);
 document.getElementById('toggleButton').addEventListener("click", () => {
+   
+    if(getMissaoSelecionada() === 'combate-as-queimadas') {
+      const menuSeta = document.getElementById('arrowButton');
+    if (menuSeta.style.visibility === 'hidden') {
+      menuSeta.style.visibility = 'visible';
+      } else {
+        menuSeta.style.visibility = 'hidden';
+      }
+    }
     const toggleButton = document.getElementById('toggleButton');
     toggleButton.classList.toggle("active");
     toggleMenu();
@@ -205,7 +221,17 @@ document.getElementById('endButton').addEventListener("click", mostrarMenuStatus
 document.getElementById('redirecionarParaTelaMissoes').addEventListener("click", function() {
     window.location.href = '../TelaMissoes/mapaMissoes.html';
 });
+document.getElementById('arrowButton').addEventListener("click", function() {
+  const toggleButton = document.getElementById('toggleButton');
+    if (toggleButton.style.visibility === 'hidden') {
+        toggleButton.style.visibility = 'visible';
+    } else {
+        toggleButton.style.visibility = 'hidden';
+    }
 
+    this.classList.toggle("active");
+    document.getElementById("pokedexOverlay").classList.toggle("active");
+});
 window.onload = function() {
     selecionarMissao();
 };

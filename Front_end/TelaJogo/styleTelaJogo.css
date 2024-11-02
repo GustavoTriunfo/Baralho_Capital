@@ -419,7 +419,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo transparente */
-  z-index: 10;
+  z-index: 8;
 }
 
 .menu-options {
@@ -679,7 +679,7 @@ left: 77%; /* Distância da esquerda */
   background-color: #020202;
   border: none;
   cursor: pointer;
-  z-index: 10;   
+  z-index: 9;   
   transition: right 0.4s ease;
   display: flex;
   flex-direction: column;
@@ -708,4 +708,104 @@ left: 77%; /* Distância da esquerda */
 
 #toggleButton.active .bar:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
+}
+
+
+
+#arrowButton {
+  position: fixed;
+  right: 0px;
+  top: calc(50% + 50px); /* Logo abaixo do botão de hambúrguer */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Linhas para formar a seta */
+#arrowButton::before,
+#arrowButton::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    width: 3px;
+    height: 70%; /* Altura da linha para a seta */
+    transition: transform 0.3s ease, left 0.3s ease;
+}
+
+/* Configuração inicial para a seta "<" */
+#arrowButton::before {
+    transform: rotate(110deg);
+    top: 10px ;
+    left: 18px; /* Definindo a posição para parecer uma seta "<" */
+}
+
+#arrowButton::after {
+    transform: rotate(-115deg);
+    top: 0px;
+    left: 18px; /* Definindo a posição para parecer uma seta "<" */
+}
+
+/* Transformação para "X" quando ativo */
+#arrowButton.active::before {
+    transform: rotate(45deg);
+    top: 5px;
+    left: 18px;
+}
+
+#arrowButton.active::after {
+    transform: rotate(-45deg);
+    top: 5px;
+    left: 18px;
+}
+
+/* Configurações da div de fundo */
+#pokedexOverlay {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Fora da tela inicialmente */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 5, 172, 0.5); /* Azul transparente */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: right 0.5s ease;
+}
+
+
+#pokedexOverlay.active {
+  right: 0; /* Move a div para dentro da tela */
+}
+
+#pokedexGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Aumenta o tamanho mínimo das colunas */
+  gap: 10px; /* Espaçamento entre as células */
+  padding: 10px; /* Padding interno */
+}
+
+.pokedex-cell {
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+  border-radius: 5px; /* Bordas arredondadas */
+  display: flex; /* Usar flexbox para centralizar a imagem */
+  justify-content: center; /* Centralizar horizontalmente */
+  align-items: center; /* Centralizar verticalmente */
+  height: 150px; /* Aumenta a altura das células */
+  width: 150px; /* Aumenta a largura das células para um tamanho fixo */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona sombra para dar profundidade */
+}
+
+.pokedex-image {
+  max-width: 90%; /* A imagem ocupará no máximo 90% da largura da célula */
+  max-height: 90%; /* A imagem ocupará no máximo 90% da altura da célula */
+  object-fit: contain; /* Mantém a proporção da imagem */
 }

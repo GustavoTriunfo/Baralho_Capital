@@ -20,6 +20,10 @@ export class Missao {
     }
 
     selecionarIdentificadorCarta() {
-        
+
+    }
+
+    eventoCliqueNaCartaDeAcordoComMissao(elementoClicado) {
+
     }
 }

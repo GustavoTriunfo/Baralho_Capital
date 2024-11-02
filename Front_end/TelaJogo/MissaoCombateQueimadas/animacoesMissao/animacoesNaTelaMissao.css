@@ -22,3 +22,14 @@
   z-index: 2;
   animation: aparecerDoFundo 1s ease-out forwards; /* Aplica a animação */
 }
+
+.carta-clone {
+  position: fixed; /* Manter a posição fixada durante a animação */
+  z-index: 1000;  /* Z-index para estar acima de outros elementos */
+  transition: transform 1s ease, opacity 1s ease; /* Transições para transformação e opacidade */
+}
+
+.carta-clone.deslizar {
+  transform: translateY(-100px); /* Deslizar para cima */
+  opacity: 0; /* Tornar invisível */
+}

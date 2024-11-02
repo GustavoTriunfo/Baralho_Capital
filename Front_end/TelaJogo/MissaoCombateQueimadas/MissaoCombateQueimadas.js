@@ -1,12 +1,13 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateQueimadas} from './cartasMissaoCombateQueimadas.js'
 import {setCartasJogo} from '../app.js'
-import {criarAnimacaoFogo} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {criarAnimacaoFogo, animarCartaJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {retornarAoEstadoNormal, ocultarMaoJogador} from '../script.js'
 import {criarCartaParaJogador} from '../startJogo.js'
 
 var criouCartasIniciaisJogador = false;
 var cartaSelecionada = 10
+var cartaEscolhidaPorJogador = 0
 
 export class MissaoCombateQueimadas extends Missao {
     configurarHtml() {
@@ -36,6 +37,14 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     criarImagensEspecificasDaMissao() {
+
+        
+        let arrow = document.getElementById('arrowButton');
+        let pokedex = document.getElementById('pokedexOverlay');
+        arrow.style.display = 'block'
+        pokedex.style.display = 'block'
+
+
         const imagemMao = document.getElementById('maoJogador');
         const imagemBaralho = document.getElementById('imagemBaralho');
         const mesa = document.getElementById('mesa')
@@ -60,28 +69,6 @@ export class MissaoCombateQueimadas extends Missao {
         fogo.style.zIndex = '3';  
 
         //document.body.appendChild(fogo);
-
-        const fogoAr = document.createElement('img');
-        fogoAr.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoAr.gif';
-        fogoAr.style.position = 'fixed';
-        fogoAr.style.left = '50%';             
-        fogoAr.style.bottom = '30px';         
-        fogoAr.style.transform = 'translateX(-50%)';
-        fogoAr.style.width = '900px';
-        fogoAr.style.zIndex = '2';  
-
-        //mesa.appendChild(fogoAr);
-
-        const madeiraQueimada = document.createElement('img');
-        madeiraQueimada.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/burnedLog.png';
-        madeiraQueimada.style.position = 'fixed';
-        madeiraQueimada.style.left = '80%';             
-        madeiraQueimada.style.top = '400px';         
-        madeiraQueimada.style.transform = 'translateX(-50%)';
-        madeiraQueimada.style.width = '300px';
-        madeiraQueimada.style.zIndex = '1';  
-
-        //document.body.appendChild(madeiraQueimada);
 
         let botao = document.getElementById('startButton')
         botao.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireButtonWhite.gif';
@@ -186,4 +173,35 @@ criarCartasNoInicioDaMissao() {
         }
         return cartaSelecionada
     }
+
+    eventoCliqueNaCartaDeAcordoComMissao(elementoClicado) {
+         // Passo 1: Obter o ID do elemento clicado
+    var idCarta = $(elementoClicado).attr("id");
+ 
+    // Passo 2: Verificar se o ID é válido
+    if (idCarta && CartasMissaoCombateQueimadas[idCarta]) {
+        cartaEscolhidaPorJogador = idCarta
+        // Passo 3: Obter a carta correspondente
+        var cartaSelecionada = CartasMissaoCombateQueimadas[idCarta];
+        
+        // // Passo 4: Lógica com base no tipo da carta
+        // console.log("Carta ID:", idCarta); // Exibe o ID da carta
+        // console.log("Caminho da Imagem:", cartaSelecionada.caminhoImagem); // Exibe o caminho da imagem
+        // console.log("Tipo de Carta:", cartaSelecionada.tipo); // Exibe o tipo da carta
+        
+        // // Aqui você pode adicionar a lógica que precisa com base no tipo de carta
+        // if (cartaSelecionada.tipo === 'ATK') {
+        //     // Execute a lógica para cartas de ataque
+        //     console.log("Esta é uma carta de ataque.");
+        // } else if (cartaSelecionada.tipo === 'EST') {
+        //     // Execute a lógica para cartas de estratégia
+        //     console.log("Esta é uma carta de estratégia.");
+        // }
+
+        animarCartaJogador(cartaSelecionada.caminhoImagem, $(elementoClicado));
+    } else {
+        console.error("ID da carta não válido ou não encontrado nas cartas disponíveis.");
+    }
+    }
+
 }
