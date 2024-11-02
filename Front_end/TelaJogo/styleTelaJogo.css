@@ -271,18 +271,6 @@
   z-index: 5;
 }
 
-#configurations{
-  width: 180px;
-  height: auto;
-  position: fixed;
-  top: 400px; /* Ajuste conforme necessário */
-  right: -30px; /* Ajuste conforme necessário */
-  z-index: 11; /* Garante que o botão fique acima do fundo preto */
-  background-size: contain;
-  border: none; /* Remova a borda do botão */
-  cursor: pointer; /* Defina o cursor para mostrar que o botão é clicável */
-}
-
 #startOverlay {
   position: fixed;
   top: 0;
@@ -680,4 +668,44 @@ left: 77%; /* Distância da esquerda */
   height: 30px;
   border-radius: 0px;
   z-index: 2 !important;
+}
+
+#toggleButton {
+  position: fixed;
+  right: 0px;        
+  top: 50%;          
+  transform: translateY(-50%); 
+  padding: 10px;
+  background-color: #020202;
+  border: none;
+  cursor: pointer;
+  z-index: 10;   
+  transition: right 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px; /* Espaço entre as linhas */
+}
+
+/* Estilos das barras */
+#toggleButton .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  transition: 0.4s;
+  border-radius: 2px;
+}
+
+/* Efeito ao alternar o botão */
+#toggleButton.active .bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+#toggleButton.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+#toggleButton.active .bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }

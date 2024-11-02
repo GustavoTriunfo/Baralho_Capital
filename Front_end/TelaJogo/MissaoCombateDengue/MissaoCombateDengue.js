@@ -1,7 +1,13 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateDengue} from './cartasMissaoCombateDengue.js';
 import {setCartasJogo} from '../app.js'
-import { criarCartasNoInicio} from '../startJogo.js'
+import {criarCartaParaJogador, criarCartaParaOponente} from '../startJogo.js'
+import {ocultarMaoJogador, retornarAoEstadoNormal} from '../script.js'
+
+var cartasInvestimentosContraMosquito = 0
+var defendidoContraUmaPicadaSurpresa = false
+var defendidoContraUmaPicadaParalizante = false
+var picadasRecebidas = 0
 
 export class MissaoCombateDengue extends Missao {
     configurarHtml() {
@@ -215,6 +221,83 @@ export class MissaoCombateDengue extends Missao {
     }
 
     funcoesEspecificasDaMissao() {
-        criarCartasNoInicio();
+        
     }
+
+    criarCartasNoInicioDaMissao() {
+        var contador = 0;
+        ocultarMaoJogador();
+    function criarCartaComIntervalo() {
+        // Calcula para quem a carta deve ser criada com base no contador
+        if (contador % 2 === 0) {
+            criarCartaParaJogador();
+        } else {
+            criarCartaParaOponente();
+        }
+        // Incrementa o contador para a próxima iteração
+        contador++;
+
+        // Se ainda houver cartas para criar, programa a próxima execução
+        if (contador < 8) {
+            setTimeout(criarCartaComIntervalo, 500);
+        } else {
+            // Quando todas as cartas forem criadas, retorne ao estado normal
+            setTimeout(retornarAoEstadoNormal, 500);
+        }
+    }
+
+    // Inicia o processo de criação de cartas com um intervalo inicial
+    setTimeout(criarCartaComIntervalo, 0);
+    }
+
+    selecionarIdentificadorCarta() {
+        let min = 16; 
+        let max = 32; 
+        if(getCartasInvestimentosContraMosquito() > 5 && getCartasInvestimentosContraMosquito() <= 7){
+            min = 18; 
+        } else if (getCartasInvestimentosContraMosquito() > 7 && getCartasInvestimentosContraMosquito() < 10){
+            min = 16;
+        } else if(getCartasInvestimentosContraMosquito() >= 10){
+            min = 16; 
+            max = 26;
+        }else{
+            min = 23
+        }
+       
+        let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
+        return cartaSelecionada
+    }
+}
+
+
+export function getCartasInvestimentosContraMosquito() {
+    return cartasInvestimentosContraMosquito
+}
+
+export function setCartasInvestimentosContraMosquito(numero) {
+    cartasInvestimentosContraMosquito += numero
+}
+
+export function getDefendidoContraUmaPicadaSurpresa() {
+    return defendidoContraUmaPicadaSurpresa
+}
+
+export function setDefendidoContraUmaPicadaSurpresa(estado) {
+    defendidoContraUmaPicadaSurpresa = estado
+}
+
+export function getDefendidoContraUmaPicadaParalizante() {
+    return defendidoContraUmaPicadaParalizante
+}
+
+export function setDefendidoContraUmaPicadaParalizante(estado) {
+    defendidoContraUmaPicadaParalizante = estado
+}
+
+export function getPicadasRecebidas() {
+    return picadasRecebidas
+}
+
+export function setPicadasRecebidas(numero) {
+    picadasRecebidas += numero
 }
