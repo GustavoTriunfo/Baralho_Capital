@@ -13,4 +13,5 @@ export var CartasMissaoCombateQueimadas = {
     12: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogador9.png', tipo: 'EST'},
     13: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogador3.png', tipo: 'EST'},
     14: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/CartaJogadorX.png', tipo: 'EST'},
+    15: { caminhoImagem: '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png', tipo: 'DEF'},
 }

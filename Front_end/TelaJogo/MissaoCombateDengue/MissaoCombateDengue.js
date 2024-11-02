@@ -163,10 +163,21 @@ export class MissaoCombateDengue extends Missao {
                 imgRisada.style.right = '55px';
                 imgRisada.style.width = '80px';
 
+                // Criar a imagem do mosquito cantando
+                const imgMosquito = document.createElement('img');
+                imgMosquito.id = 'mosquitoNotes';
+                imgMosquito.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoSinging.gif';
+                imgMosquito.alt = 'mosquito notes'; // Texto alternativo para acessibilidade
+                imgMosquito.style.position = 'fixed';
+                imgMosquito.style.top = '150px'; // Defina a posição desejada
+                imgMosquito.style.right = '50px'; // Defina a posição desejada
+                imgMosquito.style.width = '80px'; // Ajuste o tamanho conforme necessário
+                imgMosquito.style.zIndex = '99'; // Ajuste o z-index conforme necessário
+
                 // Adicionar os elementos à 'black-bg'
                 blackBg.appendChild(imgRaiva);
                 blackBg.appendChild(imgRisada);
-
+                blackBg.appendChild(imgMosquito);
                 
                 let imagem = document.getElementById('animatedImage');
                 imagem.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/MosquitoDengue.png';
@@ -266,6 +277,42 @@ export class MissaoCombateDengue extends Missao {
        
         let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
         return cartaSelecionada
+    }
+
+    eventoCliqueNaCartaDeAcordoComMissao(elementoClicado) {
+         // Verificar se a carta clicada já está ativa
+    if ($(elementoClicado).hasClass("active")) {
+        // Se a carta clicada já estiver ativa, remover a pré-visualização e a classe 'active'
+        $("#cardPreviewOverlay").removeClass("d-block");
+        $(elementoClicado).removeClass("active").css("z-index", "1");
+    } else {
+        // Tornar visível a div de pré-visualização
+        $("#cardPreviewOverlay").addClass("d-block");
+    
+        // Obter a imagem da carta clicada
+        var cardImage = $(elementoClicado).find('img').attr('src');
+        // Atualizar a pré-visualização com a imagem da carta clicada
+    if ($("#cardPreviewOverlay img").length === 0) {
+        // Se não houver uma imagem dentro de #cardPreviewOverlay, crie uma
+        var imgElement = document.createElement('img');
+        imgElement.src = cardImage;
+        $("#cardPreviewOverlay").append(imgElement);
+    } else {
+        // Se já houver uma imagem dentro de #cardPreviewOverlay, atualize o src dela
+        $("#cardPreviewOverlay img").attr('src', cardImage);
+    }
+        // Remover classe 'active' e redefinir o z-index de todas as cartas
+        $(".player-card").removeClass("active").css("z-index", "1");
+    
+        // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
+        $(elementoClicado).addClass("active").css("z-index", "1000");
+        var idCarta = $(".player-card.active").attr("id");
+        if (idCarta == 3 || idCarta == 4 || idCarta == 5 || idCarta == 6 || idCarta == 7 || idCarta == 36) {
+            $("#botaoDevolver, #botaoJogar").prop("disabled", true);
+        } else {
+            $("#botaoDevolver, #botaoJogar").prop("disabled", false);
+        }
+    }
     }
 }
 
