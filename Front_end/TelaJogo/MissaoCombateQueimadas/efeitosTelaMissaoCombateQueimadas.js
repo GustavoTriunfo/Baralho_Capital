@@ -1,9 +1,10 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
-import {getCartaBossRecente, pararMusica} from '../app.js'
+import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss} from '../app.js'
 import {diminuirVidaJogador} from '../jogador.js'
 import {danoNoJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro} from '../script.js'
 
+let pontosJogador = 0;
 
 export function verificarCartasMissaoQueimadas() {
     if(
@@ -12,7 +13,15 @@ export function verificarCartasMissaoQueimadas() {
         parseInt(getCartaBossRecente()) === 9 && parseInt(getCartaEscolhidaPorJogador()) === 12 || 
         ([2, 4, 5, 6, 7, 8, 0].includes(parseInt(getCartaBossRecente())) && parseInt(getCartaEscolhidaPorJogador()) === 13)
     ) {
-        adicionarPontoAJogador()
+        if([14].includes(parseInt(getCartaEscolhidaPorJogador()))){
+            alterarVidaBoss(50)
+            if(getVidaBoss() <= 50 && getTransicaoBoss() === false) {
+                setTransicaoBoss(true)
+                transicaoFogareu()
+            }
+        } else {
+            adicionarPontoAJogador()
+        }
     } else {
         diminuirVidaJogador()
         danoNoJogador()
@@ -38,22 +47,43 @@ export function finalizarMissaoCombateQueimadas() {
     var corpo = document.body
     imagemOverlay.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoFundoDerrota.gif';
 
-    // Definir estilo para a nova imagem
     imagemOverlay.style.position = 'fixed';
     imagemOverlay.style.top = '0';
     imagemOverlay.style.left = '0';
     imagemOverlay.style.width = '100%';
     imagemOverlay.style.height = '100%';
     imagemOverlay.style.objectFit = 'cover';
-    imagemOverlay.style.zIndex = '10000'; // Garantir que fique no topo
-    imagemOverlay.style.opacity = '0.8'; // Leve transparência
-    imagemOverlay.style.pointerEvents = 'none'; // Permite clique através da imagem
+    imagemOverlay.style.zIndex = '10000';
+    imagemOverlay.style.opacity = '1';
+    imagemOverlay.style.pointerEvents = 'none';
 
-    // Adiciona a imagem ao body
     corpo.appendChild(imagemOverlay);
 }
 }
 
 export function adicionarPontoAJogador() {
+    let pontoContainer = document.getElementById('pontoContainer');
+    if (!pontoContainer) {
+        pontoContainer = document.createElement('div');
+        pontoContainer.id = 'pontoContainer';
+        pontoContainer.className = 'p-3 rounded';
+        pontoContainer.innerHTML = `
+            <span>Pontos:</span>
+            <span id="pontoContador" class="ponto-contador">${pontosJogador}</span>
+        `;
+        document.body.appendChild(pontoContainer);
+    }
 
+    // Incrementa os pontos
+    pontosJogador++;
+    const pontoContador = document.getElementById('pontoContador');
+    pontoContador.textContent = pontosJogador;
+
+    // Adiciona a classe para a animação de aumento
+    pontoContador.classList.add('ponto-animado');
+
+    // Remove a animação após 300ms para o efeito de pulso
+    setTimeout(() => {
+        pontoContador.classList.remove('ponto-animado');
+    }, 300);
 }

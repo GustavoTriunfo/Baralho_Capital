@@ -99,3 +99,30 @@
 .flash-red.active {
   opacity: 1; /* Opacidade total para um flash vermelho sólido */
 }
+
+
+
+#pontoContainer {
+  position: fixed;
+  top: 8%;
+  left: 0px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7); /* Preto com 70% de opacidade */
+  padding: 10px; /* Adicionando padding para um melhor visual */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+/* Efeito de animação ao adicionar ponto */
+.ponto-contador {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.ponto-contador.ponto-animado {
+  transform: scale(2);
+  color: #ffdd57; /* Cor de destaque temporária */
+}

@@ -1,10 +1,9 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateQueimadas} from './cartasMissaoCombateQueimadas.js'
 import {setCartasJogo, atualizarStatusJogo, iniciarMusica} from '../app.js'
-import {criarAnimacaoFogo, animarCartaJogador, transicaoFogareu} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {criarAnimacaoFogo, animarCartaJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {ocultarMaoJogador, reproduzirEfeitoSonoro} from '../script.js'
 import {criarCartaParaJogador} from '../startJogo.js'
-//import {verificarCartasMissaoQueimadas} from './efeitosTelaMissaoCombateQueimadas.js'
 
 var criouCartasIniciaisJogador = false;
 var cartaSelecionada = 9
@@ -129,11 +128,9 @@ funcoesEspecificasDaMissao() {
             reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP2.mp3')
         setTimeout(() => {
             this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuv3.gif');
-            transicaoFogareu()
                 setTimeout(() => {
                      intro = false
-                     console.log('intro false')
-                 }, 6000);  
+                 }, 4000);  
         }, 700);  
     }, 1000);  
 }, 500);  
