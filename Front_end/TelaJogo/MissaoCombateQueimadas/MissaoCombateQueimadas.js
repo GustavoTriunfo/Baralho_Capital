@@ -75,7 +75,7 @@ export class MissaoCombateQueimadas extends Missao {
         fogo.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoParteBaixaTela.gif';
         fogo.alt = 'Fogo';
 
-        fogo.style.position = 'relative';
+        fogo.style.position = 'fixed';
         fogo.style.left = '50%';           
         fogo.style.top = '40px';         
         fogo.style.transform = 'translateX(-50%)';
@@ -135,7 +135,7 @@ export class MissaoCombateQueimadas extends Missao {
 }
 
 funcoesEspecificasDaMissao() {
-    animacaoFundoIntro();
+    //animacaoFundoIntro();
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP1.mp3')
     setTimeout(() => {
         this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuIntrov2.gif');
@@ -143,7 +143,7 @@ funcoesEspecificasDaMissao() {
             reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP2.mp3')
         setTimeout(() => {
             this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuv3.gif');
-        }, 1000);  
+        }, 700);  
     }, 1000);  
 }, 500);  
 }
