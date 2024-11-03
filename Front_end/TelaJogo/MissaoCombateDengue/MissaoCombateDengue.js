@@ -1,6 +1,6 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateDengue} from './cartasMissaoCombateDengue.js';
-import {setCartasJogo} from '../app.js'
+import {setCartasJogo, iniciarMusica} from '../app.js'
 import {criarCartaParaJogador, criarCartaParaOponente} from '../startJogo.js'
 import {ocultarMaoJogador, retornarAoEstadoNormal} from '../script.js'
 
@@ -232,7 +232,7 @@ export class MissaoCombateDengue extends Missao {
     }
 
     funcoesEspecificasDaMissao() {
-        
+        iniciarMusica(0.4)
     }
 
     criarCartasNoInicioDaMissao() {

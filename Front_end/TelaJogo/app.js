@@ -303,6 +303,15 @@ export function adicionarImagemNaPokedex(caminhoImagem) {
     pokedexGrid.appendChild(novaCelula);
 }
 
+export function iniciarMusica(volume) {
+    // Obtém o elemento de áudio
+    var audio = document.getElementById('musica');
+    audio.volume = volume;
+    // Inicia a reprodução da música
+    audio.play();
+}
+
+
 adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
 adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
 adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');

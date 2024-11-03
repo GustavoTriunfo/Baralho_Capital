@@ -1,7 +1,7 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateQueimadas} from './cartasMissaoCombateQueimadas.js'
-import {setCartasJogo, atualizarStatusJogo} from '../app.js'
-import {criarAnimacaoFogo, animarCartaJogador, animacaoFundoIntro} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {setCartasJogo, atualizarStatusJogo, iniciarMusica} from '../app.js'
+import {criarAnimacaoFogo, animarCartaJogador, transicaoFogareu} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {ocultarMaoJogador, reproduzirEfeitoSonoro} from '../script.js'
 import {criarCartaParaJogador} from '../startJogo.js'
 
@@ -38,25 +38,11 @@ export class MissaoCombateQueimadas extends Missao {
 
     criarImagensEspecificasDaMissao() {
         var fundo = document.querySelector('.black-bg');
-        const corpo = document.getElementById('corpo');
-        const fundoIntro = document.createElement('div');
-        fundoIntro.id = 'fundoIntro';
-        fundoIntro.className = 'fundo-intro'; 
-    
-        fundoIntro.style.position = 'fixed';
-        fundoIntro.style.zIndex =1
-        fundoIntro.style.top = '0';
-        fundoIntro.style.left = '0';
-        fundoIntro.style.width = '100%';
-        fundoIntro.style.height = '100%';
-        fundoIntro.style.pointerEvents = 'none';
-        corpo.appendChild(fundoIntro);
         
         let arrow = document.getElementById('arrowButton');
         let pokedex = document.getElementById('pokedexOverlay');
         arrow.style.display = 'block'
         pokedex.style.display = 'block'
-
 
         const imagemMao = document.getElementById('maoJogador');
         const imagemBaralho = document.getElementById('imagemBaralho');
@@ -90,8 +76,9 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     configurarMusicasEEfeitosSonoros() {
-        this.alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Forest Funk.mp3");
-        this.criarEIniciarAudio(1, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Burning Fire sound.mp3")
+        this.alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Precipice.mp3");
+        this.criarEIniciarAudio(1, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Burning Fire sound.mp3", 0.3)
+        this.criarEIniciarAudio(2, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Lantern Run.mp3", 0.6)
     }
 
     alterarMusica(novaFonte) {
@@ -100,7 +87,7 @@ export class MissaoCombateQueimadas extends Missao {
         musica.load();
     }
 
-     criarEIniciarAudio(id, src) {
+     criarEIniciarAudio(id, src, volume = 0.5) {
         // Cria um novo elemento de áudio
         let audioElement = document.createElement('audio');
         
@@ -109,7 +96,7 @@ export class MissaoCombateQueimadas extends Missao {
         audioElement.src = src;          // Define o caminho do arquivo de áudio
         audioElement.loop = true;        // Define o áudio para tocar em loop
         audioElement.preload = 'auto';   // Carrega o áudio automaticamente
-        audioElement.volume = 0.6;       // Ajusta o volume (de 0.0 a 1.0)
+        audioElement.volume = volume;       // Ajusta o volume (de 0.0 a 1.0)
     
         // Adiciona o elemento de áudio ao corpo do documento
         document.body.appendChild(audioElement);
@@ -135,7 +122,8 @@ export class MissaoCombateQueimadas extends Missao {
 }
 
 funcoesEspecificasDaMissao() {
-    //animacaoFundoIntro();
+    iniciarMusica(0.2)
+    this.pararAudioPorId(2)
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP1.mp3')
     setTimeout(() => {
         this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuIntrov2.gif');
@@ -143,6 +131,7 @@ funcoesEspecificasDaMissao() {
             reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP2.mp3')
         setTimeout(() => {
             this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuv3.gif');
+            transicaoFogareu()
         }, 700);  
     }, 1000);  
 }, 500);  
@@ -234,4 +223,17 @@ export function adicionarCartaLadoEsquerdo(enderecoImagem) {
     carta.classList.add('carta-animada');
     
     document.body.appendChild(carta);
+}
+
+export function criarImagemFogareuFaseDois() {
+    let imagem = document.getElementById('animatedImage');
+    imagem.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuForma2.gif';
+    imagem.style.width = '250px'
+    imagem.style.height = 'auto'
+    imagem.style.position = 'fixed';
+    imagem.style.top = '0px';
+    imagem.style.right = '20px';
+    imagem.style.zIndex = 3
+    imagem.classList.add('animated');
+    imagem.classList.remove('no-animation');
 }

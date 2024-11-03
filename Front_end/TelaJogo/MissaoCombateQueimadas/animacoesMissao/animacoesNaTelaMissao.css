@@ -37,20 +37,47 @@
 
 
 
-.fundo-intro {
-  position: fixed;/* Fixa a imagem na tela */
+.explosao-transicao {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px; /* ajuste o tamanho conforme necessário */
+  opacity: 0; /* Começa invisível */
+  transition: opacity 2s ease-in-out;
+  animation: aparecerDesaparecer 5s ease forwards;
+}
+
+/* Animação para opacidade */
+@keyframes aparecerDesaparecer {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+.sobreposicao-branca {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  background-image: url('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoFundoIntro.gif');
-  background-size: cover; /* Cobre toda a área */
-  opacity: 0; /* Começa invisível */
-  transition: opacity 1s ease; /* Transição suave de opacidade */
-  z-index: 1; /* Acima de outros elementos */
+  background-color: white;
+  opacity: 1;
+  transition: opacity 1s ease; /* Transição suave para o fade */
+  z-index: 9999; /* Acima de todos os outros elementos */
 }
 
-.fundo-intro.active {
-  opacity: 1; /* Opacidade de 50% quando a classe "active" é adicionada */
+.sobreposicao-branca.fade-out {
+  opacity: 0; /* Fade out para transparente */
 }
