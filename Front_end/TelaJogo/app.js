@@ -1,5 +1,5 @@
 import {rearrangeCards} from './playerCard.js';
-import {jogadorAtual, jogador2, alternarJogador} from './startJogo.js'
+import {jogadorAtual, jogador2, jogador1, alternarJogador} from './startJogo.js'
 import {reproduzirEfeitoSonoro, getTempoMissaoZerado,
     atualizarNumeroCarta} from './script.js'
 import {getQuantidadeHPJogador} from './jogador.js'
@@ -117,18 +117,35 @@ export function alterarFaseBoss() {
 }
 
 export function atualizarStatusJogo(){
-    
-    if(verificarFim() === false){
-        if(jogadorAtual === jogador2){
-            turnoJogador()
-            alternarJogador()
-        } else{
-            turnoBoss()
-            alternarJogador()
-            atualizarStatusJogo()
+    if (missao === 'combate-mosquito-dengue') {
+        if(verificarFim() === false){
+            if(jogadorAtual === jogador2){
+                turnoJogador()
+                alternarJogador()
+            } else{
+                console.log('entrou turno boss')
+                turnoBoss()
+                alternarJogador()
+                atualizarStatusJogo()
+            }
+        }else{
+            terminarJogo()
         }
-    }else{
-        terminarJogo()
+    } else if (missao === 'combate-as-queimadas'){
+        if(verificarFim() === false){
+            if(jogadorAtual === jogador1){
+                turnoBoss()
+                alternarJogador()
+                atualizarStatusJogo()
+               
+            } else{
+                console.log('entrou turno boss')
+                turnoJogador()
+                alternarJogador()
+            }
+        }else{
+            terminarJogo()
+        }
     }
 }
 
