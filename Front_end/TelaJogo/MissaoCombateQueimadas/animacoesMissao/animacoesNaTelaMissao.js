@@ -1,44 +1,75 @@
+import {reproduzirEfeitoSonoro} from '../../script.js'
+import {pararMusica} from '../../app.js'
+import {criarImagemFogareuFaseDois} from '../MissaoCombateQueimadas.js'
+
 export function criarAnimacaoFogo() {
 
  
 }
 
-// Método para animar a carta
 export function animarCartaJogador(caminhoImagem, elementoClicado) {
-       // Certifique-se de que o elemento clicado é um objeto jQuery
-       var $elementoClicado = $(elementoClicado);
-
-       // Criar um clone da imagem da carta usando jQuery
+       
+       var $elementoClicado = $(elementoClicado); 
        var $clone = $('<img>', {
            src: caminhoImagem,
-           class: 'carta-clone', // Classe para estilização
+           class: 'carta-clone',
            css: {
-               left: $elementoClicado.offset().left + 'px', // Posição horizontal
-               top: $elementoClicado.offset().top + 'px', // Posição vertical
-               width: $elementoClicado.width() + 'px' // Largura igual à carta original
+               left: $elementoClicado.offset().left + 'px', 
+               top: $elementoClicado.offset().top + 'px', 
+               width: $elementoClicado.width() + 'px' 
            }
-       }).appendTo('body'); // Adiciona o clone ao body
-   
-       // Usar a classe CSS para iniciar a animação
+       }).appendTo('body'); 
        requestAnimationFrame(() => {
-           // Adiciona a classe que inicia a animação
+           
            $clone.addClass('deslizar');
        });
    
-       // Remover o clone após a animação
        setTimeout(() => {
            $clone.remove();
-       }, 1000); // O tempo deve ser o mesmo da transição CSS
+       }, 1000);
 }
 
-export function animacaoFundoIntro() {
-    const fundoIntro = document.getElementById('fundoIntro');
+export function transicaoFogareu() {
+    pararMusica()
+    const corpo = document.body;
 
-    // Adiciona a classe "active" para iniciar a animação
-    fundoIntro.classList.add('active');
-
-    // Depois de 5 segundos, remove a classe para desaparecer suavemente
+    const imagem = document.createElement('img');
+    imagem.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/explosion.gif';
+    imagem.className = 'explosao-transicao';
+    imagem.style.position = 'fixed';
+    imagem.style.top = '35%';
+    imagem.style.left = '60%';
+    imagem.style.height = '600px'
+    imagem.style.width = 'auto'
+    imagem.style.zIndex = 6
+    imagem.style.pointerEvents = 'none';
+  
+    corpo.appendChild(imagem);
+  
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Monster Roar.mp3')
     setTimeout(() => {
-        fundoIntro.classList.remove('active');
-    }, 1500); // Mantém a opacidade de 50% por 5 segundos
+        telaFicarBrancaPorUmSegundo()
+        criarImagemFogareuFaseDois()
+      imagem.remove();
+    }, 4000);
+    pararMusica()
+}
+
+function telaFicarBrancaPorUmSegundo() {
+    const corpo = document.body;
+
+    // Criar a sobreposição branca
+    const sobreposicaoBranca = document.createElement('div');
+    sobreposicaoBranca.className = 'sobreposicao-branca';
+    corpo.appendChild(sobreposicaoBranca);
+
+    // Definir o fade-out depois de 1 segundo
+    setTimeout(() => {
+        sobreposicaoBranca.classList.add('fade-out');
+    }, 1000);
+
+    // Remover o elemento após a transição de fade-out
+    setTimeout(() => {
+        sobreposicaoBranca.remove();
+    }, 2000);
 }

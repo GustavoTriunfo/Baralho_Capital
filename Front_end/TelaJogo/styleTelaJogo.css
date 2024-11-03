@@ -796,7 +796,7 @@ left: 77%; /* Distância da esquerda */
 }
 
 .pokedex-cell {
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+  background-color: rgba(255, 255, 255, 0.4); /* Fundo branco semi-transparente */
   border-radius: 5px; /* Bordas arredondadas */
   display: flex; /* Usar flexbox para centralizar a imagem */
   justify-content: center; /* Centralizar horizontalmente */

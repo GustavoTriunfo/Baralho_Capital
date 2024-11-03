@@ -103,19 +103,10 @@ startButton.addEventListener('click', function() {
     startOverlay.style.display = 'none';
 
     iniciarCronometroTempoMissao(600)
-    iniciarMusica();
     metodosEspecificosDaMissao();
     atualizarTelaStatus();
     criarCartasNoInicio();
   });
-
-  function iniciarMusica() {
-    // Obtém o elemento de áudio
-    var audio = document.getElementById('musica');
-    audio.volume = 0.4;
-    // Inicia a reprodução da música
-    audio.play();
-}
 
 export {jogadorAtual, jogador2, jogador1};
 
