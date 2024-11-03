@@ -81,3 +81,21 @@
 .sobreposicao-branca.fade-out {
   opacity: 0; /* Fade out para transparente */
 }
+
+
+
+.flash-red {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red; /* Fundo vermelho sólido */
+  opacity: 0; /* Começa invisível */
+  transition: opacity 0.1s ease; /* Transição rápida */
+  z-index: 10000; /* Camada superior */
+}
+
+.flash-red.active {
+  opacity: 1; /* Opacidade total para um flash vermelho sólido */
+}

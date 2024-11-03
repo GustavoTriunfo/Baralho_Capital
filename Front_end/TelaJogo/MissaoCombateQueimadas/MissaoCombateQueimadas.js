@@ -4,10 +4,12 @@ import {setCartasJogo, atualizarStatusJogo, iniciarMusica} from '../app.js'
 import {criarAnimacaoFogo, animarCartaJogador, transicaoFogareu} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {ocultarMaoJogador, reproduzirEfeitoSonoro} from '../script.js'
 import {criarCartaParaJogador} from '../startJogo.js'
+//import {verificarCartasMissaoQueimadas} from './efeitosTelaMissaoCombateQueimadas.js'
 
 var criouCartasIniciaisJogador = false;
-var cartaSelecionada = 10
+var cartaSelecionada = 9
 var cartaEscolhidaPorJogador = 0
+var intro = true
 
 export class MissaoCombateQueimadas extends Missao {
     configurarHtml() {
@@ -76,17 +78,12 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     configurarMusicasEEfeitosSonoros() {
-        this.alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Precipice.mp3");
+        alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Precipice.mp3");
         this.criarEIniciarAudio(1, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Burning Fire sound.mp3", 0.3)
         this.criarEIniciarAudio(2, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Lantern Run.mp3", 0.6)
     }
 
-    alterarMusica(novaFonte) {
-        const musica = document.getElementById("musica");
-        musica.src = novaFonte;
-        musica.load();
-    }
-
+   
      criarEIniciarAudio(id, src, volume = 0.5) {
         // Cria um novo elemento de áudio
         let audioElement = document.createElement('audio');
@@ -122,6 +119,7 @@ export class MissaoCombateQueimadas extends Missao {
 }
 
 funcoesEspecificasDaMissao() {
+    intro = true
     iniciarMusica(0.2)
     this.pararAudioPorId(2)
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP1.mp3')
@@ -132,6 +130,10 @@ funcoesEspecificasDaMissao() {
         setTimeout(() => {
             this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuv3.gif');
             transicaoFogareu()
+                setTimeout(() => {
+                     intro = false
+                     console.log('intro false')
+                 }, 6000);  
         }, 700);  
     }, 1000);  
 }, 500);  
@@ -152,7 +154,7 @@ criarCartasNoInicioDaMissao()
                 if (contador < 4) {
                     setTimeout(criarCartaComIntervalo, 800);
                 } else {
-                    // Quando todas as cartas forem criadas, retorne ao estado normal
+                    
                     
                 }
             }
@@ -167,9 +169,11 @@ criarCartasNoInicioDaMissao()
     selecionarIdentificadorCarta() {
         if (criouCartasIniciaisJogador === false) {
             cartaSelecionada++
-            if (cartaSelecionada === 14){
+            if (cartaSelecionada === 13){
                 criouCartasIniciaisJogador = true
             }
+        } else {
+            cartaSelecionada = 15
         }
         return cartaSelecionada
     }
@@ -197,8 +201,11 @@ criarCartasNoInicioDaMissao()
         //     // Execute a lógica para cartas de estratégia
         //     console.log("Esta é uma carta de estratégia.");
         // }
+        //verificarCartasMissaoQueimadas()
 
         animarCartaJogador(cartaSelecionada.caminhoImagem, $(elementoClicado));
+        ocultarMaoJogador()
+        atualizarStatusJogo()
     } else {
         console.error("ID da carta não válido ou não encontrado nas cartas disponíveis.");
     }
@@ -236,4 +243,18 @@ export function criarImagemFogareuFaseDois() {
     imagem.style.zIndex = 3
     imagem.classList.add('animated');
     imagem.classList.remove('no-animation');
+}
+
+export function getCartaEscolhidaPorJogador() {
+    return cartaEscolhidaPorJogador
+}
+
+export function getEstadoIntro() {
+    return intro
+}
+
+export function alterarMusica(novaFonte) {
+    const musica = document.getElementById("musica");
+    musica.src = novaFonte;
+    musica.load();
 }

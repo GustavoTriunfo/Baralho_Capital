@@ -1,4 +1,4 @@
-import {reproduzirEfeitoSonoro, setJogoAcabou} from './script.js'
+import {reproduzirEfeitoSonoro} from './script.js'
 import {terminarJogo} from './app.js'
 
 var quantidadeHPJogador = 100.0
