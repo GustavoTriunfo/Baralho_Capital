@@ -31,27 +31,26 @@ export class MissaoCombateQueimadas extends Missao {
         imagem.style.position = 'fixed';
         imagem.style.top = '-80px';
         imagem.style.right = '20px';
+        imagem.style.zIndex = 3
         imagem.classList.remove('animated');
         imagem.classList.add('no-animation');
     }
 
     criarImagensEspecificasDaMissao() {
+        var fundo = document.querySelector('.black-bg');
+        const corpo = document.getElementById('corpo');
         const fundoIntro = document.createElement('div');
-
-        // Define o ID e a classe
         fundoIntro.id = 'fundoIntro';
-        fundoIntro.className = 'fundo-intro'; // ou use: fundoIntro.classList.add('fundo-intro');
+        fundoIntro.className = 'fundo-intro'; 
     
-        // Estiliza a div diretamente, se necessário (ou você pode fazer isso via CSS)
         fundoIntro.style.position = 'fixed';
-        fundoIntro.style.zIndex = 3
+        fundoIntro.style.zIndex =1
         fundoIntro.style.top = '0';
         fundoIntro.style.left = '0';
         fundoIntro.style.width = '100%';
         fundoIntro.style.height = '100%';
-    
-        // Adiciona a div ao body
-        document.body.appendChild(fundoIntro);
+        fundoIntro.style.pointerEvents = 'none';
+        corpo.appendChild(fundoIntro);
         
         let arrow = document.getElementById('arrowButton');
         let pokedex = document.getElementById('pokedexOverlay');
@@ -68,6 +67,7 @@ export class MissaoCombateQueimadas extends Missao {
         mesa.style.zIndex = 0
         imagemBaralho.style.display = 'none'
         imagemMao.style.display = 'none';  
+        imagemMao.style.zIndex = 999
        
         iconeBoss.style.right = '10px'
 
@@ -75,14 +75,14 @@ export class MissaoCombateQueimadas extends Missao {
         fogo.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoParteBaixaTela.gif';
         fogo.alt = 'Fogo';
 
-        fogo.style.position = 'fixed';
+        fogo.style.position = 'relative';
         fogo.style.left = '50%';           
-        fogo.style.bottom = '20px';         
+        fogo.style.top = '40px';         
         fogo.style.transform = 'translateX(-50%)';
-        fogo.style.width = '900px';
-        fogo.style.zIndex = '3';  
-
-        //document.body.appendChild(fogo);
+        fogo.style.width = '500px';
+        fogo.style.zIndex = '1';  
+        
+        fundo.appendChild(fogo);
 
         let botao = document.getElementById('startButton')
         botao.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireButtonWhite.gif';

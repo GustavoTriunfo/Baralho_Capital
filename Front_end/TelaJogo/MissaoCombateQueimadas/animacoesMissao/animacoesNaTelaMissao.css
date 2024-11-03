@@ -38,7 +38,7 @@
 
 
 .fundo-intro {
-  position: fixed; /* Fixa a imagem na tela */
+  position: fixed;/* Fixa a imagem na tela */
   top: 0;
   left: 0;
   width: 100%;
@@ -48,7 +48,7 @@
   background-size: cover; /* Cobre toda a área */
   opacity: 0; /* Começa invisível */
   transition: opacity 1s ease; /* Transição suave de opacidade */
-  z-index: 9999; /* Acima de outros elementos */
+  z-index: 1; /* Acima de outros elementos */
 }
 
 .fundo-intro.active {
