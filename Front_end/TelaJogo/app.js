@@ -134,17 +134,18 @@ export function atualizarStatusJogo(){
     } else if (missao === 'combate-as-queimadas'){
         if(verificarFim() === false){
             if(jogadorAtual === jogador1){
+                console.log('entrou turno boss')
                 turnoBoss()
                 alternarJogador()
                 atualizarStatusJogo()
                
             } else{
-                console.log('entrou turno boss')
+                console.log('entrou turno jogador')
                 turnoJogador()
                 alternarJogador()
             }
         }else{
-            terminarJogo()
+           
         }
     }
 }
@@ -177,7 +178,7 @@ export function escolhaDoBoss(){
     }
 }
 
-function verificarFim(){
+export function verificarFim(){
     if(vidaBoss < 10){
         return true
     } else if(getQuantidadeHPJogador() < 2){
@@ -190,12 +191,13 @@ function verificarFim(){
 
 export function pararMusica() {
     let imagemBotaoMusica = document.getElementById('imagemMusica');
+    var audio = document.getElementById('musica');
     if (musicaTocando || getTempoMissaoZerado()|| getBombardeioFumaceAcontecendo()) {
-        musica.pause();
+        audio.pause();
         musicaTocando = false;
         imagemBotaoMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songFalse.png";
     } else {
-        musica.play();
+        audio.play();
         musicaTocando = true;
         imagemBotaoMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songTrue.png";
     }

@@ -46,7 +46,7 @@ export function transicaoFogareu() {
   
     corpo.appendChild(imagem);
   
-    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Monster Roar.mp3')
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Monster Roar.mp3', 0.6)
     setTimeout(() => {
         telaFicarBrancaPorUmSegundo()
         criarImagemFogareuFaseDois()
@@ -72,4 +72,31 @@ function telaFicarBrancaPorUmSegundo() {
     setTimeout(() => {
         sobreposicaoBranca.remove();
     }, 2000);
+}
+
+export function danoNoJogador(numPiscos = 3) {
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Ethan screaming.mp3', 0.4)
+    const flash = document.createElement('div');
+    flash.classList.add('flash-red');
+    document.body.appendChild(flash);
+
+    let piscadas = 0;
+
+    // Função para alternar o flash on/off
+    function piscar() {
+        flash.classList.add('active'); // Ativa o flash
+
+        setTimeout(() => {
+            flash.classList.remove('active'); // Desativa o flash
+
+            piscadas++;
+            if (piscadas < numPiscos) {
+                setTimeout(piscar, 100); // Espera antes de iniciar a próxima piscada
+            } else {
+                flash.remove(); // Remove o elemento após todas as piscadas
+            }
+        }, 100); // Duração de cada piscada
+    }
+
+    piscar(); // Inicia o primeiro flash
 }
