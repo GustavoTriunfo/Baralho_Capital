@@ -1,5 +1,5 @@
 import {reproduzirEfeitoSonoro} from './script.js'
-import {terminarJogo} from './app.js'
+import {terminarJogo, getMissaoSelecionada} from './app.js'
 
 var quantidadeHPJogador = 100.0
 
@@ -29,7 +29,7 @@ export function curarVidaJogador(numero) {
     export function diminuirVidaJogador() {
       var quantidadeVidaJogador = document.getElementById('playerHealthBar');
       quantidadeHPJogador -= 33.3;
-      if (quantidadeHPJogador > 32){
+      if (quantidadeHPJogador > 32 && getMissaoSelecionada() !== 'combate-as-queimadas'){
         ajustarOpacidadeVida(1 - (quantidadeHPJogador / 100));
       }
 
