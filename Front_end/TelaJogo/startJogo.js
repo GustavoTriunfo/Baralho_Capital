@@ -117,6 +117,6 @@ startButton.addEventListener('click', function() {
     audio.play();
 }
 
-export {jogadorAtual, jogador2};
+export {jogadorAtual, jogador2, jogador1};
 
 
