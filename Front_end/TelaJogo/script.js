@@ -109,12 +109,30 @@ export function iniciarCronometroTempoMissao(tempoRecebido) {
           elementoTempo.classList.add("d-none");
           tempoMissaoZerado = true;
           terminarJogo()
+          if(tempoRestante <= 0){
+            criarImagemRelogio()
+          }
           return;
       }
       
       // Decrementa o tempo restante
       tempoRestante--;
   }, 1000);
+}
+
+function criarImagemRelogio() {
+  const relogio = document.createElement('img');
+  relogio.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/deadLine.png';
+  relogio.alt = 'relogio';
+
+  relogio.style.position = 'fixed';
+  relogio.style.right = '-20%';           
+  relogio.style.top = '5%';         
+  relogio.style.transform = 'translateX(-50%)';
+  relogio.style.width = '150px';
+  relogio.style.zIndex = '99999';  
+  
+  document.body.appendChild(relogio);
 }
 
 function formatarTempo(segundos) {

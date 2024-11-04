@@ -1,7 +1,6 @@
 import { atualizarTelaStatus, selecionarImagem, metodosEspecificosDaMissao, criarCartasNoInicio, selecionarIdCarta} from './app.js';
 import {rearrangeCards} from './playerCard.js';
-import {iniciarCronometroTempoMissao, 
-     atualizarNumeroCarta, reproduzirEfeitoSonoro} from './script.js'
+import {atualizarNumeroCarta, reproduzirEfeitoSonoro} from './script.js'
 
 var jogador1 = {
     saldo: 0,
@@ -101,8 +100,6 @@ startButton.addEventListener('click', function() {
     startButton.style.display = 'none';
     // Oculta o overlay preto
     startOverlay.style.display = 'none';
-
-    iniciarCronometroTempoMissao(600)
     metodosEspecificosDaMissao();
     atualizarTelaStatus();
     criarCartasNoInicio();
