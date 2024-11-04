@@ -2,7 +2,7 @@ import {Missao} from '../Missao.js'
 import {CartasMissaoCombateQueimadas} from './cartasMissaoCombateQueimadas.js'
 import {setCartasJogo, atualizarStatusJogo, iniciarMusica} from '../app.js'
 import {criarAnimacaoFogo, animarCartaJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
-import {ocultarMaoJogador, reproduzirEfeitoSonoro} from '../script.js'
+import {ocultarMaoJogador, reproduzirEfeitoSonoro, iniciarCronometroTempoMissao} from '../script.js'
 import {criarCartaParaJogador} from '../startJogo.js'
 
 var criouCartasIniciaisJogador = false;
@@ -38,6 +38,10 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     criarImagensEspecificasDaMissao() {
+        var elementoTempo = document.getElementById("tempo-missao-div");
+        elementoTempo.style.left = '-5%'
+        elementoTempo.style.top = '20%'
+
         var fundo = document.querySelector('.black-bg');
         
         let arrow = document.getElementById('arrowButton');
@@ -129,6 +133,7 @@ export class MissaoCombateQueimadas extends Missao {
 }
 
 funcoesEspecificasDaMissao() {
+    iniciarCronometroTempoMissao(300)
     intro = true
     iniciarMusica(0.2)
     this.pararAudioPorId(2)

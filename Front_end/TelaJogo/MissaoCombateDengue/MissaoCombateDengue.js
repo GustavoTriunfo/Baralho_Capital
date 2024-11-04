@@ -2,7 +2,7 @@ import {Missao} from '../Missao.js'
 import {CartasMissaoCombateDengue} from './cartasMissaoCombateDengue.js';
 import {setCartasJogo, iniciarMusica} from '../app.js'
 import {criarCartaParaJogador, criarCartaParaOponente} from '../startJogo.js'
-import {ocultarMaoJogador, retornarAoEstadoNormal} from '../script.js'
+import {ocultarMaoJogador, retornarAoEstadoNormal, iniciarCronometroTempoMissao} from '../script.js'
 
 var cartasInvestimentosContraMosquito = 0
 var defendidoContraUmaPicadaSurpresa = false
@@ -232,6 +232,7 @@ export class MissaoCombateDengue extends Missao {
     }
 
     funcoesEspecificasDaMissao() {
+        iniciarCronometroTempoMissao(600)
         iniciarMusica(0.4)
     }
 
