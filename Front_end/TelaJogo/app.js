@@ -9,7 +9,7 @@ import {getBombardeioFumaceAcontecendo, acoesCartaBossMosquitoDengue, finalizarM
      verificarCartasMissaoDengue, atualizarTelaMissaoCombateDengue
 } from './MissaoCombateDengue/efeitosTelaMissaoCombateDengue.js'
 import {verificarCartasMissaoQueimadas, atualizarTelaMissaoCombateQueimadas, finalizarMissaoCombateQueimadas,
-
+    getJogadorSofreuDano
 } from './MissaoCombateQueimadas/efeitosTelaMissaoCombateQueimadas.js'
 import {verificarCartaEscolhidaFogareu, verificaJogadaFogareu} from './MissaoCombateQueimadas/fogareuFoguentoBoss.js'
 import {Missao} from './Missao.js'
@@ -132,20 +132,21 @@ export function atualizarStatusJogo(){
             terminarJogo()
         }
     } else if (missao === 'combate-as-queimadas'){
+        console.log('entrou no status')
         if(verificarFim() === false){
-            if(jogadorAtual === jogador1){
+            if(jogadorAtual === jogador1 && getJogadorSofreuDano() === false){
                 console.log('entrou turno boss')
                 turnoBoss()
                 alternarJogador()
                 atualizarStatusJogo()
                
-            } else{
+            } else if (getJogadorSofreuDano() === false){
                 console.log('entrou turno jogador')
                 turnoJogador()
                 alternarJogador()
             }
         }else{
-           
+          console.log('jogo acabou') 
         }
     }
 }

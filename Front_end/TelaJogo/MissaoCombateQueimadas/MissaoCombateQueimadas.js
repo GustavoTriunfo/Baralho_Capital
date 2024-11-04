@@ -74,6 +74,17 @@ export class MissaoCombateQueimadas extends Missao {
         let botao = document.getElementById('startButton')
         botao.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fireButtonWhite.gif';
         botao.style.width = '110px'
+
+
+        const cronometroElement = document.createElement('div');
+        cronometroElement.id = 'cronometro';
+        cronometroElement.style.zIndex = 10
+        cronometroElement.style.position = 'fixed';
+        cronometroElement.style.top = '20px';
+        cronometroElement.style.left = '50%';
+        cronometroElement.style.transform = 'translateX(-50%)';
+        cronometroElement.style.fontSize = '3rem';
+        document.body.appendChild(cronometroElement);
     }
 
     configurarMusicasEEfeitosSonoros() {

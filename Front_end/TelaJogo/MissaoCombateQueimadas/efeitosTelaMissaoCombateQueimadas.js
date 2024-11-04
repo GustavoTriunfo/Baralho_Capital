@@ -1,10 +1,12 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
-import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss} from '../app.js'
-import {diminuirVidaJogador} from '../jogador.js'
+import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss, atualizarStatusJogo} from '../app.js'
+import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
 import {danoNoJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
-import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro} from '../script.js'
+import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador} from '../script.js'
 
 let pontosJogador = 0;
+var jogadorSofreuDano = false
+var jogadorLevouDanoPorTempoZerado = false
 
 export function verificarCartasMissaoQueimadas() {
     if(
@@ -23,8 +25,7 @@ export function verificarCartasMissaoQueimadas() {
             adicionarPontoAJogador()
         }
     } else {
-        diminuirVidaJogador()
-        danoNoJogador()
+        queimarJogador()
     }
     console.log(getCartaBossRecente() + ' ' + getCartaEscolhidaPorJogador())
 }
@@ -33,8 +34,27 @@ export function atualizarTelaMissaoCombateQueimadas() {
 
 }
 
+export function queimarJogador() {
+    if(getQuantidadeHPJogador() > 2){
+    pausarCronometro()
+    jogadorSofreuDano = true
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/RisadaFogareu.mp3", 1);
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/DanoNoJogador.mp3", 1);
+    diminuirVidaJogador()
+    ocultarMaoJogador()
+    danoNoJogador()
+        setTimeout(() => {
+            setJogadorSofreuDano(false)
+            atualizarStatusJogo()
+            retornarAoEstadoNormal()
+            reiniciarCronometro()
+    }, 3000);  
+    }
+}
+
 export function finalizarMissaoCombateQueimadas() {
     if(getJogoAcabou() === false) {
+    pausarCronometro()
     pararMusica()
     reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Creepy Asteroid.mp3", 1);
     setJogoAcabou(true)
@@ -86,4 +106,83 @@ export function adicionarPontoAJogador() {
     setTimeout(() => {
         pontoContador.classList.remove('ponto-animado');
     }, 300);
+}
+
+let intervaloCronometro; // Variável para armazenar o intervalo do cronômetro
+let tempoRestante = 5; // Tempo inicial padrão
+
+// Função para iniciar o cronômetro com um tempo específico
+export function iniciarCronometroLance(tempoInicial = 5) {
+    // Define o tempo restante com o valor passado (ou o padrão de 5 segundos)
+    tempoRestante = tempoInicial;
+
+    const cronometroElement = document.getElementById('cronometro') || document.createElement('div');
+    if (!document.getElementById('cronometro')) {
+        cronometroElement.id = 'cronometro';
+        cronometroElement.className = 'cronometro';
+        document.body.appendChild(cronometroElement);
+    }
+
+    // Limpa qualquer intervalo existente para reiniciar o cronômetro do zero
+    clearInterval(intervaloCronometro);
+
+    // Inicia o intervalo para o cronômetro
+    intervaloCronometro = setInterval(() => {
+        const milissegundos = Math.floor((tempoRestante % 1) * 100);
+        const segundos = Math.floor(tempoRestante);
+
+        cronometroElement.textContent = `${segundos}.${milissegundos < 10 ? '0' + milissegundos : milissegundos}`;
+
+        // Adiciona a cor vermelha quando o tempo está acabando
+        if (tempoRestante <= 1) {
+            cronometroElement.style.color = 'red';
+        } else {
+            cronometroElement.style.color = 'white';
+        }
+
+        // Animação de pulso
+        if (tempoRestante % 1 === 0) {
+            cronometroElement.classList.add('animacao');
+            setTimeout(() => {
+                cronometroElement.classList.remove('animacao');
+            }, 100);
+        }
+
+        // Decrementa o tempo restante
+        tempoRestante -= 0.01;
+
+        // Limita o cronômetro a 0 e para o intervalo
+        if (tempoRestante <= 0) {
+            clearInterval(intervaloCronometro);
+            cronometroElement.textContent = '0.00';
+            queimarJogador()
+            setJogadorLevouDanoPorTempoZerado(true)
+        }
+    }, 10); // Atualiza a cada 10 milissegundos
+}
+
+// Função para pausar o cronômetro
+export function pausarCronometro() {
+    clearInterval(intervaloCronometro);
+}
+
+// Função para reiniciar o cronômetro com um novo valor de tempo
+export function reiniciarCronometro(tempoInicial = 5) {
+    iniciarCronometroLance(tempoInicial); // Reinicia o cronômetro com o novo tempo
+}
+
+export function getJogadorSofreuDano() {
+    return jogadorSofreuDano
+}
+
+export function setJogadorSofreuDano(estado) {
+    jogadorSofreuDano = estado
+}
+
+export function getJogadorLevouDanoPorTempoZerado() {
+    return jogadorLevouDanoPorTempoZerado
+}
+
+export function setJogadorLevouDanoPorTempoZerado(estado) {
+    jogadorLevouDanoPorTempoZerado = estado
 }

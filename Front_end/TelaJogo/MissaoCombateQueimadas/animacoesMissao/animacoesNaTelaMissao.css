@@ -123,6 +123,28 @@
 }
 
 .ponto-contador.ponto-animado {
-  transform: scale(2);
+  transform: scale(5);
   color: #ffdd57; /* Cor de destaque temporária */
+}
+
+
+
+.cronometro {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: rgb(24, 138, 195) !important; /* Força a cor branca */
+  font-weight: bold; /* Deixa a fonte mais grossa */
+  transition: color 0.3s ease;
+}
+
+.cronometro.alert {
+  color: red !important; /* Muda para vermelho quando o tempo está acabando */
+}
+
+.cronometro.animacao {
+  transform: scale(1.3);
+  transition: transform 0.1s ease;
 }
