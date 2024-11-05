@@ -1,10 +1,10 @@
 import {reproduzirEfeitoSonoro, getCartaJogadorRecente, iniciarCronometro, setCronometroAtivo, visualizacaoCartaBoss,
-
+  getEfeitosSonorosPermitidos
 } from '../script.js'
 import {tocarEfeitoSoco, getQuantidadeCartasExercitoAladoUtilizadas, getBombardeioFumaceAcontecendo, setBombardeioFumaceAcontecendo,
 
 } from './efeitosTelaMissaoCombateDengue.js'
-import {getCartaBossRecente, setCartaBossRecente, getEstadoEfeitoSonoro, pararMusica, getVidaBoss, getTransicaoBoss,
+import {getCartaBossRecente, setCartaBossRecente, pararMusica, getVidaBoss, getTransicaoBoss,
   jogadaBoss, setTransicaoBoss, getMusicaTocando
 } from '../app.js'
 
@@ -71,7 +71,7 @@ var faseDois = false
       export function tocarEfeitoRisadaAleatoriaMosquitoDengue() {
         let efeitosSonoros = []
 
-        if(getEstadoEfeitoSonoro()){
+        if(getEfeitosSonorosPermitidos()){
           if(faseDois === false){
             efeitosSonoros = efeitosSonorosFaseUm
           }else{
@@ -296,9 +296,8 @@ export function iniciarSusto() {
       parouMusica = true
       pararMusica()
     }
-    var audioSusto = new Audio('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3');
-    audioSusto.volume = 0.2; 
-    audioSusto.play();
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/MosquitoAtaqueMaisLeve.mp3', 0.2)
+   
     if(getCartaBossRecente() === 4){
       imagemSusto.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/AtaqueSustoParalizante.png'
     } else{

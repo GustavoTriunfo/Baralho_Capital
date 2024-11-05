@@ -19,7 +19,6 @@ import {MissaoCombateQueimadas} from './MissaoCombateQueimadas/MissaoCombateQuei
 var alteracaoBossJaAconteceu = false
 var danoCausado = 0
 var vidaBoss = 100
-var efeitoSonoro = true;
 var missao = ''
 var transicaoBoss = false
 let Cartas = null
@@ -193,7 +192,7 @@ export function verificarFim(){
 export function pararMusica() {
     let imagemBotaoMusica = document.getElementById('imagemMusica');
     var audio = document.getElementById('musica');
-    if (musicaTocando || getTempoMissaoZerado()|| getBombardeioFumaceAcontecendo()) {
+    if (musicaTocando || getTempoMissaoZerado() || getBombardeioFumaceAcontecendo()) {
         audio.pause();
         musicaTocando = false;
         imagemBotaoMusica.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/songFalse.png";
@@ -338,14 +337,6 @@ export function getCartaBossRecente() {
 export function setCartaBossRecente(numero) {
     cartaBossRecente = numero
 }
-
-export function getEstadoEfeitoSonoro() {
-    return efeitoSonoro
-  }
-  
-  export function setEstadoEfeitoSonoro(estado) {
-    efeitoSonoro = estado
-  }
 
   export function getVidaBoss() {
     return vidaBoss

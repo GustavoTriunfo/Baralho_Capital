@@ -145,9 +145,9 @@
 <audio id="musica" preload="auto" loop></audio>
 
 <script type="module">
-import {verificarCartaBoss, getCartaBossRecente, atualizarTelaStatus, getEstadoEfeitoSonoro, setEstadoEfeitoSonoro, 
+import {verificarCartaBoss, getCartaBossRecente, atualizarTelaStatus, 
   pararMusica, selecionarMissao, getMissaoSelecionada} from './app.js'
-import {setQuantidadeCartasJogadas} from './script.js'
+import {setQuantidadeCartasJogadas, setEfeitosSonorosPermitidos, getEfeitosSonorosPermitidos} from './script.js'
  
   var mutado = document.getElementById('efeitoSons');
 
@@ -162,11 +162,11 @@ import {setQuantidadeCartasJogadas} from './script.js'
   }
 
   function mutarEfeitosSonoros(){
-    if (getEstadoEfeitoSonoro()) {
-      setEstadoEfeitoSonoro(false);
+    if (getEfeitosSonorosPermitidos()) {
+      setEfeitosSonorosPermitidos(false);
       mutado.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/muted.png";
       } else {
-        setEstadoEfeitoSonoro(true);
+        setEfeitosSonorosPermitidos(true);
           mutado.src = "/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/speaking.png";
       }
   }
