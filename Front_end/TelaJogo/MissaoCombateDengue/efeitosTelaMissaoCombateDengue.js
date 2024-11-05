@@ -194,10 +194,13 @@ export function finalizarMissaoCombateDengue() {
 
         if(getVidaBoss() < 10){
             pararZumbidoLoucura()
-            pararMusica()
+            if(getMusicaTocando() === true){
+                pararMusica()
+                reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Saint-Saëns_ Le carnaval des animaux, R. 125_ VII. Aquarium - VIII. Personnages à longues....mp3', 0.5)
+            }
             ajustarOpacidadeVida(0)
             reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/MorteMosquito.mp3', 1)
-            reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Saint-Saëns_ Le carnaval des animaux, R. 125_ VII. Aquarium - VIII. Personnages à longues....mp3', 0.5)
+            
             var endgameOverlay = document.getElementById('endgameOverlay');
             endgameOverlay.style.display = 'block';
             setJogoAcabou(true)
@@ -210,7 +213,9 @@ export function finalizarMissaoCombateDengue() {
      
     
         } else if(getQuantidadeHPJogador() < 2 || getTempoMissaoZerado() === true){
+            if(getMusicaTocando() === true){
             pararMusica()
+            }
             reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Darkest Dungeon - Death door bell.mp3', 1)
             var endgamePlayerLose = document.getElementById('endgamePlayerLose');
             endgamePlayerLose.style.display = 'block';

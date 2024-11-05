@@ -8,6 +8,7 @@ var cronometroAtivoJogo = false;
 var tempoMissaoZerado = false;
 var quantidadeCartasJogadas = 0;
 var numeroCarta = 0;
+var efeitosSonorosPermitidos = true
 
 export function ocultarMaoJogador() {
   var maoJogador = document.getElementById('maoJogador');
@@ -142,9 +143,11 @@ function formatarTempo(segundos) {
 }
 
 export function reproduzirEfeitoSonoro(url, volume = 1){
+  if(efeitosSonorosPermitidos) {
   var audio = new Audio(url);
   audio.volume = volume; 
   audio.play();
+  }
 }
 
 document.getElementById('imagemDerrota').addEventListener('click', function() {
@@ -221,3 +224,12 @@ export function getJogoAcabou() {
 export function setJogoAcabou(estado) {
     jogoAcabou = estado
 }
+
+export function getEfeitosSonorosPermitidos() {
+  return efeitosSonorosPermitidos
+}
+
+export function setEfeitosSonorosPermitidos(estado) {
+  efeitosSonorosPermitidos = estado
+}
+

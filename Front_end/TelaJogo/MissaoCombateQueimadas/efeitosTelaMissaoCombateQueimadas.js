@@ -1,5 +1,7 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
-import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss, atualizarStatusJogo} from '../app.js'
+import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss, atualizarStatusJogo,
+    getMusicaTocando
+} from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
 import {danoNoJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador} from '../script.js'
@@ -38,7 +40,7 @@ export function queimarJogador() {
     if(getQuantidadeHPJogador() > 2){
     pausarCronometro()
     jogadorSofreuDano = true
-    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/RisadaFogareu.mp3", 1);
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/RisadaFogareu.mp3", 0.4);
     reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/DanoNoJogador.mp3", 1);
     diminuirVidaJogador()
     ocultarMaoJogador()
@@ -55,8 +57,10 @@ export function queimarJogador() {
 export function finalizarMissaoCombateQueimadas() {
     if(getJogoAcabou() === false) {
     pausarCronometro()
+    if(getMusicaTocando() === true){
     pararMusica()
     reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Creepy Asteroid.mp3", 1);
+    }
     setJogoAcabou(true)
     var endgamePlayerLose = document.getElementById('endgamePlayerLose');
     var imagemDerrota = document.getElementById('imagemDerrota');
