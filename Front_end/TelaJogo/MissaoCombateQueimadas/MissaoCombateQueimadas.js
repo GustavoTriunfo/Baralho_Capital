@@ -248,10 +248,10 @@ export function adicionarCartaLadoEsquerdo(enderecoImagem) {
 export function criarImagemFogareuFaseDois() {
     let imagem = document.getElementById('animatedImage');
     imagem.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuForma2.gif';
-    imagem.style.width = '250px'
+    imagem.style.width = '230px'
     imagem.style.height = 'auto'
     imagem.style.position = 'fixed';
-    imagem.style.top = '0px';
+    imagem.style.top = '20px';
     imagem.style.right = '20px';
     imagem.style.zIndex = 3
     imagem.classList.add('animated');
