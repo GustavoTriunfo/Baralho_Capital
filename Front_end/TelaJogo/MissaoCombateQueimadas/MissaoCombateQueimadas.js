@@ -38,6 +38,11 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     criarImagensEspecificasDaMissao() {
+        let botaoMenu = document.getElementById('toggleButton')
+        let botaoPokedex = document.getElementById('arrowButton')
+        botaoMenu.style.visibility = 'hidden'
+        botaoPokedex.style.visibility = 'hidden'
+
         var elementoTempo = document.getElementById("tempo-missao-div");
         elementoTempo.style.left = '-5%'
         elementoTempo.style.top = '20%'
@@ -174,6 +179,10 @@ criarCartasNoInicioDaMissao()
             // Inicia o processo de criação de cartas com um intervalo inicial
             setTimeout(criarCartaComIntervalo, 0);
             setTimeout(() => {
+                let botaoMenu = document.getElementById('toggleButton')
+                let botaoPokedex = document.getElementById('arrowButton')
+                botaoMenu.style.visibility = 'visible'
+                botaoPokedex.style.visibility = 'visible'
                 atualizarStatusJogo() //inicio da missão turno boss
             }, 3000); 
         }, 3000); 
