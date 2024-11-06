@@ -1,6 +1,7 @@
 import {reproduzirEfeitoSonoro} from '../../script.js'
 import {pararMusica} from '../../app.js'
 import {criarImagemFogareuFaseDois} from '../MissaoCombateQueimadas.js'
+import {pausarCronometro, reiniciarCronometro} from '../efeitosTelaMissaoCombateQueimadas.js'
 
 export function criarAnimacaoFogo() {
 
@@ -31,6 +32,7 @@ export function animarCartaJogador(caminhoImagem, elementoClicado) {
 
 export function transicaoFogareu() {
     pararMusica()
+    pausarCronometro()
     const corpo = document.body;
 
     const imagem = document.createElement('img');
@@ -51,7 +53,8 @@ export function transicaoFogareu() {
         telaFicarBrancaPorUmSegundo()
         criarImagemFogareuFaseDois()
         fantasmasDeFogoAnimacao()
-      imagem.remove();
+        imagem.remove();
+        reiniciarCronometro()
     }, 4000);
     pararMusica()
 }
