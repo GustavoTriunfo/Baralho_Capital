@@ -313,19 +313,6 @@ export function iniciarMusica(volume) {
     audio.play();
 }
 
-
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
-adicionarImagemNaPokedex('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/cartas/RoupaAntiChamas.png');
 export function getMusicaTocando() {
     return musicaTocando
 }

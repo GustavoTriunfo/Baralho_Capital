@@ -1,6 +1,6 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
 import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss, atualizarStatusJogo,
-    getMusicaTocando
+    getMusicaTocando, adicionarImagemNaPokedex, selecionarCaminhoImagem
 } from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
 import {danoNoJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
@@ -25,6 +25,7 @@ export function verificarCartasMissaoQueimadas() {
             }
         } else {
             adicionarPontoAJogador()
+            verificarItensDePontuacao()
         }
     } else {
         queimarJogador()
@@ -163,6 +164,31 @@ export function iniciarCronometroLance(tempoInicial = 5) {
             setJogadorLevouDanoPorTempoZerado(true)
         }
     }, 10); // Atualiza a cada 10 milissegundos
+}
+
+
+export function verificarItensDePontuacao() {
+    if(pontosJogador === 8) {
+        entregarCartaEspecial(17)
+    } else if (pontosJogador === 16) {
+        entregarCartaEspecial(19)
+    }
+     else if (pontosJogador === 26) {
+        entregarCartaEspecial(23)
+     }  else if (pontosJogador === 38) {
+        entregarCartaEspecial(25)
+     }  else if (pontosJogador === 50) {
+        entregarCartaEspecial(27)
+     }  else if (pontosJogador >= 70) {
+        entregarCartaEspecial(28)
+     }
+}
+
+export function entregarCartaEspecial(limiteIdCartaGerada) {
+    let min = 14; 
+   let max = limiteIdCartaGerada; 
+   let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
+   adicionarImagemNaPokedex(selecionarCaminhoImagem(cartaSelecionada))
 }
 
 // Função para pausar o cronômetro
