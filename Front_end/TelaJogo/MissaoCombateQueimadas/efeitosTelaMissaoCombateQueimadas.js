@@ -1,6 +1,6 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
 import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss, atualizarStatusJogo,
-    getMusicaTocando, adicionarImagemNaPokedex, selecionarCaminhoImagem
+    getMusicaTocando, selecionarCaminhoImagem
 } from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
 import {danoNoJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
@@ -185,10 +185,68 @@ export function verificarItensDePontuacao() {
 }
 
 export function entregarCartaEspecial(limiteIdCartaGerada) {
-    let min = 14; 
+   let min = 14; 
    let max = limiteIdCartaGerada; 
    let cartaSelecionada = Math.floor(Math.random() * (max - min + 1)) + min;
-   adicionarImagemNaPokedex(selecionarCaminhoImagem(cartaSelecionada))
+   adicionarImagemNaPokedex(selecionarCaminhoImagem(cartaSelecionada), cartaSelecionada)
+}
+
+let celulaSelecionada = null;
+
+export function adicionarImagemNaPokedex(caminhoImagem, id) {
+    // Seleciona a grid da Pokédex
+    const pokedexGrid = document.getElementById('pokedexGrid');
+
+    // Cria um novo slot (div) para a imagem
+    const novaCelula = document.createElement('div');
+    novaCelula.classList.add('pokedex-cell'); // Adiciona uma classe para estilização
+    novaCelula.dataset.selecionado = "false"; // Inicialmente, não está selecionada
+    novaCelula.dataset.id = id; // Armazena o ID da imagem como um atributo da célula
+
+    // Cria a imagem
+    const novaImagem = document.createElement('img');
+    novaImagem.src = caminhoImagem;
+    novaImagem.alt = 'Imagem do item'; // Texto alternativo para acessibilidade
+    novaImagem.classList.add('pokedex-image'); // Adiciona uma classe para estilização
+
+    // Adiciona a imagem à nova célula
+    novaCelula.appendChild(novaImagem);
+
+    // Adiciona a nova célula à grid da Pokédex
+    pokedexGrid.appendChild(novaCelula);
+
+    // Adiciona o evento de clique para alternar entre seleção e execução da ação
+    novaCelula.addEventListener('click', () => {
+        // Se já existe uma célula selecionada, remove a seleção dela
+        if (celulaSelecionada && celulaSelecionada !== novaCelula) {
+            celulaSelecionada.style.backgroundColor = ''; // Restaura a cor original
+            celulaSelecionada.dataset.selecionado = "false";
+        }
+
+        // Alterna o estado da célula clicada
+        if (novaCelula.dataset.selecionado === "false") {
+            // Marca a nova célula como selecionada
+            novaCelula.style.backgroundColor = 'yellow'; // Altere a cor conforme desejar
+            novaCelula.dataset.selecionado = "true";
+            celulaSelecionada = novaCelula; // Atualiza a referência para a célula selecionada
+        } else {
+            // Caso a célula selecionada seja clicada novamente, chama a ação com o ID e desmarca
+            realizarAcaoComImagemSelecionada(id);
+            novaCelula.remove(); 
+            celulaSelecionada = null; // Limpa a referência, já que nada estará selecionado
+        }
+    });
+}
+
+// Exemplo de função que realiza uma ação com a imagem selecionada
+function realizarAcaoComImagemSelecionada(id) {
+    console.log(`Ação executada com o ID da imagem: ${id}`);
+    verificarCartaEspecialDoJogador(id)
+    document.getElementById('arrowButton').click();
+}
+
+export function verificarCartaEspecialDoJogador(id) {
+
 }
 
 // Função para pausar o cronômetro

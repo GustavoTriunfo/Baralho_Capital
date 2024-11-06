@@ -286,25 +286,6 @@ export function selecionarImagem(idImagem, novaCarta) {
     novaCarta.appendChild(imagem);
 }
 
-export function adicionarImagemNaPokedex(caminhoImagem) {
-    // Seleciona a grid da Pokédex
-    const pokedexGrid = document.getElementById('pokedexGrid');
-
-    // Cria um novo slot (div) para a imagem
-    const novaCelula = document.createElement('div');
-    novaCelula.classList.add('pokedex-cell'); // Adiciona uma classe para estilização
-
-    // Cria a imagem
-    const novaImagem = document.createElement('img');
-    novaImagem.src = caminhoImagem;
-    novaImagem.alt = 'Imagem do item'; // Texto alternativo para acessibilidade
-    novaImagem.classList.add('pokedex-image'); // Adiciona uma classe para estilização
-    // Adiciona a imagem à nova célula
-    novaCelula.appendChild(novaImagem);
-    // Adiciona a nova célula à grid da Pokédex
-    pokedexGrid.appendChild(novaCelula);
-}
-
 export function iniciarMusica(volume) {
     // Obtém o elemento de áudio
     var audio = document.getElementById('musica');
