@@ -15,6 +15,7 @@ import {verificarCartaEscolhidaFogareu, verificaJogadaFogareu} from './MissaoCom
 import {Missao} from './Missao.js'
 import {MissaoCombateDengue} from './MissaoCombateDengue/MissaoCombateDengue.js'
 import {MissaoCombateQueimadas} from './MissaoCombateQueimadas/MissaoCombateQueimadas.js'
+import {transicaoFogareu} from './MissaoCombateQueimadas/animacoesMissao/animacoesNaTelaMissao.js'
 
 var alteracaoBossJaAconteceu = false
 var danoCausado = 0
@@ -111,7 +112,7 @@ export function alterarFaseBoss() {
     if (missao === 'combate-mosquito-dengue') {
         alterarFaseBossMosquitoDengue()
     } else if (missao === 'combate-as-queimadas'){
-
+        transicaoFogareu()
     }
 }
 

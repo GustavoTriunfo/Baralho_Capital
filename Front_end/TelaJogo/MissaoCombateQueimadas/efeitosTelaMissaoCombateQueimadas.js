@@ -17,16 +17,9 @@ export function verificarCartasMissaoQueimadas() {
         parseInt(getCartaBossRecente()) === 9 && parseInt(getCartaEscolhidaPorJogador()) === 12 || 
         ([2, 4, 5, 6, 7, 8, 0].includes(parseInt(getCartaBossRecente())) && parseInt(getCartaEscolhidaPorJogador()) === 13)
     ) {
-        if([14].includes(parseInt(getCartaEscolhidaPorJogador()))){
-            alterarVidaBoss(50)
-            if(getVidaBoss() <= 50 && getTransicaoBoss() === false) {
-                setTransicaoBoss(true)
-                transicaoFogareu()
-            }
-        } else {
             adicionarPontoAJogador()
             verificarItensDePontuacao()
-        }
+        
     } else {
         queimarJogador()
     }
@@ -240,7 +233,7 @@ export function adicionarImagemNaPokedex(caminhoImagem, id) {
 
 // Exemplo de função que realiza uma ação com a imagem selecionada
 function realizarAcaoComImagemSelecionada(id) {
-    console.log(`Ação executada com o ID da imagem: ${id}`);
+    alterarVidaBoss(getVidaBoss() - 20)
     verificarCartaEspecialDoJogador(id)
     document.getElementById('arrowButton').click();
 }
