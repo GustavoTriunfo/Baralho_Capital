@@ -94,6 +94,20 @@ export class MissaoCombateQueimadas extends Missao {
         cronometroElement.style.transform = 'translateX(-50%)';
         cronometroElement.style.fontSize = '3rem';
         document.body.appendChild(cronometroElement);
+
+
+        const iconeExclamacao = document.createElement('img');
+        iconeExclamacao.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/recebeuCartaEspecial.gif';
+        iconeExclamacao.id = 'exclamacao';
+        iconeExclamacao.style.display = 'none'
+        iconeExclamacao.style.position = 'fixed';
+        iconeExclamacao.style.right = '-16%';           
+        iconeExclamacao.style.top = '40px';         
+        iconeExclamacao.style.transform = 'translateX(-50%)';
+        iconeExclamacao.style.width = '100px';
+        iconeExclamacao.style.zIndex = '5';  
+        
+        fundo.appendChild(iconeExclamacao);
     }
 
     configurarMusicasEEfeitosSonoros() {
