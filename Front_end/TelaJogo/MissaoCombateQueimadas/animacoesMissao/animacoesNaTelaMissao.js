@@ -247,6 +247,9 @@ export function fogareuDerrotado() {
  }
 
  function configurarJogador() {
+    let cronometro = document.getElementById('cronometro')
+    cronometro.style.display = 'none'
+
     let iconeBoss = document.getElementById('iconeBoss')
     iconeBoss.style.left = '1%'
     iconeBoss.style.top = '0.5%'

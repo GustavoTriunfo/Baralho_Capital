@@ -233,6 +233,11 @@ export function adicionarImagemNaPokedex(caminhoImagem, id) {
             celulaSelecionada = null; // Limpa a referência, já que nada estará selecionado
         }
     });
+    const exclamacao = document.getElementById('exclamacao');
+    exclamacao.style.display = 'block'
+    setTimeout(() => {
+         exclamacao.style.display = 'none'
+    }, 1500);  
 }
 
 // Exemplo de função que realiza uma ação com a imagem selecionada
