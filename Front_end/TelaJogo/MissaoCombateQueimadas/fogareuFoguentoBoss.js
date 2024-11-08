@@ -1,6 +1,6 @@
 import {setCartaBossRecente, getCartaBossRecente, selecionarCaminhoImagem} from '../app.js'
 import {adicionarCartaLadoEsquerdo, getEstadoIntro} from './MissaoCombateQueimadas.js'
-import {reproduzirEfeitoSonoro, retornarAoEstadoNormal} from '../script.js'
+import {reproduzirEfeitoSonoro, retornarAoEstadoNormal, getJogoAcabou} from '../script.js'
 import {verificarCartasMissaoQueimadas, iniciarCronometroLance, getJogadorSofreuDano, getJogadorLevouDanoPorTempoZerado,
     setJogadorLevouDanoPorTempoZerado
 } from './efeitosTelaMissaoCombateQueimadas.js'
@@ -18,7 +18,6 @@ export function verificarCartaEscolhidaFogareu() {
 }
 
 export function verificaJogadaFogareu() {
-    console.log('entrou no verifica')
     if(getJogadorSofreuDano() === false) {
     if (getEstadoIntro() === false && getJogadorLevouDanoPorTempoZerado() === false) {
         verificarCartasMissaoQueimadas();
@@ -29,8 +28,10 @@ export function verificaJogadaFogareu() {
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/jogadaFogareu.mp3', 0.3);
     adicionarCartaLadoEsquerdo(selecionarCaminhoImagem(getCartaBossRecente()));
     setTimeout(() => {
-        iniciarCronometroLance()
-        retornarAoEstadoNormal();
+        if(getJogoAcabou() === false) {
+            iniciarCronometroLance()
+            retornarAoEstadoNormal();
+        }
     }, 200);  
     }
  } else {
