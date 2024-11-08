@@ -1,6 +1,6 @@
-import {reproduzirEfeitoSonoro} from '../../script.js'
+import {reproduzirEfeitoSonoro, setJogoAcabou} from '../../script.js'
 import {pararMusica} from '../../app.js'
-import {criarImagemFogareuFaseDois} from '../MissaoCombateQueimadas.js'
+import {criarImagemFogareuFaseDois, removerTodasCartas, pararAudioPorId} from '../MissaoCombateQueimadas.js'
 import {pausarCronometro, reiniciarCronometro} from '../efeitosTelaMissaoCombateQueimadas.js'
 
 export function criarAnimacaoFogo() {
@@ -200,3 +200,68 @@ export function pararFantasmasDeFogoAnimacao() {
     animacaoAtiva = false; // Define a flag para interromper novas animações
     clearInterval(intervaloAnimacao); // Para o intervalo de criação de novas imagens
 }
+
+export function fogareuDerrotado() {
+    removerTodasCartas()
+    pararMusica()
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Erik Satie - Gnossienne No.1.mp3", 1);
+    pararAudioPorId(1)
+    setJogoAcabou(true)
+    pausarCronometro()
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGritando.mp3', 0.2)
+    setTimeout(function () {
+        configurarJogador()
+        fogareuMorrendo()
+        pararFantasmasDeFogoAnimacao()
+        setTimeout(function () {
+             chamasApagando()
+             setTimeout(function () {
+                var endgameOverlay = document.getElementById('endgameOverlay');
+                endgameOverlay.style.display = 'block';
+           }, 10000);
+        }, 3000);
+    }, 1500);
+}
+
+ function fogareuMorrendo() {
+    const fogareuImagem = document.getElementById('animatedImage');
+
+    if (fogareuImagem) {
+        fogareuImagem.classList.add('boss-death');
+
+        fogareuImagem.addEventListener('animationend', () => {
+            telaFicarBrancaPorUmSegundo()
+            fogareuImagem.remove();
+        });
+    }
+}
+
+ function chamasApagando() {
+    var fundo = document.querySelector('.black-bg');
+    fundo.style.backgroundSize = '200% 100%';
+    fundo.style.backgroundImage = 'url("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/jogadorVenceuFundo.png")';
+    const chamas = document.getElementById('FogoBaixo');
+    chamas.style.display = 'none'
+    const mesa = document.getElementById('mesa')
+    mesa.style.backgroundImage = 'url("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/charredGround.jpg")'
+ }
+
+ function configurarJogador() {
+    let iconeBoss = document.getElementById('iconeBoss')
+    iconeBoss.style.left = '1%'
+    iconeBoss.style.top = '0.5%'
+    iconeBoss.style.width = '55px'
+    iconeBoss.style.height = 'auto'
+    iconeBoss.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/deadBossFace.png'
+
+    let botaoMenu = document.getElementById('toggleButton')
+    let botaoPokedex = document.getElementById('arrowButton')
+    botaoMenu.style.visibility = 'hidden'
+    botaoPokedex.style.visibility = 'hidden'
+
+    const imagemMao = document.getElementById('maoJogador');
+    imagemMao.style.display = 'none';  
+
+    var elementoTempo = document.getElementById("tempo-missao-div");
+    elementoTempo.style.visibility = 'hidden'
+ }

@@ -69,7 +69,7 @@ export class MissaoCombateQueimadas extends Missao {
 
         const fogo = document.createElement('img');
         fogo.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoParteBaixaTela.gif';
-        fogo.alt = 'Fogo';
+        fogo.id = 'FogoBaixo';
 
         fogo.style.position = 'fixed';
         fogo.style.left = '50%';           
@@ -121,17 +121,7 @@ export class MissaoCombateQueimadas extends Missao {
         audioElement.play();
     }
 
-    pararAudioPorId(id) {
-        // Busca o elemento de áudio pelo ID
-        const audioElement = document.getElementById(id);
-        
-        // Verifica se o elemento existe e então pausa o áudio
-        if (audioElement) {
-            audioElement.pause();
-        } else {
-            console.log(`Áudio com ID ${id} não encontrado.`);
-        }
-    }
+   
 
     configurarCartas() {
         setCartasJogo(CartasMissaoCombateQueimadas)
@@ -141,7 +131,7 @@ funcoesEspecificasDaMissao() {
     iniciarCronometroTempoMissao(300)
     intro = true
     iniciarMusica(0.2)
-    this.pararAudioPorId(2)
+    pararAudioPorId(2)
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuIntroP1.mp3')
     setTimeout(() => {
         this.criarImagemFogareu('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogareuIntrov2.gif');
@@ -236,7 +226,6 @@ criarCartasNoInicioDaMissao()
 }
 
 export function adicionarCartaLadoEsquerdo(enderecoImagem) {
-      
     const carta = document.createElement('img');
     carta.src = enderecoImagem;
     carta.alt = 'Imagem de Carta';
@@ -249,9 +238,15 @@ export function adicionarCartaLadoEsquerdo(enderecoImagem) {
     carta.style.height = 'auto';        
     carta.style.zIndex = '2';           
 
-    carta.classList.add('carta-animada');
-    
+    carta.classList.add('carta-animada');  // Classe para animação
+    carta.classList.add('carta-lateral');  // Classe para fácil seleção e remoção
+
     document.body.appendChild(carta);
+}
+
+export function removerTodasCartas() {
+    const cartas = document.querySelectorAll('.carta-lateral'); // Seleciona todas as cartas com a classe 'carta-lateral'
+    cartas.forEach(carta => carta.remove()); // Remove cada carta do DOM
 }
 
 export function criarImagemFogareuFaseDois() {
@@ -279,4 +274,16 @@ export function alterarMusica(novaFonte) {
     const musica = document.getElementById("musica");
     musica.src = novaFonte;
     musica.load();
+}
+
+export function pararAudioPorId(id) {
+    // Busca o elemento de áudio pelo ID
+    const audioElement = document.getElementById(id);
+    
+    // Verifica se o elemento existe e então pausa o áudio
+    if (audioElement) {
+        audioElement.pause();
+    } else {
+        console.log(`Áudio com ID ${id} não encontrado.`);
+    }
 }

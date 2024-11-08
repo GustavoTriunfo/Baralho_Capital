@@ -1,9 +1,9 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
-import {getCartaBossRecente, pararMusica, alterarVidaBoss, getTransicaoBoss, setTransicaoBoss, getVidaBoss, atualizarStatusJogo,
+import {getCartaBossRecente, pararMusica, alterarVidaBoss, getVidaBoss, atualizarStatusJogo,
     getMusicaTocando, selecionarCaminhoImagem
 } from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
-import {danoNoJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {danoNoJogador, fogareuDerrotado} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador} from '../script.js'
 
 let pontosJogador = 0;
@@ -50,33 +50,37 @@ export function queimarJogador() {
 
 export function finalizarMissaoCombateQueimadas() {
     if(getJogoAcabou() === false) {
-    pausarCronometro()
-    if(getMusicaTocando() === true){
-    pararMusica()
-    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Creepy Asteroid.mp3", 1);
+        if(getVidaBoss() < 10){
+            fogareuDerrotado()
+        } else if(getQuantidadeHPJogador() < 2 || getTempoMissaoZerado() === true){
+            pausarCronometro()
+            if(getMusicaTocando() === true){
+            pararMusica()
+            reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Creepy Asteroid.mp3", 1);
+            }
+            setJogoAcabou(true)
+            var endgamePlayerLose = document.getElementById('endgamePlayerLose');
+            var imagemDerrota = document.getElementById('imagemDerrota');
+            endgamePlayerLose.style.display = 'block';
+            imagemDerrota.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/burnedSkull.png'
+
+            const imagemOverlay = document.createElement('img');
+            var corpo = document.body
+            imagemOverlay.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoFundoDerrota.gif';
+
+            imagemOverlay.style.position = 'fixed';
+            imagemOverlay.style.top = '0';
+            imagemOverlay.style.left = '0';
+            imagemOverlay.style.width = '100%';
+            imagemOverlay.style.height = '100%';
+            imagemOverlay.style.objectFit = 'cover';
+            imagemOverlay.style.zIndex = '10000';
+            imagemOverlay.style.opacity = '1';
+            imagemOverlay.style.pointerEvents = 'none';
+
+            corpo.appendChild(imagemOverlay);
+        }
     }
-    setJogoAcabou(true)
-    var endgamePlayerLose = document.getElementById('endgamePlayerLose');
-    var imagemDerrota = document.getElementById('imagemDerrota');
-    endgamePlayerLose.style.display = 'block';
-    imagemDerrota.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/burnedSkull.png'
-
-    const imagemOverlay = document.createElement('img');
-    var corpo = document.body
-    imagemOverlay.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/fogoFundoDerrota.gif';
-
-    imagemOverlay.style.position = 'fixed';
-    imagemOverlay.style.top = '0';
-    imagemOverlay.style.left = '0';
-    imagemOverlay.style.width = '100%';
-    imagemOverlay.style.height = '100%';
-    imagemOverlay.style.objectFit = 'cover';
-    imagemOverlay.style.zIndex = '10000';
-    imagemOverlay.style.opacity = '1';
-    imagemOverlay.style.pointerEvents = 'none';
-
-    corpo.appendChild(imagemOverlay);
-}
 }
 
 export function adicionarPontoAJogador() {

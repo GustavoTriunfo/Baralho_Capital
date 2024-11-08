@@ -148,3 +148,43 @@
   transform: scale(1.3);
   transition: transform 0.1s ease;
 }
+
+@keyframes deathSequenceFastColors {
+  0% {
+    filter: hue-rotate(0deg);
+}
+20% {
+    filter: hue-rotate(360deg);
+}
+40% {
+    filter: hue-rotate(720deg);
+}
+60% {
+    filter: hue-rotate(1080deg);
+}
+75% {
+    filter: hue-rotate(1440deg);
+}
+85% {
+    filter: hue-rotate(1800deg);
+}
+90% {
+    filter: hue-rotate(2520deg);
+}
+95% {
+    filter: hue-rotate(3600deg);
+}
+98% {
+    filter: hue-rotate(5000deg);
+}
+100% {
+    filter: hue-rotate(7200deg);
+    visibility: hidden; /* Desaparece no final */
+}
+}
+
+
+/* Aplicando a animação à classe */
+.boss-death {
+animation: deathSequenceFastColors 3s linear forwards;
+}
