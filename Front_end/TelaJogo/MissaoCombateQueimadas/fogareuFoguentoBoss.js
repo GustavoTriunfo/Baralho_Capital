@@ -51,18 +51,26 @@ export function verificaJogadaFogareu() {
     }
 }
 
- function acoesFogareuApartirDeVida() {
-    if (getVidaBoss() > 80) {
-        tempoDeRespostaFogareu = 1
-        tempoRodada = 5
-    } else if (getVidaBoss() < 80 && getVidaBoss() > 60) {
-        tempoDeRespostaFogareu = 0.7
-        tempoRodada = 4
-    }  else if (getVidaBoss() < 60 && getVidaBoss() > 40) {
-        tempoDeRespostaFogareu = 0.4
-        tempoRodada = 3
-    } else if (getVidaBoss() < 40 && getVidaBoss() > 10) {
-        tempoDeRespostaFogareu = 0.2
-        tempoRodada = 2
+function acoesFogareuApartirDeVida() {
+    const vidaBoss = getVidaBoss();
+    const vidaMaximaBoss = 100 // Supondo que haja uma função que retorna a vida máxima do boss
+    const porcentagemVida = (vidaBoss / vidaMaximaBoss) * 100; // Calcula a porcentagem de vida do boss
+
+    if (porcentagemVida > 80) {
+        tempoDeRespostaFogareu = 1;
+        tempoRodada = 5;
+    } else if (porcentagemVida <= 80 && porcentagemVida > 60) {
+        tempoDeRespostaFogareu = 0.7;
+        tempoRodada = 4;
+    } else if (porcentagemVida <= 60 && porcentagemVida > 40) {
+        tempoDeRespostaFogareu = 0.4;
+        tempoRodada = 3;
+    } else if (porcentagemVida <= 40 && porcentagemVida > 10) {
+        tempoDeRespostaFogareu = 0.2;
+        tempoRodada = 2;
+    } else {
+        // Caso o boss tenha menos que 10% de vida
+        tempoDeRespostaFogareu = 0.1; // Resposta ainda mais rápida
+        tempoRodada = 1; // Rodada mais curta
     }
 }

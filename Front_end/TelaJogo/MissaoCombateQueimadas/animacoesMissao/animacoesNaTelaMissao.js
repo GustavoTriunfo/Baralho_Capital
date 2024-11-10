@@ -204,7 +204,6 @@ export function pararFantasmasDeFogoAnimacao() {
 export function fogareuDerrotado() {
     removerTodasCartas()
     pararMusica()
-    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Erik Satie - Gnossienne No.1.mp3", 1);
     pararAudioPorId(1)
     setJogoAcabou(true)
     pausarCronometro()
@@ -214,6 +213,7 @@ export function fogareuDerrotado() {
         fogareuMorrendo()
         pararFantasmasDeFogoAnimacao()
         setTimeout(function () {
+             reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Erik Satie - Gnossienne No.1.mp3", 1);
              chamasApagando()
              setTimeout(function () {
                 var endgameOverlay = document.getElementById('endgameOverlay');
