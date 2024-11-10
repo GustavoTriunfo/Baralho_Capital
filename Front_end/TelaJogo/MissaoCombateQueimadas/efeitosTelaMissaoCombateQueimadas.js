@@ -3,7 +3,7 @@ import {getCartaBossRecente, pararMusica, alterarVidaBoss, getVidaBoss, atualiza
     getMusicaTocando, selecionarCaminhoImagem, setTurnoMaisLongoDoJogador
 } from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
-import {danoNoJogador, fogareuDerrotado} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {danoNoJogador, fogareuDerrotado, exibirTempestade} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador, getTempoMissaoZerado} from '../script.js'
 
 let pontosJogador = 0;
@@ -252,6 +252,7 @@ export function adicionarImagemNaPokedex(caminhoImagem, id) {
 // Exemplo de função que realiza uma ação com a imagem selecionada
 function realizarAcaoComImagemSelecionada(id) {
     alterarVidaBoss(getVidaBoss() - 20)
+    pausarCronometro()
     verificarCartaEspecialDoJogador(id)
     document.getElementById('arrowButton').click();
 
@@ -262,7 +263,8 @@ function realizarAcaoComImagemSelecionada(id) {
 }
 
 export function verificarCartaEspecialDoJogador(id) {
-
+    ocultarMaoJogador()
+    exibirTempestade()
 }
 
 // Função para pausar o cronômetro

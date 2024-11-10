@@ -1,4 +1,4 @@
-import {reproduzirEfeitoSonoro, setJogoAcabou} from '../../script.js'
+import {reproduzirEfeitoSonoro, setJogoAcabou, ocultarMaoJogador, retornarAoEstadoNormal} from '../../script.js'
 import {pararMusica} from '../../app.js'
 import {criarImagemFogareuFaseDois, removerTodasCartas, pararAudioPorId} from '../MissaoCombateQueimadas.js'
 import {pausarCronometro, reiniciarCronometro} from '../efeitosTelaMissaoCombateQueimadas.js'
@@ -31,6 +31,8 @@ export function animarCartaJogador(caminhoImagem, elementoClicado) {
 }
 
 export function transicaoFogareu() {
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Monster Roar.mp3', 0.6)
+    ocultarMaoJogador()
     pararMusica()
     pausarCronometro()
     const corpo = document.body;
@@ -47,14 +49,13 @@ export function transicaoFogareu() {
     imagem.style.pointerEvents = 'none';
   
     corpo.appendChild(imagem);
-  
-    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Monster Roar.mp3', 0.6)
     setTimeout(() => {
         telaFicarBrancaPorUmSegundo()
         criarImagemFogareuFaseDois()
         fantasmasDeFogoAnimacao()
         imagem.remove();
         reiniciarCronometro()
+        retornarAoEstadoNormal()
     }, 4000);
     pararMusica()
 }
@@ -268,3 +269,44 @@ export function fogareuDerrotado() {
     var elementoTempo = document.getElementById("tempo-missao-div");
     elementoTempo.style.visibility = 'hidden'
  }
+
+
+ export function exibirTempestade() {
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/raio.mp3', 1)
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Thunderstorm sound effectv2.mp3', 1)
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGritandoTempestadev3.mp3', 0.4)
+    // Cria o elemento do contêiner da tempestade
+    const tempestadeDiv = document.createElement('div');
+    tempestadeDiv.classList.add('tempestade');
+
+    // Cria o elemento de imagem do GIF de tempestade
+    const gifTempestade = document.createElement('img');
+    gifTempestade.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/chuvaTorrencial.gif';
+    gifTempestade.alt = 'Gif da Tempestade';
+    gifTempestade.classList.add('gifTempestade');
+
+    const fumaca = document.createElement('img');
+    fumaca.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/smoke1.gif';
+    fumaca.alt = 'Gif da Fumaça';
+    fumaca.style.position = 'absolute';
+    fumaca.style.width = '1000px';
+    fumaca.style.height = 'auto';
+    fumaca.style.top = '20%';
+    fumaca.style.left = '60%';
+    fumaca.style.transform = 'translate(-50%, -50%)'; // Centraliza a imagem
+    fumaca.style.zIndex = '8';
+    fumaca.style.opacity = 0.5
+
+
+    tempestadeDiv.appendChild(fumaca);
+    tempestadeDiv.appendChild(gifTempestade);
+
+    // Adiciona o contêiner da tempestade ao body ou qualquer outro elemento
+    document.body.appendChild(tempestadeDiv);
+
+    // A animação de entrada já é aplicada via CSS
+    // Remover o contêiner da tempestade após 10 segundos (ajustar conforme necessário)
+    setTimeout(() => {
+        tempestadeDiv.remove();
+    }, 20000); // 10 segundos para a animação durar e depois ser removido
+}
