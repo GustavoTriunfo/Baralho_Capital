@@ -1,10 +1,10 @@
 import {getCartaEscolhidaPorJogador} from './MissaoCombateQueimadas.js'
 import {getCartaBossRecente, pararMusica, alterarVidaBoss, getVidaBoss, atualizarStatusJogo,
-    getMusicaTocando, selecionarCaminhoImagem
+    getMusicaTocando, selecionarCaminhoImagem, setTurnoMaisLongoDoJogador
 } from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
 import {danoNoJogador, fogareuDerrotado} from './animacoesMissao/animacoesNaTelaMissao.js'
-import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador} from '../script.js'
+import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador, getTempoMissaoZerado} from '../script.js'
 
 let pontosJogador = 0;
 var jogadorSofreuDano = false
@@ -167,17 +167,23 @@ export function iniciarCronometroLance(tempoInicial = 5) {
 export function verificarItensDePontuacao() {
     if(pontosJogador === 8) {
         entregarCartaEspecial(17)
+        setTurnoMaisLongoDoJogador(true)
     } else if (pontosJogador === 16) {
         entregarCartaEspecial(19)
+        setTurnoMaisLongoDoJogador(true)
     }
      else if (pontosJogador === 26) {
         entregarCartaEspecial(23)
+        setTurnoMaisLongoDoJogador(true)
      }  else if (pontosJogador === 38) {
         entregarCartaEspecial(25)
+        setTurnoMaisLongoDoJogador(true)
      }  else if (pontosJogador === 50) {
         entregarCartaEspecial(27)
+        setTurnoMaisLongoDoJogador(true)
      }  else if (pontosJogador >= 70) {
         entregarCartaEspecial(28)
+        setTurnoMaisLongoDoJogador(true)
      }
 }
 
@@ -212,39 +218,47 @@ export function adicionarImagemNaPokedex(caminhoImagem, id) {
     // Adiciona a nova célula à grid da Pokédex
     pokedexGrid.appendChild(novaCelula);
 
-    // Adiciona o evento de clique para alternar entre seleção e execução da ação
-    novaCelula.addEventListener('click', () => {
+    // Adiciona o evento de clique diretamente ao novo elemento
+    novaCelula.addEventListener("click", function(event) {
+        event.stopPropagation();  // Impede a propagação do evento de clique
+
+        // Chama o método de visualização passando o elemento clicado
+        visualizarCartaAtravesDeClique(novaCelula);
+
         // Se já existe uma célula selecionada, remove a seleção dela
         if (celulaSelecionada && celulaSelecionada !== novaCelula) {
             celulaSelecionada.style.backgroundColor = ''; // Restaura a cor original
             celulaSelecionada.dataset.selecionado = "false";
+            $(celulaSelecionada).removeClass("active"); // Remover a classe 'active' da célula anterior
         }
 
         // Alterna o estado da célula clicada
         if (novaCelula.dataset.selecionado === "false") {
             // Marca a nova célula como selecionada
-            novaCelula.style.backgroundColor = 'yellow'; // Altere a cor conforme desejar
+            novaCelula.style.backgroundColor = 'yellow'; // Cor de seleção para a célula atual
             novaCelula.dataset.selecionado = "true";
             celulaSelecionada = novaCelula; // Atualiza a referência para a célula selecionada
-        } else {
-            // Caso a célula selecionada seja clicada novamente, chama a ação com o ID e desmarca
-            realizarAcaoComImagemSelecionada(id);
-            novaCelula.remove(); 
-            celulaSelecionada = null; // Limpa a referência, já que nada estará selecionado
+            $(novaCelula).addClass("active"); // Adiciona a classe 'active' à nova célula
         }
     });
+
+    // Exibe o ícone de exclamação por 1,5 segundos
     const exclamacao = document.getElementById('exclamacao');
-    exclamacao.style.display = 'block'
+    exclamacao.style.display = 'block';
     setTimeout(() => {
-         exclamacao.style.display = 'none'
+         exclamacao.style.display = 'none';
     }, 1500);  
 }
-
 // Exemplo de função que realiza uma ação com a imagem selecionada
 function realizarAcaoComImagemSelecionada(id) {
     alterarVidaBoss(getVidaBoss() - 20)
     verificarCartaEspecialDoJogador(id)
     document.getElementById('arrowButton').click();
+
+    if (celulaSelecionada) {
+        celulaSelecionada.remove();
+        celulaSelecionada = null;
+    }
 }
 
 export function verificarCartaEspecialDoJogador(id) {
@@ -275,4 +289,61 @@ export function getJogadorLevouDanoPorTempoZerado() {
 
 export function setJogadorLevouDanoPorTempoZerado(estado) {
     jogadorLevouDanoPorTempoZerado = estado
+}
+
+export function visualizarCartaAtravesDeClique(elementoClicado) {
+    // Verificar se a carta clicada já está ativa
+    if ($(elementoClicado).hasClass("active")) {
+        // Se a carta clicada já estiver ativa, remover a pré-visualização e a classe 'active'
+        $("#cardPreviewOverlay").removeClass("d-block");
+        $(elementoClicado).removeClass("active").css("z-index", "1");
+        $(elementoClicado).data("selecionado", "false"); // Resetar o selecionado
+    } else {
+        // Tornar visível a div de pré-visualização
+        $("#cardPreviewOverlay").addClass("d-block").css("z-index", "999");
+
+        // Obter a imagem da carta clicada
+        const cardImage = $(elementoClicado).find('img').attr('src');
+        
+        // Atualizar a pré-visualização com a imagem da carta clicada
+        if ($("#cardPreviewOverlay img").length === 0) {
+            // Se não houver uma imagem dentro de #cardPreviewOverlay, crie uma
+            const imgElement = document.createElement('img');
+            imgElement.src = cardImage;
+            $("#cardPreviewOverlay").append(imgElement);
+        } else {
+            // Se já houver uma imagem dentro de #cardPreviewOverlay, atualize o src dela
+            $("#cardPreviewOverlay img").attr('src', cardImage);
+        }
+
+        // Remover classe 'active' e redefinir o z-index de todas as cartas
+        $(".player-card").removeClass("active").css("z-index", "1");
+
+        // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
+        $(elementoClicado).addClass("active").css("z-index", "1000");
+
+        const idCarta = $(".player-card.active").attr("id");
+
+        // Configurar o estado dos botões
+        if ([3, 4, 5, 6, 7, 36].includes(parseInt(idCarta))) {
+            $("#botaoDevolver, #botaoJogar").prop("disabled", true);
+        } else {
+            $("#botaoDevolver, #botaoJogar").prop("disabled", false);
+
+            // Configura o evento de clique para o botão Jogar
+            $("#botaoJogar").off("click").on("click", () => realizarAcaoComImagemSelecionada(idCarta));
+        }
+
+        // Modifica o texto do botão "Devolver" para "Fechar"
+        $("#botaoDevolver").text("Fechar");
+
+        // Configura o evento de clique para o botão "Fechar"
+        $("#botaoDevolver").off("click").on("click", () => {
+            // Remove a pré-visualização e a classe 'active' da carta
+            $("#cardPreviewOverlay").removeClass("d-block");
+            $(elementoClicado).removeClass("active").css("z-index", "1");
+            $(elementoClicado).data("selecionado", "false"); // Resetar o selecionado
+            $("#botaoDevolver").text("Devolver"); // Volta o texto para "Devolver" ao fechar
+        });
+    }
 }

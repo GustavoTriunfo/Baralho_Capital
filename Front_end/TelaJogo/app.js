@@ -17,6 +17,7 @@ import {MissaoCombateDengue} from './MissaoCombateDengue/MissaoCombateDengue.js'
 import {MissaoCombateQueimadas} from './MissaoCombateQueimadas/MissaoCombateQueimadas.js'
 import {transicaoFogareu} from './MissaoCombateQueimadas/animacoesMissao/animacoesNaTelaMissao.js'
 
+var turnoMaisLongoDoJogador = false
 var alteracaoBossJaAconteceu = false
 var danoCausado = 0
 var vidaBoss = 100
@@ -348,4 +349,11 @@ export function getObjetoMissaoSelecionada() {
     return objetoMissaoCriado
 }
 
+export function getTurnoMaisLongoDoJogador() {
+    return turnoMaisLongoDoJogador
+}
+
+export function setTurnoMaisLongoDoJogador(estado) {
+    turnoMaisLongoDoJogador = estado
+}
  

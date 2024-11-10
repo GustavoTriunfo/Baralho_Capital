@@ -193,6 +193,12 @@ export function finalizarMissaoCombateDengue() {
     if(getJogoAcabou() === false){
 
         if(getVidaBoss() < 10){
+            let iconeBoss = document.getElementById('iconeBoss')
+            iconeBoss.style.left = '1%'
+            iconeBoss.style.top = '0.5%'
+            iconeBoss.style.width = '55px'
+            iconeBoss.style.height = 'auto'
+            iconeBoss.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/deadBossFace.png'
             pararZumbidoLoucura()
             if(getMusicaTocando() === true){
                 pararMusica()
