@@ -38,6 +38,9 @@ export class MissaoCombateQueimadas extends Missao {
     }
 
     criarImagensEspecificasDaMissao() {
+        let redirecionarTelaMissao = document.getElementById('redirecionarParaTelaMissoes');
+        redirecionarTelaMissao.src = '/Baralho_Capital/Front_end/TelaJogo/ImagensTelaJogo/mapa.png';
+
         let botaoMenu = document.getElementById('toggleButton')
         let botaoPokedex = document.getElementById('arrowButton')
         botaoMenu.style.visibility = 'hidden'
@@ -230,7 +233,7 @@ criarCartasNoInicioDaMissao()
         //verificarCartasMissaoQueimadas()
 
         animarCartaJogador(cartaSelecionada.caminhoImagem, $(elementoClicado));
-        ocultarMaoJogador()
+        //ocultarMaoJogador()
         atualizarStatusJogo()
     } else {
         console.error("ID da carta não válido ou não encontrado nas cartas disponíveis.");
@@ -239,22 +242,27 @@ criarCartasNoInicioDaMissao()
 
 }
 
-export function adicionarCartaLadoEsquerdo(enderecoImagem) {
+export function adicionarCartaLadoEsquerdo(enderecoImagem, tempoAnimacao = 1) {
     const carta = document.createElement('img');
     carta.src = enderecoImagem;
     carta.alt = 'Imagem de Carta';
 
+    // Define estilos iniciais
     carta.style.position = 'fixed';
-    carta.style.left = '10px';       
-    carta.style.top = '50%';            
-    carta.style.transform = 'translateY(-50%)'; 
-    carta.style.width = '150px';        
-    carta.style.height = 'auto';        
-    carta.style.zIndex = '2';           
+    carta.style.left = '10px';
+    carta.style.top = '50%';
+    carta.style.transform = 'translateY(-50%)';
+    carta.style.width = '150px';
+    carta.style.height = 'auto';
+    carta.style.zIndex = '2';
 
+    // Define a duração da animação usando uma variável CSS personalizada
+    carta.style.setProperty('--tempo-animacao', `${tempoAnimacao}s`);
+    
     carta.classList.add('carta-animada');  // Classe para animação
     carta.classList.add('carta-lateral');  // Classe para fácil seleção e remoção
 
+    // Adiciona a carta ao DOM
     document.body.appendChild(carta);
 }
 

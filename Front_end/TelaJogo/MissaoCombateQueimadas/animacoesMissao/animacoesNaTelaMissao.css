@@ -14,24 +14,24 @@
 
 .carta-animada {
   position: fixed;
-  left: 80px;              /* Posição final na lateral esquerda */
-  top: 50%;                /* Centralização vertical */
-  transform: translateY(-50%); 
-  width: 150px;            /* Tamanho da carta */
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
   height: auto;
   z-index: 2;
-  animation: aparecerDoFundo 1s ease-out forwards; /* Aplica a animação */
+  animation: aparecerDoFundo var(--tempo-animacao, 1s) ease-out forwards; /* Define duração da animação */
 }
 
 .carta-clone {
-  position: fixed; /* Manter a posição fixada durante a animação */
-  z-index: 1000;  /* Z-index para estar acima de outros elementos */
-  transition: transform 1s ease, opacity 1s ease; /* Transições para transformação e opacidade */
+  position: fixed;
+  z-index: 1000;
+  transition: transform var(--tempo-animacao, 1s) ease, opacity var(--tempo-animacao, 1s) ease;
 }
 
 .carta-clone.deslizar {
-  transform: translateY(-100px); /* Deslizar para cima */
-  opacity: 0; /* Tornar invisível */
+  transform: translateY(-100px);
+  opacity: 0;
 }
 
 
