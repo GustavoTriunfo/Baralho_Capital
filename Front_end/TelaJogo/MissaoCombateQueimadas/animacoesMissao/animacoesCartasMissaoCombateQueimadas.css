@@ -1,0 +1,80 @@
+.tempestade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 9999; /* Garantir que fique em cima de outros elementos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: aparecerTempestade 3s ease-in forwards, desaparecerTempestade 3s ease-out 10s forwards; /* Efeito de aparecimento e desaparecimento */
+}
+
+.gifTempestade {
+    position: absolute;  /* Posiciona o GIF em relação ao contêiner pai */
+    top: -80px;
+    left: 0;
+    width: 100vw; /* 100% da largura da tela */
+    height: 115vh; /* 100% da altura da tela */
+    object-fit: cover; /* Faz o GIF cobrir toda a tela mantendo a proporção */
+    opacity: 1;
+    z-index: 9; /* Garante que o GIF fique atrás de outros elementos, mas em cima do fundo */
+}
+
+/* Animação do efeito de aparecimento da tempestade */
+@keyframes aparecerTempestade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Animação do efeito de desaparecimento da tempestade */
+@keyframes desaparecerTempestade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Efeito de clarão (raios) */
+.tempestade::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Cor do clarão */
+    opacity: 0;
+    animation: raio 5s infinite; /* Efeito contínuo de raio */
+}
+
+/* Animação do clarão de raio */
+@keyframes raio {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
