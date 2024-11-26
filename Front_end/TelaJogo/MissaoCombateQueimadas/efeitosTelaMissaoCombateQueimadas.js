@@ -3,7 +3,7 @@ import {getCartaBossRecente, pararMusica, alterarVidaBoss, getVidaBoss, atualiza
     getMusicaTocando, selecionarCaminhoImagem, setTurnoMaisLongoDoJogador
 } from '../app.js'
 import {diminuirVidaJogador, getQuantidadeHPJogador} from '../jogador.js'
-import {danoNoJogador, fogareuDerrotado, exibirTempestade} from './animacoesMissao/animacoesNaTelaMissao.js'
+import {danoNoJogador, fogareuDerrotado, exibirTempestade, exibirJatoDaMangueira} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {setJogoAcabou, getJogoAcabou, reproduzirEfeitoSonoro, retornarAoEstadoNormal, ocultarMaoJogador, getTempoMissaoZerado} from '../script.js'
 
 let pontosJogador = 0;
@@ -251,7 +251,6 @@ export function adicionarImagemNaPokedex(caminhoImagem, id) {
 }
 // Exemplo de função que realiza uma ação com a imagem selecionada
 function realizarAcaoComImagemSelecionada(id) {
-    alterarVidaBoss(getVidaBoss() - 20)
     pausarCronometro()
     verificarCartaEspecialDoJogador(id)
     document.getElementById('arrowButton').click();
@@ -263,8 +262,20 @@ function realizarAcaoComImagemSelecionada(id) {
 }
 
 export function verificarCartaEspecialDoJogador(id) {
-    ocultarMaoJogador()
-    exibirTempestade()
+    switch(id){
+    case '18': exibirJatoDaMangueira()
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGrito.mp3", 0.4);
+    alterarVidaBoss(getVidaBoss() - 30)
+    break;
+    case '25': exibirTempestade()
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGrito.mp3", 0.4);
+    alterarVidaBoss(getVidaBoss() - 40)
+    break;
+    default: alterarVidaBoss(getVidaBoss() - 20)
+    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGrito.mp3", 0.4);
+    break;
+    }
+    
 }
 
 // Função para pausar o cronômetro

@@ -272,9 +272,10 @@ export function fogareuDerrotado() {
 
 
  export function exibirTempestade() {
+    ocultarMaoJogador()
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/raio.mp3', 1)
     reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Thunderstorm sound effectv2.mp3', 1)
-    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGritandoTempestadev3.mp3', 0.4)
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGritandoTempestadev3.mp3', 1)
     // Cria o elemento do contêiner da tempestade
     const tempestadeDiv = document.createElement('div');
     tempestadeDiv.classList.add('tempestade');
@@ -307,6 +308,49 @@ export function fogareuDerrotado() {
     // A animação de entrada já é aplicada via CSS
     // Remover o contêiner da tempestade após 10 segundos (ajustar conforme necessário)
     setTimeout(() => {
+        retornarAoEstadoNormal()
         tempestadeDiv.remove();
     }, 20000); // 10 segundos para a animação durar e depois ser removido
+}
+
+export function exibirJatoDaMangueira() {
+    ocultarMaoJogador()
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGritandoTempestadev3.mp3', 1)
+    reproduzirEfeitoSonoro('/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/FIRE EXTINGUISHERv2.mp3', 0.6)
+    // Cria o elemento do jato de água
+    const jatoAgua = document.createElement('img');
+    jatoAgua.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/waterAttack02.gif'; // Substitua pelo caminho correto
+    jatoAgua.alt = 'Jato de Água';
+    jatoAgua.classList.add('jatoAgua');
+
+    // Personalização de tamanho e posição diretamente no JavaScript
+    jatoAgua.style.width = '800px';
+    jatoAgua.style.height = 'auto';
+    jatoAgua.style.top = '20%';
+    jatoAgua.style.left = '-25%';
+    jatoAgua.style.zIndex = 9;
+    jatoAgua.style.transform = 'rotate(-30deg)';
+
+    // Cria o elemento da fumaça de impacto
+    const fumacaImpacto = document.createElement('img');
+    fumacaImpacto.src = '/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/imagensMissaoQueimadas/smoke1.gif'; // Substitua pelo caminho correto
+    fumacaImpacto.alt = 'Fumaça do Impacto';
+    fumacaImpacto.classList.add('fumacaImpacto');
+
+    // Personalização de tamanho e posição diretamente no JavaScript
+    fumacaImpacto.style.width = '800px';
+    fumacaImpacto.style.height = 'auto';
+    fumacaImpacto.style.top = '-10%';
+    fumacaImpacto.style.left = '-50%';
+    fumacaImpacto.style.zIndex = 8
+    // Adiciona os elementos ao body
+    document.body.appendChild(jatoAgua);
+    document.body.appendChild(fumacaImpacto);
+
+    // Remove o jato e a fumaça após 1 segundo
+    setTimeout(() => {
+        retornarAoEstadoNormal()
+        jatoAgua.remove();
+        fumacaImpacto.remove();
+    }, 10000); // Ajuste a duração conforme necessário
 }
