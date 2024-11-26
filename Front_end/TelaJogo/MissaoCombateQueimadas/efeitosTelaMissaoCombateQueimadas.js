@@ -262,20 +262,21 @@ function realizarAcaoComImagemSelecionada(id) {
 }
 
 export function verificarCartaEspecialDoJogador(id) {
+    id = String(id);
     switch(id){
-    case '18': exibirJatoDaMangueira()
-    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGrito.mp3", 0.4);
+    case '18': 
+    exibirJatoDaMangueira()
     alterarVidaBoss(getVidaBoss() - 30)
     break;
-    case '25': exibirTempestade()
-    reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGrito.mp3", 0.4);
+    case '25': 
+    exibirTempestade()
     alterarVidaBoss(getVidaBoss() - 40)
     break;
-    default: alterarVidaBoss(getVidaBoss() - 20)
+    default: 
+    alterarVidaBoss(getVidaBoss() - 20)
     reproduzirEfeitoSonoro("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/fogareuGrito.mp3", 0.4);
     break;
-    }
-    
+    }  
 }
 
 // Função para pausar o cronômetro
@@ -334,9 +335,8 @@ export function visualizarCartaAtravesDeClique(elementoClicado) {
 
         // Adicionar classe 'active' e definir um z-index maior para a carta selecionada
         $(elementoClicado).addClass("active").css("z-index", "1000");
-
-        const idCarta = $(".player-card.active").attr("id");
-
+        const idCarta = $(".pokedex-cell.active").data("id");
+       
         // Configurar o estado dos botões
         if ([3, 4, 5, 6, 7, 36].includes(parseInt(idCarta))) {
             $("#botaoDevolver, #botaoJogar").prop("disabled", true);
