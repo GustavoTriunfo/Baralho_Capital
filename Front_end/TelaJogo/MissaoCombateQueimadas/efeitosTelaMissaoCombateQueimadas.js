@@ -266,11 +266,9 @@ export function verificarCartaEspecialDoJogador(id) {
     switch(id){
     case '18': 
     exibirJatoDaMangueira()
-    alterarVidaBoss(getVidaBoss() - 30)
     break;
     case '25': 
     exibirTempestade()
-    alterarVidaBoss(getVidaBoss() - 40)
     break;
     default: 
     alterarVidaBoss(getVidaBoss() - 20)

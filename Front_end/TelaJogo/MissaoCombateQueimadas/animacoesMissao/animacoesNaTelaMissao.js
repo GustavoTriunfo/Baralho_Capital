@@ -1,5 +1,5 @@
 import {reproduzirEfeitoSonoro, setJogoAcabou, ocultarMaoJogador, retornarAoEstadoNormal} from '../../script.js'
-import {pararMusica} from '../../app.js'
+import {pararMusica, alterarVidaBoss, getVidaBoss} from '../../app.js'
 import {criarImagemFogareuFaseDois, removerTodasCartas, pararAudioPorId} from '../MissaoCombateQueimadas.js'
 import {pausarCronometro, reiniciarCronometro} from '../efeitosTelaMissaoCombateQueimadas.js'
 
@@ -308,9 +308,10 @@ export function fogareuDerrotado() {
     // A animação de entrada já é aplicada via CSS
     // Remover o contêiner da tempestade após 10 segundos (ajustar conforme necessário)
     setTimeout(() => {
+        alterarVidaBoss(getVidaBoss() - 40)
         retornarAoEstadoNormal()
         tempestadeDiv.remove();
-    }, 20000); // 10 segundos para a animação durar e depois ser removido
+    }, 10000); // 10 segundos para a animação durar e depois ser removido
 }
 
 export function exibirJatoDaMangueira() {
@@ -349,6 +350,7 @@ export function exibirJatoDaMangueira() {
 
     // Remove o jato e a fumaça após 1 segundo
     setTimeout(() => {
+        alterarVidaBoss(getVidaBoss() - 30)
         retornarAoEstadoNormal()
         jatoAgua.remove();
         fumacaImpacto.remove();
