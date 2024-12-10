@@ -1,6 +1,6 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateDengue} from './cartasMissaoCombateDengue.js';
-import {setCartasJogo, iniciarMusica} from '../app.js'
+import {setCartasJogo, iniciarMusica, alterarVideo} from '../app.js'
 import {criarCartaParaJogador, criarCartaParaOponente} from '../startJogo.js'
 import {ocultarMaoJogador, retornarAoEstadoNormal, iniciarCronometroTempoMissao} from '../script.js'
 
@@ -220,7 +220,8 @@ export class MissaoCombateDengue extends Missao {
         configurarMusicasEEfeitosSonoros() {
             console.log("Configurando músicas e efeitos sonoros da missão combate à dengue.");
             this.alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Danse macabre.mp3");
-    }
+            alterarVideo("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/monster.mp4")
+        }
      alterarMusica(novaFonte) {
         const musica = document.getElementById("musica");
         musica.src = novaFonte;

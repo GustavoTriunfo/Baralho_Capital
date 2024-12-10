@@ -14,7 +14,7 @@ import {verificarCartasMissaoQueimadas, atualizarTelaMissaoCombateQueimadas, fin
 import {verificarCartaEscolhidaFogareu, verificaJogadaFogareu} from './MissaoCombateQueimadas/fogareuFoguentoBoss.js'
 import {Missao} from './Missao.js'
 import {MissaoCombateDengue} from './MissaoCombateDengue/MissaoCombateDengue.js'
-import {MissaoCombateQueimadas} from './MissaoCombateQueimadas/MissaoCombateQueimadas.js'
+import {MissaoCombateQueimadas, pararAudioPorId} from './MissaoCombateQueimadas/MissaoCombateQueimadas.js'
 import {transicaoFogareu} from './MissaoCombateQueimadas/animacoesMissao/animacoesNaTelaMissao.js'
 
 var turnoMaisLongoDoJogador = false
@@ -27,6 +27,7 @@ let Cartas = null
 var cartaBossRecente = 3
 var musicaTocando = true;
 var objetoMissaoCriado = null;
+var idMusicaTocandoNoInicio = []
 
 function getParametroMissao() {
     const params = new URLSearchParams(window.location.search);
@@ -294,6 +295,39 @@ export function iniciarMusica(volume) {
     audio.volume = volume;
     // Inicia a reprodução da música
     audio.play();
+}
+
+export function alterarVideo(novaUrl) {
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    videoPlayer.pause();
+
+    const videoSource = videoPlayer.querySelector('source');
+    videoSource.src = novaUrl;
+
+    videoPlayer.load();
+}
+
+export function verificarSeExisteMusicaAParar() {
+    if (idMusicaTocandoNoInicio.length === 0) {
+        return;
+    }
+
+    idMusicaTocandoNoInicio.forEach(idMusica => {
+        pararAudioPorId(idMusica);
+    });
+}
+
+export function verificarSeExisteMusicaATocar() {
+  
+}
+
+export function getIdMusicaTocandoNoInicio() {
+    return idMusicaTocandoNoInicio
+}
+
+export function setIdMusicaTocandoNoInicio(numero) {
+    idMusicaTocandoNoInicio.push(numero);
 }
 
 export function getMusicaTocando() {
