@@ -119,7 +119,7 @@ export class MissaoCombateQueimadas extends Missao {
         setIdMusicaTocandoNoInicio(1)
         criarEIniciarAudio(2, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Lantern Run.mp3", 0.6)
         setIdMusicaTocandoNoInicio(2)
-        alterarVideo("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Traveller's Tales Oxford (2004).mp4")
+        alterarVideo("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/tutorialMissaoQueimadas.mp4")
     }
 
 
