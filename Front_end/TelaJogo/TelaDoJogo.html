@@ -9,9 +9,52 @@
   <link rel="stylesheet" href="/Baralho_Capital/Front_end/TelaJogo/styleTelaJogo.css">
   <link rel="stylesheet" href="/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/animacoesMissao/animacoesNaTelaMissao.css">
   <link rel="stylesheet" href="/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/animacoesMissao/animacoesCartasMissaoCombateQueimadas.css">
+  <style>
+    @media (max-width: 768px) {
+      .modal-dialog {
+        margin: 0;
+        height: 100%;
+      }
+      .modal-content {
+        height: 100%;
+        border-radius: 0;
+      }
+      .modal-body {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      video {
+        max-height: 100%;
+      }
+    }
+  </style>
 </head>
 <body id="corpo">
+
+  <div class="container text-center mt-3" id="botaoTutorial">
+    <img id="tutorial" src="/Baralho_Capital/missionVideoTutorial.png" alt="Clique para assistir" class="img-fluid" style="position: absolute; bottom: 2%; right: 5%; cursor: pointer; max-width: 30%; height: auto; z-index: 999;" data-bs-toggle="modal" data-bs-target="#videoModal">
+  </div>
+
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="videoModalLabel">Tutorial da Missão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
  
+          <video id="videoPlayer" class="w-100" controls>
+            <source src="" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="fundoBarraVidaJogador" id="playerLifeBar">
     <div id="playerHealthBar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
@@ -147,7 +190,7 @@
 
 <script type="module">
 import {verificarCartaBoss, getCartaBossRecente, atualizarTelaStatus, 
-  pararMusica, selecionarMissao, getMissaoSelecionada} from './app.js'
+  pararMusica, selecionarMissao, getMissaoSelecionada, verificarSeExisteMusicaAParar, verificarSeExisteMusicaATocar} from './app.js'
 import {setQuantidadeCartasJogadas, setEfeitosSonorosPermitidos, getEfeitosSonorosPermitidos} from './script.js'
  
   var mutado = document.getElementById('efeitoSons');
@@ -236,6 +279,65 @@ document.getElementById('arrowButton').addEventListener("click", function() {
 window.onload = function() {
     selecionarMissao();
 };
+
+document.getElementById('tutorial').addEventListener('click', function() {
+    const videoModal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    const bootstrapModal = new bootstrap.Modal(videoModal);
+    bootstrapModal.show();
+
+    videoPlayer.play();
+
+    videoPlayer.addEventListener('ended', function () {
+        closeModal();
+    });
+
+    verificarSeExisteMusicaAParar()
+});
+
+const closeButton = document.querySelector('.btn-close');
+closeButton.addEventListener('click', function () {
+    const videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.pause();
+    videoPlayer.currentTime = 0;
+
+    const videoModal = document.getElementById('videoModal');
+    videoModal.classList.remove('show');
+    videoModal.style.display = 'none';
+
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+        modalBackdrop.parentNode.removeChild(modalBackdrop);
+    }
+
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+
+    verificarSeExisteMusicaATocar()
+});
+
+function closeModal() {
+    const videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.pause();
+    videoPlayer.currentTime = 0;
+
+    const videoModal = document.getElementById('videoModal');
+    videoModal.classList.remove('show');
+    videoModal.style.display = 'none';
+
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+        modalBackdrop.parentNode.removeChild(modalBackdrop);
+    }
+
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+
+    verificarSeExisteMusicaATocar()
+}
 
 </script>
 </body>

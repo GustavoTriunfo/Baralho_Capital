@@ -1,6 +1,6 @@
 import { atualizarTelaStatus, selecionarImagem, metodosEspecificosDaMissao, criarCartasNoInicio, selecionarIdCarta} from './app.js';
 import {rearrangeCards} from './playerCard.js';
-import {atualizarNumeroCarta, reproduzirEfeitoSonoro} from './script.js'
+import {atualizarNumeroCarta, reproduzirEfeitoSonoro, esconderBotaoTutorial} from './script.js'
 
 var jogador1 = {
     saldo: 0,
@@ -103,6 +103,7 @@ startButton.addEventListener('click', function() {
     metodosEspecificosDaMissao();
     atualizarTelaStatus();
     criarCartasNoInicio();
+    esconderBotaoTutorial()
   });
 
 export {jogadorAtual, jogador2, jogador1};

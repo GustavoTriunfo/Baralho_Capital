@@ -1,6 +1,6 @@
 import {Missao} from '../Missao.js'
 import {CartasMissaoCombateQueimadas} from './cartasMissaoCombateQueimadas.js'
-import {setCartasJogo, atualizarStatusJogo, iniciarMusica} from '../app.js'
+import {setCartasJogo, atualizarStatusJogo, iniciarMusica, alterarVideo, setIdMusicaTocandoNoInicio} from '../app.js'
 import {criarAnimacaoFogo, animarCartaJogador} from './animacoesMissao/animacoesNaTelaMissao.js'
 import {ocultarMaoJogador, reproduzirEfeitoSonoro, iniciarCronometroTempoMissao} from '../script.js'
 import {criarCartaParaJogador} from '../startJogo.js'
@@ -115,28 +115,13 @@ export class MissaoCombateQueimadas extends Missao {
 
     configurarMusicasEEfeitosSonoros() {
         alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Precipice.mp3");
-        this.criarEIniciarAudio(1, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Burning Fire sound.mp3", 0.3)
-        this.criarEIniciarAudio(2, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Lantern Run.mp3", 0.6)
+        criarEIniciarAudio(1, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Burning Fire sound.mp3", 0.3)
+        setIdMusicaTocandoNoInicio(1)
+        criarEIniciarAudio(2, "/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Lantern Run.mp3", 0.6)
+        setIdMusicaTocandoNoInicio(2)
+        alterarVideo("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateQueimadas/musicasEEfeitosSonoros/Traveller's Tales Oxford (2004).mp4")
     }
 
-   
-     criarEIniciarAudio(id, src, volume = 0.5) {
-        // Cria um novo elemento de áudio
-        let audioElement = document.createElement('audio');
-        
-        // Configura o elemento de áudio
-        audioElement.id = id;            // Define o ID para o áudio
-        audioElement.src = src;          // Define o caminho do arquivo de áudio
-        audioElement.loop = true;        // Define o áudio para tocar em loop
-        audioElement.preload = 'auto';   // Carrega o áudio automaticamente
-        audioElement.volume = volume;       // Ajusta o volume (de 0.0 a 1.0)
-    
-        // Adiciona o elemento de áudio ao corpo do documento
-        document.body.appendChild(audioElement);
-    
-        // Inicia a reprodução automaticamente
-        audioElement.play();
-    }
 
    
 
@@ -308,4 +293,22 @@ export function pararAudioPorId(id) {
     } else {
         console.log(`Áudio com ID ${id} não encontrado.`);
     }
+}
+
+export function criarEIniciarAudio(id, src, volume = 0.5) {
+    // Cria um novo elemento de áudio
+    let audioElement = document.createElement('audio');
+    
+    // Configura o elemento de áudio
+    audioElement.id = id;            // Define o ID para o áudio
+    audioElement.src = src;          // Define o caminho do arquivo de áudio
+    audioElement.loop = true;        // Define o áudio para tocar em loop
+    audioElement.preload = 'auto';   // Carrega o áudio automaticamente
+    audioElement.volume = volume;       // Ajusta o volume (de 0.0 a 1.0)
+
+    // Adiciona o elemento de áudio ao corpo do documento
+    document.body.appendChild(audioElement);
+
+    // Inicia a reprodução automaticamente
+    audioElement.play();
 }

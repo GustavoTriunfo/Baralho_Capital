@@ -171,6 +171,15 @@ if (contentElement && warningElement) {
 }
 }
 
+export function esconderBotaoTutorial() {
+  const botaoTutorial = document.getElementById('botaoTutorial');
+  if (botaoTutorial) {
+      botaoTutorial.style.display = 'none';
+  } else {
+      console.warn('Elemento com ID "botaoTutorial" não encontrado.');
+  }
+}
+
 window.addEventListener('resize', checkOrientation);
 window.addEventListener('load', checkOrientation);
 window.addEventListener('orientationchange', checkOrientation);
