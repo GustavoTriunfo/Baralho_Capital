@@ -220,7 +220,7 @@ export class MissaoCombateDengue extends Missao {
         configurarMusicasEEfeitosSonoros() {
             console.log("Configurando músicas e efeitos sonoros da missão combate à dengue.");
             this.alterarMusica("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/Danse macabre.mp3");
-            alterarVideo("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/monster.mp4")
+            alterarVideo("/Baralho_Capital/Front_end/TelaJogo/MissaoCombateDengue/musicasEEfeitos/tutorialMissaoDengue.mp4")
         }
      alterarMusica(novaFonte) {
         const musica = document.getElementById("musica");
